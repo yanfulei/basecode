@@ -28,20 +28,20 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.annimon:stream:1.1.8'
-    implementation 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
-    implementation 'org.greenrobot:eventbus:3.1.1'
-    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
-    implementation 'com.google.code.gson:gson:2.8.4'
-    implementation 'com.wuhenzhizao:titlebar:1.1.3'
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
-    implementation 'com.wang.avi:library:2.1.3'
-    implementation 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
-    implementation 'com.google.zxing:core:3.3.0'
-    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
-    implementation 'com.orhanobut:logger:2.2.0'
-    implementation 'org.greenrobot:greendao:3.2.2'
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api 'com.annimon:stream:1.1.8'
+    api 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
+    api 'org.greenrobot:eventbus:3.1.1'
+    api 'com.squareup.okhttp3:okhttp:3.10.0'
+    api 'com.google.code.gson:gson:2.8.4'
+    api 'com.wuhenzhizao:titlebar:1.1.3'
+    api 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
+    api 'com.wang.avi:library:2.1.3'
+    api 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
+    api 'com.google.zxing:core:3.3.0'
+    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    api 'com.orhanobut:logger:2.2.0'
+    api 'org.greenrobot:greendao:3.2.2'
 }
 
 // build a jar with source files
