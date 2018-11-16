@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#ffffff</color>
+    <color name="red">#EA1C27</color>
+    <color name="title_bar">#3F51B5</color>
+    <color name="mo_ren_lable">#e1e1e1</color>
+    <color name="wan_cheng">#B2B2B2</color>
+    <color name="transparent">#00000000</color>
+    <color name="base_btn_color">#527CFD</color>
+    <color name="deep_blue">#003366</color>
+    <color name="main_bg_color">#108EE9</color>
+    <color name="style_fengexian">#bbbbbb</color>
+
+    <color name="colorPrimary">#fc7c21</color>
+    <color name="colorPrimaryDark">#fc7c21</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorBlack50">#88000000</color>
+
+    <color name="light_grey">#FFF2F2F2</color>
+</resources>
