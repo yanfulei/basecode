@@ -1,5 +1,5 @@
 # basecode
-个人基础框架
+ 个人基础框架
 ````
  // 根目录的build.gradle
  repositories {
