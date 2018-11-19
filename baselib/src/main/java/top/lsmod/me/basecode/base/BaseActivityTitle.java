@@ -154,7 +154,7 @@ public abstract class BaseActivityTitle extends Activity {
     /**
      * 发送网络接口请求
      */
-    public void sendNetWorkRequest(BaseReqBean bean, String serverLocal, Object[] interfaceInfo) {
+    public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
         showLoading();
         if (!EventBus.getDefault().isRegistered(this)) {
             // EventBus注册

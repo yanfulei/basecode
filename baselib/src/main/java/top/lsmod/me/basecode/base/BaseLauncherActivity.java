@@ -59,7 +59,7 @@ public abstract class BaseLauncherActivity extends Activity {
     /**
      * 发送网络接口请求
      */
-    public void sendNetWorkRequest(BaseReqBean bean, String serverLocal, Object[] interfaceInfo) {
+    public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
         if (!EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
