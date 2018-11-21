@@ -138,7 +138,7 @@ public abstract class BaseActivityTitle extends Activity {
      * 发送网络接口请求
      */
     public void sendNetWorkRequestAuto(BaseReqBean bean) {
-        if (!isBaseRegistered) {
+        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
             isBaseRegistered = true;

@@ -78,7 +78,7 @@ public abstract class BaseActivityNoTitle extends Activity {
      * 发送网络接口请求
      */
     public void sendNetWorkRequestAuto(BaseReqBean bean) {
-        if (!isBaseRegistered) {
+        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
             isBaseRegistered = true;
@@ -101,7 +101,7 @@ public abstract class BaseActivityNoTitle extends Activity {
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
         showLoading();
-        if (!isBaseRegistered) {
+        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
             isBaseRegistered = true;
@@ -188,5 +188,11 @@ public abstract class BaseActivityNoTitle extends Activity {
         if (null != adDialog) {
             adDialog.dismiss();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

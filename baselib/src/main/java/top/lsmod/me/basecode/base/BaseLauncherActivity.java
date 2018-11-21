@@ -62,7 +62,7 @@ public abstract class BaseLauncherActivity extends Activity {
      * 发送网络接口请求
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
-        if (!isBaseRegistered) {
+        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
             isBaseRegistered = true;
@@ -129,5 +129,11 @@ public abstract class BaseLauncherActivity extends Activity {
      */
     public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
