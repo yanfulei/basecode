@@ -38,7 +38,7 @@ public abstract class BaseActivityTitle extends Activity {
     // 所有布局
     private LinearLayout llAllView;
     // 是否已经注册EventBus
-    private boolean isBaseRegistered;
+    public boolean isBaseRegistered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,7 +161,7 @@ public abstract class BaseActivityTitle extends Activity {
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
         showLoading();
-        if (!isBaseRegistered) {
+        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
             isBaseRegistered = true;
@@ -207,19 +207,19 @@ public abstract class BaseActivityTitle extends Activity {
     public void onOkHttpResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
         hideLoading();
         // 错误自动弹出
-        if (baseNetWorkEbRspBean.isAuto()) {
-            if (!baseNetWorkEbRspBean.isSuccess()) {
-                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
-                return;
-            }
-            // 业务层是否错误
-            Gson gson = new Gson();
-            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
-            if (!baseRspBean.Success) {
-                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
-                return;
-            }
-        }
+//        if (baseNetWorkEbRspBean.isAuto()) {
+//            if (!baseNetWorkEbRspBean.isSuccess()) {
+//                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+//                return;
+//            }
+//            // 业务层是否错误
+//            Gson gson = new Gson();
+//            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
+//            if (!baseRspBean.Success) {
+//                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
+//                return;
+//            }
+//        }
         onNetWorkResponse(baseNetWorkEbRspBean);
     }
 
@@ -228,5 +228,11 @@ public abstract class BaseActivityTitle extends Activity {
      */
     public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
