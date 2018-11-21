@@ -14,10 +14,16 @@
         <item name="android:colorBackground">@color/base_btn_color</item>
         <item name="android:color">@color/base_btn_color</item>
     </style>
-    <!--实线样式-->
+    <!-- 实线样式X -->
     <style name="style_line_x">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dip</item>
+        <item name="android:background">@color/light_grey</item>
+    </style>
+    <!-- 实线样式Y -->
+    <style name="style_line_y">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/light_grey</item>
     </style>
 </resources>
