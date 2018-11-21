@@ -13,6 +13,7 @@ import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import top.lsmod.me.basecode.BuildConfig;
 import top.lsmod.me.basecode.R;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbReqBean;
@@ -36,6 +37,8 @@ public abstract class BaseActivityTitle extends Activity {
     private LinearLayout llContent;
     // 所有布局
     private LinearLayout llAllView;
+    // 是否已经注册EventBus
+    private boolean isBaseRegistered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,7 @@ public abstract class BaseActivityTitle extends Activity {
 
     /**
      * 设置状态栏颜色
+     *
      * @return
      */
     public abstract int setStatusBarColor();
@@ -100,7 +104,7 @@ public abstract class BaseActivityTitle extends Activity {
     /**
      * 展示加载框
      */
-    public void showLoading(){
+    public void showLoading() {
         adDialog = new LoadingDialog(this);
         adDialog.onCreateView();
         adDialog.setUiBeforShow();
@@ -114,8 +118,8 @@ public abstract class BaseActivityTitle extends Activity {
     /**
      * 关闭弹框
      */
-    public void hideLoading(){
-        if (adDialog.isShowing()){
+    public void hideLoading() {
+        if (adDialog.isShowing()) {
             adDialog.dismiss();
         }
     }
@@ -134,9 +138,10 @@ public abstract class BaseActivityTitle extends Activity {
      * 发送网络接口请求
      */
     public void sendNetWorkRequestAuto(BaseReqBean bean) {
-        if (!EventBus.getDefault().isRegistered(this)) {
+        if (!isBaseRegistered) {
             // EventBus注册
             EventBus.getDefault().register(this);
+            isBaseRegistered = true;
         }
         // OKHTTP注册
         new BaseOkHttp().initNetWorkPlugin();
@@ -156,9 +161,10 @@ public abstract class BaseActivityTitle extends Activity {
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
         showLoading();
-        if (!EventBus.getDefault().isRegistered(this)) {
+        if (!isBaseRegistered) {
             // EventBus注册
             EventBus.getDefault().register(this);
+            isBaseRegistered = true;
         }
         // OKHTTP注册
         new BaseOkHttp().initNetWorkPlugin();
@@ -166,7 +172,7 @@ public abstract class BaseActivityTitle extends Activity {
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);
         // url请求参数
-        if (interfaceInfo[2].equals("get")||interfaceInfo[2].equals("delete")) {
+        if (interfaceInfo[2].equals("get") || interfaceInfo[2].equals("delete")) {
             String param = "";
             try {
                 param = HttpUtils.parseURLPair(bean);
@@ -209,7 +215,7 @@ public abstract class BaseActivityTitle extends Activity {
             // 业务层是否错误
             Gson gson = new Gson();
             BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
-            if (!baseRspBean.Success){
+            if (!baseRspBean.Success) {
                 ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
                 return;
             }
@@ -220,7 +226,7 @@ public abstract class BaseActivityTitle extends Activity {
     /**
      * 初步处理后返回activity
      */
-    public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean){
+    public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
 
     }
 }

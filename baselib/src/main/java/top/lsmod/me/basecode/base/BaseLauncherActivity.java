@@ -28,6 +28,8 @@ import static android.view.Window.PROGRESS_START;
  * Email yanfulei1990@gmail.com
  */
 public abstract class BaseLauncherActivity extends Activity {
+    // 是否已经注册EventBus
+    private boolean isBaseRegistered;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,10 @@ public abstract class BaseLauncherActivity extends Activity {
      * 发送网络接口请求
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
-        if (!EventBus.getDefault().isRegistered(this)) {
+        if (!isBaseRegistered) {
             // EventBus注册
             EventBus.getDefault().register(this);
+            isBaseRegistered = true;
         }
         // OKHTTP注册
         new BaseOkHttp().initNetWorkPlugin();
@@ -113,7 +116,7 @@ public abstract class BaseLauncherActivity extends Activity {
             // 业务层是否错误
             Gson gson = new Gson();
             BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
-            if (!baseRspBean.Success){
+            if (!baseRspBean.Success) {
                 ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
                 return;
             }
@@ -124,7 +127,7 @@ public abstract class BaseLauncherActivity extends Activity {
     /**
      * 初步处理后返回activity
      */
-    public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean){
+    public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
 
     }
 }
