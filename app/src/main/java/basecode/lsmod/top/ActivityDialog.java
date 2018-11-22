@@ -63,7 +63,11 @@ public class ActivityDialog extends BaseActivityTitle {
                 final ShareBottomDialog dialog = new ShareBottomDialog(this, getLlAllView(), datas, true);
                 dialog.showAnim(mBasIn).show();
                 dialog.setOnItemClickListener((adapterView, view1, i, l) -> ToastUtils.showToast(ActivityDialog.this, "点击位置为【" + i + "】", ToastUtils.SUCCESS));
-                dialog.setOnItemDelClickListener(postion -> ToastUtils.showToast(ActivityDialog.this, "删除位置为【" + postion + "】", ToastUtils.SUCCESS));
+                dialog.setOnItemDelClickListener(postion -> {
+                    ToastUtils.showToast(ActivityDialog.this, "删除位置为【" + postion + "】", ToastUtils.SUCCESS);
+                    datas.remove(postion);
+                    dialog.getShareBottomAdapter().notifyDataSetChanged();
+                });
                 break;
             case R.id.btn_share_buttom_dialog_nodel:
                 List<String> datas1 = new ArrayList<>();
