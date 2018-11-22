@@ -21,7 +21,7 @@ import top.lsmod.me.basecode.utils.ToastUtils;
  * Date:2018/11/21
  * Email:yanfulei1990@gmail.com
  **/
-public class Activity1 extends BaseActivityTitle {
+public class ActivityNetWork extends BaseActivityTitle {
     @BindView(R.id.btn_bat)
     Button btnBat;
 
@@ -42,7 +42,7 @@ public class Activity1 extends BaseActivityTitle {
 
     @Override
     public String setTitleBarText() {
-        return null;
+        return "网络请求";
     }
 
     @Override

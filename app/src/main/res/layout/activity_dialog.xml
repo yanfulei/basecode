@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn_bat"
+        android:id="@+id/btn_share_buttom_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="跳转至继承自BaseActivityTitle的界面"/>
+        android:text="底部自定义Dialog带删除" />
 
     <Button
-        android:id="@+id/btn_dialog"
+        android:id="@+id/btn_share_buttom_dialog_nodel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dialog演示部分"/>
-
+        android:text="底部自定义Dialog不带删除" />
 </LinearLayout>
