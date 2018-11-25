@@ -15,4 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="底部自定义Dialog不带删除" />
+
+    <Button
+        android:id="@+id/btn_popup_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="悬浮框"/>
 </LinearLayout>

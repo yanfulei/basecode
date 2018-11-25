@@ -1,11 +1,13 @@
 package basecode.lsmod.top;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.dialog.widget.popup.BubblePopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
 import top.lsmod.me.basecode.ui.ShareBottomDialog;
+import top.lsmod.me.basecode.ui.SimpleCustomPop;
 import top.lsmod.me.basecode.utils.ToastUtils;
 
 /**
@@ -25,6 +28,10 @@ import top.lsmod.me.basecode.utils.ToastUtils;
 public class ActivityDialog extends BaseActivityTitle {
     @BindView(R.id.btn_share_buttom_dialog)
     Button btnShareButtomDialog;
+    @BindView(R.id.btn_share_buttom_dialog_nodel)
+    Button btnShareButtomDialogNodel;
+    @BindView(R.id.btn_popup_dialog)
+    Button btnPopupDialog;
 
     @Override
     public void initSingle() {
@@ -51,7 +58,7 @@ public class ActivityDialog extends BaseActivityTitle {
 
     }
 
-    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel})
+    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_share_buttom_dialog:
@@ -78,6 +85,18 @@ public class ActivityDialog extends BaseActivityTitle {
                 final ShareBottomDialog dialog1 = new ShareBottomDialog(this, getLlAllView(), datas1, false);
                 dialog1.showAnim(mBasIn1).show();
                 dialog1.setOnItemClickListener((adapterView, view1, i, l) -> ToastUtils.showToast(ActivityDialog.this, "点击位置为【" + i + "】", ToastUtils.SUCCESS));
+                break;
+            case R.id.btn_popup_dialog:
+//                SimpleCustomPop customPop = new SimpleCustomPop(this);
+//                customPop.anchorView(btnPopupDialog);
+//                customPop.show();
+                View inflate = View.inflate(this, R.layout.popup_bubble_text, null);
+                TextView tv = inflate.findViewById(R.id.tv_bubble);
+                BubblePopup bubblePopup = new BubblePopup(this, inflate);
+                tv.setText("最美的不是下雨天,是曾与你躲过雨的屋檐~");
+                bubblePopup.anchorView(btnPopupDialog)
+                        .gravity(Gravity.TOP)
+                        .show();
                 break;
         }
     }
