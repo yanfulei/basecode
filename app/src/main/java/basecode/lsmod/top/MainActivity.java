@@ -53,4 +53,9 @@ public class MainActivity extends BaseActivityNoTitle {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
+
+    @Override
+    public void initSingle() {
+
+    }
 }

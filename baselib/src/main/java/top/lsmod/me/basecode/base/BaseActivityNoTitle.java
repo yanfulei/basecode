@@ -39,6 +39,7 @@ public abstract class BaseActivityNoTitle extends Activity {
         addContentView(setContentView(), params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
+        initSingle();
     }
 
     @Override
@@ -46,6 +47,11 @@ public abstract class BaseActivityNoTitle extends Activity {
         super.onStart();
         initData();
     }
+
+    /**
+     * 此方法相当于onCreate
+     */
+    public abstract void initSingle();
 
     /**
      * 设置状态栏颜色
