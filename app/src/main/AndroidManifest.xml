@@ -19,6 +19,7 @@
         <activity android:name=".ActivityNetWork"></activity>
         <activity android:name=".ActivityDialog"></activity>
         <activity android:name=".ActivitySwitchButton"></activity>
+        <activity android:name=".ActicitySearchTitle"></activity>
     </application>
 
 </manifest>
