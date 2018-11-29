@@ -19,6 +19,8 @@ public class MainActivity extends BaseActivityNoTitle {
     Button btnBat;
     @BindView(R.id.btn_dialog)
     Button btnDialog;
+    @BindView(R.id.btn_swich)
+    Button btnSwich;
 
     @Override
     public int setStatusBarColor() {
@@ -35,7 +37,7 @@ public class MainActivity extends BaseActivityNoTitle {
 
     }
 
-    @OnClick({R.id.btn_bat, R.id.btn_dialog})
+    @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bat:
@@ -43,6 +45,9 @@ public class MainActivity extends BaseActivityNoTitle {
                 break;
             case R.id.btn_dialog:
                 startActivity(new Intent(this, ActivityDialog.class));
+                break;
+            case R.id.btn_swich:
+                startActivity(new Intent(this, ActivitySwitchButton.class));
                 break;
         }
     }

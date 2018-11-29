@@ -153,19 +153,19 @@ public abstract class BaseActivityNoTitle extends Activity {
     public void onOkHttpResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
         hideLoading();
         // 错误自动弹出
-        if (baseNetWorkEbRspBean.isAuto()) {
-            if (!baseNetWorkEbRspBean.isSuccess()) {
-                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
-                return;
-            }
-            // 业务层是否错误
-            Gson gson = new Gson();
-            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
-            if (!baseRspBean.Success) {
-                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
-                return;
-            }
-        }
+//        if (baseNetWorkEbRspBean.isAuto()) {
+//            if (!baseNetWorkEbRspBean.isSuccess()) {
+//                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+//                return;
+//            }
+//            // 业务层是否错误
+//            Gson gson = new Gson();
+//            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
+//            if (!baseRspBean.Success) {
+//                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
+//                return;
+//            }
+//        }
         onNetWorkResponse(baseNetWorkEbRspBean);
     }
 
