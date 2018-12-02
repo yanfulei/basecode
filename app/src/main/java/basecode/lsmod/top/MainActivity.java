@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivityNoTitle {
 
     }
 
-    @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich, R.id.btn_search})
+    @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich, R.id.btn_search, R.id.btn_jwd})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bat:
@@ -53,6 +53,9 @@ public class MainActivity extends BaseActivityNoTitle {
                 break;
             case R.id.btn_search:
                 startActivity(new Intent(this, ActicitySearchTitle.class));
+                break;
+            case R.id.btn_jwd:
+                startActivity(new Intent(this, ActivityGPRS.class));
                 break;
         }
     }

@@ -30,4 +30,10 @@
         android:layout_height="wrap_content"
         android:text="跳转至集成自BaseActivitySearchTitle界面"/>
 
+    <Button
+        android:id="@+id/btn_jwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GPRS方式经纬度"/>
+
 </LinearLayout>
