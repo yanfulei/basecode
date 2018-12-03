@@ -20,9 +20,10 @@ public class LeftRightItemView extends LinearLayout {
     public TextView tvRightText;
     public String leftText;
     public String rightText;
+    public LinearLayout llAllView;
 
     public LeftRightItemView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public LeftRightItemView(Context context, AttributeSet attrs) {
@@ -31,6 +32,7 @@ public class LeftRightItemView extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.left_tight_item_view, this);
         tvLeftText = findViewById(R.id.tv_left_title);
         tvRightText = findViewById(R.id.tv_right_text);
+        llAllView = findViewById(R.id.ll_allview);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.LeftRightItemView);
         leftText = array.getString(R.styleable.LeftRightItemView_left_text);
@@ -38,6 +40,10 @@ public class LeftRightItemView extends LinearLayout {
         array.recycle();
         tvLeftText.setText(leftText);
         tvRightText.setText(rightText);
+    }
+
+    public void setOnClickListener(OnClickListener v) {
+        llAllView.setOnClickListener(v);
     }
 
     public void setLeftText(String text) {
