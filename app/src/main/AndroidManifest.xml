@@ -26,6 +26,7 @@
         <activity android:name=".ActivitySwitchButton"></activity>
         <activity android:name=".ActicitySearchTitle"></activity>
         <activity android:name=".ActivityGPRS"></activity>
+        <activity android:name=".ActivityGjt"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <top.lsmod.me.basecode.customui.ScannerItemView
+        android:id="@+id/siv_scanner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sciv_left_text="物流码【按键盘回车键确认】">
+
+    </top.lsmod.me.basecode.customui.ScannerItemView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View style="@style/style_line_x"></View>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:padding="10dp"
+                    android:text="产品信息" />
+
+                <View style="@style/style_line_x"></View>
+
+                <View style="@style/style_line_x"></View>
+
+            </LinearLayout>
+
+            <!-- 装箱信息 -->
+            <LinearLayout
+                android:id="@+id/ll_zx_all"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <View style="@style/style_line_x"></View>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:padding="10dp"
+                    android:text="销售库存信息" />
+
+                <View style="@style/style_line_x"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_xskc_wuliuma"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="物流码：  1451285	1010256331746183803003015" />
+
+                    <TextView
+                        android:id="@+id/tv_xskc_zhuangxiang_leixing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="装箱类型：   箱码" />
+
+                    <TextView
+                        android:id="@+id/tv_xskc_kufang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="库房/经销商：周刚测试 总部" />
+
+                    <TextView
+                        android:id="@+id/tv_xskc_quyu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="区域：       江苏/南京市" />
+
+                    <TextView
+                        android:id="@+id/tv_xskc_zaiku_zhuangtai"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="在库状态：   在库" />
+
+                    <TextView
+                        android:id="@+id/tv_xskc_gengxin_shijian"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="更新时间：   2018年11月23日 00:39" />
+                </LinearLayout>
+
+                <View style="@style/style_line_x"></View>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View style="@style/style_line_x"></View>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:padding="10dp"
+                    android:text="窜入区域" />
+
+                <View style="@style/style_line_x"></View>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_crqu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center|left"
+                        android:padding="10dp"
+                        tools:text="未窜货 / 区域名称" />
+
+                </LinearLayout>
+
+                <View style="@style/style_line_x"></View>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

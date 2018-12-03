@@ -36,4 +36,10 @@
         android:layout_height="wrap_content"
         android:text="GPRS方式经纬度"/>
 
+    <Button
+        android:id="@+id/btn_gjt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="骨架图"/>
+
 </LinearLayout>

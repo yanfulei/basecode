@@ -44,13 +44,13 @@ public abstract class BaseActivityTitle extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_activity_title);
-        initParentView();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View view = setContentView();
         llContent.addView(view, params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
         initSingle();
+        initParentView();
     }
 
     @Override
