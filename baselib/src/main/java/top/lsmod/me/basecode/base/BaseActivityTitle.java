@@ -46,6 +46,8 @@ public abstract class BaseActivityTitle extends Activity {
         setContentView(R.layout.activity_base_activity_title);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View view = setContentView();
+        llContent = findViewById(R.id.ll_content);
+        llAllView = findViewById(R.id.ll_allview);
         llContent.addView(view, params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
@@ -62,8 +64,6 @@ public abstract class BaseActivityTitle extends Activity {
     private void initParentView() {
         commonTitleBar = findViewById(R.id.titlebar);
         commonTitleBar.getCenterTextView().setText(setTitleBarText());
-        llContent = findViewById(R.id.ll_content);
-        llAllView = findViewById(R.id.ll_allview);
         commonTitleBar.getLeftImageButton().setOnClickListener(view -> finish());
     }
 

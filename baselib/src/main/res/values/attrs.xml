@@ -45,4 +45,9 @@
         <!-- 右侧图片 -->
         <attr name="sciv_right_icon" format="integer"></attr>
     </declare-styleable>
+
+    <declare-styleable name="LeftRightItemView">
+        <attr name="left_text" format="string"/>
+        <attr name="right_text" format="string"/>
+    </declare-styleable>
 </resources>

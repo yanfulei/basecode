@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <top.lsmod.me.basecode.customui.LeftRightItemView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_text="测试左侧文字"
+        app:right_text="测试右侧文字" />
+</LinearLayout>
