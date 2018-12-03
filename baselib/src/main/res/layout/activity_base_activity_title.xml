@@ -16,6 +16,8 @@
         titlebar:titleBarHeight="44dp"
         titlebar:leftType="imageButton"
         titlebar:leftImageResource="@drawable/ic_chevron_left_black_24dp"
+        titlebar:rightType="imageButton"
+        titlebar:rightImageResource="@drawable/ic_more_horiz_black_24dp"
         titlebar:centerType="textView"
         titlebar:centerText="我是标题"
         />

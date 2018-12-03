@@ -65,6 +65,8 @@ public abstract class BaseActivityTitle extends Activity {
         commonTitleBar = findViewById(R.id.titlebar);
         commonTitleBar.getCenterTextView().setText(setTitleBarText());
         commonTitleBar.getLeftImageButton().setOnClickListener(view -> finish());
+        commonTitleBar.setSearchRightImageResource(R.drawable.ic_more_horiz_black_24dp);
+        commonTitleBar.getRightImageButton().setOnClickListener(view -> onRightImageButtonClick());
     }
 
     /**
@@ -72,6 +74,13 @@ public abstract class BaseActivityTitle extends Activity {
      */
     public LinearLayout getLlAllView() {
         return llAllView;
+    }
+
+    /**
+     * 右侧按钮点击
+     */
+    public void onRightImageButtonClick() {
+
     }
 
     /**
