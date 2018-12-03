@@ -6,12 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.bruce.pickerview.popwindow.DatePickerPopWin;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.customui.pickerview.popwindow.DatePickerPopWin;
+import top.lsmod.me.basecode.customui.pickerview.popwindow.TimePickerPopWin;
 
 /**
  * Author:yanfulei
@@ -47,7 +47,7 @@ public class ActivityTimeView extends BaseActivityTitle {
 
     }
 
-    @OnClick({R.id.btn_riqi})
+    @OnClick({R.id.btn_riqi, R.id.btn_shijian})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_riqi:
@@ -68,6 +68,21 @@ public class ActivityTimeView extends BaseActivityTitle {
                         .dateChose("2013-11-11") // date chose when init popwindow
                         .build();
                 pickerPopWin.showPopWin(ActivityTimeView.this);
+                break;
+            case R.id.btn_shijian:
+                TimePickerPopWin timePickerPopWin = new TimePickerPopWin.Builder(ActivityTimeView.this, new TimePickerPopWin.OnTimePickListener() {
+                    @Override
+                    public void onTimePickCompleted(int hour, int minute, String AM_PM, String time) {
+                        Toast.makeText(ActivityTimeView.this, time, Toast.LENGTH_SHORT).show();
+                    }
+                }).textConfirm("确定")
+                        .textCancel("取消")
+                        .btnTextSize(16)
+                        .viewTextSize(25)
+                        .colorCancel(Color.parseColor("#999999"))
+                        .colorConfirm(Color.parseColor("#009900"))
+                        .build();
+                timePickerPopWin.showPopWin(ActivityTimeView.this);
                 break;
         }
     }

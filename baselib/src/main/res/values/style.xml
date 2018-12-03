@@ -26,4 +26,9 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:background">@color/light_grey</item>
     </style>
+    <style name="FadeInPopWin">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="@android:windowEnterAnimation">@anim/pop_win_content_fade_in</item>
+        <item name="@android:windowExitAnimation">@anim/pop_win_content_fade_out</item>
+    </style>
 </resources>
