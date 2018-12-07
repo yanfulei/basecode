@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivityNoTitle {
                 startActivity(new Intent(this, ActivityGPRS.class));
                 break;
             case R.id.btn_gjt:
-                startActivity(new Intent(this, ActivityGPRS.class));
+                startActivity(new Intent(this, ActivityGjt.class));
                 break;
             case R.id.btn_left_right_view:
                 startActivity(new Intent(this, ActivityLeftRightView.class));

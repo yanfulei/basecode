@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.customui.dialog.MaterialNumDialog;
 import top.lsmod.me.basecode.ui.ShareBottomDialog;
 import top.lsmod.me.basecode.ui.SimpleCustomPop;
 import top.lsmod.me.basecode.utils.ToastUtils;
@@ -58,7 +59,7 @@ public class ActivityDialog extends BaseActivityTitle {
 
     }
 
-    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog})
+    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_share_buttom_dialog:
@@ -97,6 +98,11 @@ public class ActivityDialog extends BaseActivityTitle {
                 bubblePopup.anchorView(btnPopupDialog)
                         .gravity(Gravity.TOP)
                         .show();
+                break;
+            case R.id.btn_ed_dialog:
+                MaterialNumDialog materialNumDialog = new MaterialNumDialog(this);
+                materialNumDialog.title("自定义提示");
+                materialNumDialog.show();
                 break;
         }
     }
