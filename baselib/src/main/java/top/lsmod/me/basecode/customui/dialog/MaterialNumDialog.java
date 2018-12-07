@@ -2,8 +2,10 @@ package top.lsmod.me.basecode.customui.dialog;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.flyco.dialog.utils.CornerUtils;
@@ -17,7 +19,10 @@ import top.lsmod.me.basecode.R;
  * Date:2018/12/7
  * Email:yanfulei1990@gmail.com
  **/
-public class MaterialNumDialog  extends BaseAlertDialog<MaterialDialog> {
+public class MaterialNumDialog extends BaseAlertDialog<MaterialDialog> {
+
+    private EditText editText;
+    private int num;
 
     public MaterialNumDialog(Context context) {
         super(context);
@@ -48,6 +53,7 @@ public class MaterialNumDialog  extends BaseAlertDialog<MaterialDialog> {
 //        mTvContent.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 //                LinearLayout.LayoutParams.WRAP_CONTENT));
         View view = getLayoutInflater().inflate(R.layout.dialog_ed_view, null);
+        editText = view.findViewById(R.id.et_num);
         mLlContainer.addView(view);
 
         /**btns*/
@@ -75,5 +81,23 @@ public class MaterialNumDialog  extends BaseAlertDialog<MaterialDialog> {
         mTvBtnLeft.setBackgroundDrawable(CornerUtils.btnSelector(radius, mBgColor, mBtnPressColor, -2));
         mTvBtnRight.setBackgroundDrawable(CornerUtils.btnSelector(radius, mBgColor, mBtnPressColor, -2));
         mTvBtnMiddle.setBackgroundDrawable(CornerUtils.btnSelector(radius, mBgColor, mBtnPressColor, -2));
+        //
+        editText.setText("" + num);
+    }
+
+    /**
+     * 获取数字
+     */
+    public int getEtNum() {
+        return TextUtils.isEmpty(editText.getText().toString()) ? 0 : Integer.valueOf(editText.getText().toString());
+    }
+
+    /**
+     * 设置数字
+     *
+     * @param num
+     */
+    public void setEtNum(int num) {
+        this.num = num;
     }
 }

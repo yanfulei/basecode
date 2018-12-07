@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.popup.BubblePopup;
 
 import java.util.ArrayList;
@@ -102,6 +103,14 @@ public class ActivityDialog extends BaseActivityTitle {
             case R.id.btn_ed_dialog:
                 MaterialNumDialog materialNumDialog = new MaterialNumDialog(this);
                 materialNumDialog.title("自定义提示");
+                materialNumDialog.setEtNum(0);
+                materialNumDialog.setOnBtnClickL(
+                        materialNumDialog::dismiss,
+                        () -> {
+                            ToastUtils.showToast(ActivityDialog.this, "输入未：" + materialNumDialog.getEtNum(), ToastUtils.SUCCESS);
+                            materialNumDialog.dismiss();
+                        }
+                );
                 materialNumDialog.show();
                 break;
         }
