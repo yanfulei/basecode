@@ -1,5 +1,6 @@
 package basecode.lsmod.top;
 
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,10 +16,6 @@ import top.lsmod.me.basecode.base.BaseActivityTitle;
  **/
 public class ActivityGjt extends BaseActivityTitle {
     private View view;
-
-    @Override
-    public void initSingle() {
-    }
 
     @Override
     public int setStatusBarColor() {
@@ -37,7 +34,8 @@ public class ActivityGjt extends BaseActivityTitle {
     }
 
     @Override
-    public void initData() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getAllChildViews(view);
     }
 

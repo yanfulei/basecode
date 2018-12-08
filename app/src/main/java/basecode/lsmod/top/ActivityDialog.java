@@ -36,11 +36,6 @@ public class ActivityDialog extends BaseActivityTitle {
     Button btnPopupDialog;
 
     @Override
-    public void initSingle() {
-
-    }
-
-    @Override
     public int setStatusBarColor() {
         return 0;
     }
@@ -53,11 +48,6 @@ public class ActivityDialog extends BaseActivityTitle {
     @Override
     public String setTitleBarText() {
         return "弹出框";
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog})

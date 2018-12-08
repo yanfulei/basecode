@@ -1,6 +1,7 @@
 package basecode.lsmod.top;
 
 import android.location.Location;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -15,7 +16,8 @@ import top.lsmod.me.basecode.utils.ToastUtils;
  **/
 public class ActivityGPRS extends BaseActivityTitle {
     @Override
-    public void initSingle() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Location location = LocationUtils.getInstance(this).showLocation();
         if (location != null) {
             String address = "纬度：" + location.getLatitude() + "经度：" + location.getLongitude();
@@ -37,11 +39,6 @@ public class ActivityGPRS extends BaseActivityTitle {
     @Override
     public String setTitleBarText() {
         return null;
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override

@@ -51,14 +51,7 @@ public abstract class BaseActivityTitle extends Activity {
         llContent.addView(view, params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
-        initSingle();
         initParentView();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        initData();
     }
 
     private void initParentView() {
@@ -84,11 +77,6 @@ public abstract class BaseActivityTitle extends Activity {
     }
 
     /**
-     * 此方法相当于onCreate
-     */
-    public abstract void initSingle();
-
-    /**
      * 设置状态栏颜色
      *
      * @return
@@ -104,11 +92,6 @@ public abstract class BaseActivityTitle extends Activity {
      * 设置标题
      */
     public abstract String setTitleBarText();
-
-    /**
-     * 初始化布局
-     */
-    public abstract void initData();
 
     /**
      * 展示加载框

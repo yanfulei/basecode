@@ -10,10 +10,6 @@ import top.lsmod.me.basecode.base.BaseActivityTitle;
  * Email:yanfulei1990@gmail.com
  **/
 public class ActivityLeftRightView extends BaseActivityTitle {
-    @Override
-    public void initSingle() {
-
-    }
 
     @Override
     public int setStatusBarColor() {
@@ -28,10 +24,5 @@ public class ActivityLeftRightView extends BaseActivityTitle {
     @Override
     public String setTitleBarText() {
         return null;
-    }
-
-    @Override
-    public void initData() {
-
     }
 }

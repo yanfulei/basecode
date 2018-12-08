@@ -34,11 +34,6 @@ public class MainActivity extends BaseActivityNoTitle {
         return getLayoutInflater().inflate(R.layout.activity_main, null);
     }
 
-    @Override
-    public void initData() {
-
-    }
-
     @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich, R.id.btn_search, R.id.btn_jwd, R.id.btn_gjt, R.id.btn_left_right_view, R.id.btn_time})
     public void onViewClick(View view) {
         switch (view.getId()) {
@@ -74,10 +69,5 @@ public class MainActivity extends BaseActivityNoTitle {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-    }
-
-    @Override
-    public void initSingle() {
-
     }
 }

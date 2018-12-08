@@ -17,11 +17,6 @@ public class ActicitySearchTitle extends BaseActivitySearchTitle {
     }
 
     @Override
-    public void initSingle() {
-
-    }
-
-    @Override
     public int setStatusBarColor() {
         return 0;
     }
@@ -29,10 +24,5 @@ public class ActicitySearchTitle extends BaseActivitySearchTitle {
     @Override
     public View setContentView() {
         return getLayoutInflater().inflate(R.layout.activity_search_title, null);
-    }
-
-    @Override
-    public void initData() {
-
     }
 }

@@ -51,13 +51,6 @@ public abstract class BaseActivitySearchTitle extends Activity {
         llContent.addView(view, params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
-        initSingle();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        initData();
     }
 
     private void initParentView() {
@@ -89,11 +82,6 @@ public abstract class BaseActivitySearchTitle extends Activity {
     }
 
     /**
-     * 此方法相当于onCreate
-     */
-    public abstract void initSingle();
-
-    /**
      * 设置状态栏颜色
      *
      * @return
@@ -104,11 +92,6 @@ public abstract class BaseActivitySearchTitle extends Activity {
      * 获取子布局
      */
     public abstract View setContentView();
-
-    /**
-     * 初始化布局
-     */
-    public abstract void initData();
 
     /**
      * 展示加载框

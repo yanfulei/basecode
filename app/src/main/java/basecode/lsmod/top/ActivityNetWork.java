@@ -26,11 +26,6 @@ public class ActivityNetWork extends BaseActivityTitle {
     Button btnBat;
 
     @Override
-    public void initSingle() {
-
-    }
-
-    @Override
     public int setStatusBarColor() {
         return 0;
     }
@@ -43,11 +38,6 @@ public class ActivityNetWork extends BaseActivityTitle {
     @Override
     public String setTitleBarText() {
         return "网络请求";
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @OnClick({R.id.btn_bat})

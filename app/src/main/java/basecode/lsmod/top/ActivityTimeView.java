@@ -23,11 +23,6 @@ public class ActivityTimeView extends BaseActivityTitle {
     Button btnRiqi;
 
     @Override
-    public void initSingle() {
-
-    }
-
-    @Override
     public int setStatusBarColor() {
         return 0;
     }
@@ -40,11 +35,6 @@ public class ActivityTimeView extends BaseActivityTitle {
     @Override
     public String setTitleBarText() {
         return "时间选择";
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @OnClick({R.id.btn_riqi, R.id.btn_shijian})

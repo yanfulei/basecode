@@ -29,12 +29,6 @@ public abstract class BaseActivityBottomNavBar extends FragmentActivity {
         initParentView();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        initData();
-    }
-
     private void initParentView() {
         commonTitleBar = findViewById(R.id.titlebar);
         commonTitleBar.getCenterTextView().setText(setTitleBarText());
@@ -97,9 +91,4 @@ public abstract class BaseActivityBottomNavBar extends FragmentActivity {
      * 设置标题
      */
     public abstract String setTitleBarText();
-
-    /**
-     * 初始化布局
-     */
-    public abstract void initData();
 }
