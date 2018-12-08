@@ -37,9 +37,12 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.google.zxing.Result;
+
 import java.io.IOException;
+
 import top.lsmod.me.basecode.R;
 import top.lsmod.me.basecode.customui.ScanBoxView;
+import top.lsmod.me.basecode.utils.StatusBarUtils;
 import top.lsmod.me.basecode.utils.ToastUtils;
 import top.lsmod.me.basecode.zxing.camera.CameraManager;
 import top.lsmod.me.basecode.zxing.decode.DecodeThread;
@@ -94,12 +97,14 @@ public abstract class BaseCodeActivity extends Activity implements SurfaceHolder
         scanBoxView = findViewById(R.id.capture_crop_view_v);
         llContent = findViewById(R.id.ll_content);
         // 添加自定义布局
-        if (null != getCustomUi(icicle)){
+        if (null != getCustomUi(icicle)) {
             llContent.addView(getCustomUi(icicle));
         }
 
         inactivityTimer = new InactivityTimer(this);
         beepManager = new BeepManager(this);
+        // 设置导航栏颜色
+        StatusBarUtils.setWindowStatusBarColor(this, R.color.colorBlack50);
     }
 
     @Override
@@ -266,6 +271,7 @@ public abstract class BaseCodeActivity extends Activity implements SurfaceHolder
 
     /**
      * 扫码返回
+     *
      * @param qCode
      */
     public abstract void onCodeOk(String qCode);
