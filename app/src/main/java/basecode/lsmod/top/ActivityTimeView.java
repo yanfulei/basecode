@@ -12,6 +12,7 @@ import butterknife.OnClick;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
 import top.lsmod.me.basecode.customui.pickerview.popwindow.DatePickerPopWin;
 import top.lsmod.me.basecode.customui.pickerview.popwindow.TimePickerPopWin;
+import top.lsmod.me.basecode.utils.BDateUtils;
 
 /**
  * Author:yanfulei
@@ -44,7 +45,9 @@ public class ActivityTimeView extends BaseActivityTitle {
                 DatePickerPopWin pickerPopWin = new DatePickerPopWin.Builder(ActivityTimeView.this, new DatePickerPopWin.OnDatePickedListener() {
                     @Override
                     public void onDatePickCompleted(int year, int month, int day, String dateDesc) {
-                        Toast.makeText(ActivityTimeView.this, dateDesc, Toast.LENGTH_SHORT).show();
+                        // 转换为long
+                        long time = BDateUtils.stringToLong(dateDesc, BDateUtils.YYYY_MM_DD);
+                        Toast.makeText(ActivityTimeView.this, "String 日期：" + dateDesc + "时间戳：" + time, Toast.LENGTH_SHORT).show();
                     }
                 }).textConfirm("确定") //text of confirm button
                         .textCancel("取消") //text of cancel button
