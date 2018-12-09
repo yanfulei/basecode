@@ -39,8 +39,6 @@ public abstract class BaseActivityTitle extends Activity {
     private LinearLayout llAllView;
     // 是否已经注册EventBus
     public boolean isBaseRegistered;
-    // 无数据界面
-    private LinearLayout llNoData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,6 @@ public abstract class BaseActivityTitle extends Activity {
         View view = setContentView();
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
-        llNoData = findViewById(R.id.ll_no_data);
         llContent.addView(view, params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
@@ -71,7 +68,7 @@ public abstract class BaseActivityTitle extends Activity {
      * @return
      */
     public View getNoDataNormal() {
-        return llNoData;
+        return getLayoutInflater().inflate(R.layout.view_list_nodata_normal, null);
     }
 
     /**
