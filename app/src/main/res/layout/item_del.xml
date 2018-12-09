@@ -35,6 +35,4 @@
             android:textColor="#ffffff"
             android:textSize="14sp" />
     </top.lsmod.me.basecode.customui.SwipeLayout>
-
-
 </FrameLayout>
