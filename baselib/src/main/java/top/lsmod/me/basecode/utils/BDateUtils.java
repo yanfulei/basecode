@@ -1,6 +1,7 @@
 package top.lsmod.me.basecode.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +26,7 @@ public class BDateUtils {
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
-        long time = calendar.getTimeInMillis()/1000;
+        long time = calendar.getTimeInMillis() / 1000;
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);
         calendar.set(Calendar.SECOND, 59);
@@ -42,8 +43,8 @@ public class BDateUtils {
         todayStart.set(Calendar.MINUTE, 0);
         todayStart.set(Calendar.SECOND, 0);
         todayStart.set(Calendar.MILLISECOND, 0);
-        long time = todayStart.getTimeInMillis()/1000;
-        return (int)time;
+        long time = todayStart.getTimeInMillis() / 1000;
+        return (int) time;
     }
 
 
@@ -83,5 +84,58 @@ public class BDateUtils {
         DateFormat formatter;
         formatter = new SimpleDateFormat(formart);//HH24小时制  hh 12小时制
         return formatter.format(date);
+    }
+
+    /**
+     * strTime要转换的String类型的时间
+     * formatType时间格式
+     * strTime的时间格式和formatType的时间格式必须相同
+     *
+     * @param strTime
+     * @param formatType
+     * @return
+     * @throws ParseException
+     */
+    public static long stringToLong(String strTime, String formatType) {
+        Date date = null; // String类型转成date类型
+        try {
+            date = stringToDate(strTime, formatType);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (date == null) {
+            return 0;
+        } else {
+            long currentTime = dateToLong(date); // date类型转成long类型
+            return currentTime;
+        }
+    }
+
+    /**
+     * strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
+     * HH时mm分ss秒，
+     * strTime的时间格式必须要与formatType的时间格式相同
+     *
+     * @param strTime
+     * @param formatType
+     * @return
+     * @throws ParseException
+     */
+    public static Date stringToDate(String strTime, String formatType)
+            throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat(formatType);
+        Date date = null;
+        date = formatter.parse(strTime);
+        return date;
+    }
+
+    /**
+     * date要转换的date类型的时间
+     *
+     * @param date
+     * @return
+     */
+    public static long dateToLong(Date date) {
+        return date.getTime();
     }
 }
