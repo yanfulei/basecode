@@ -30,7 +30,7 @@ import top.lsmod.me.basecode.utils.ToastUtils;
  */
 public abstract class BaseActivityTitle extends Activity {
 
-    private CommonTitleBar commonTitleBar;
+    public CommonTitleBar commonTitleBar;
     // 加载框
     private LoadingDialog adDialog;
     // 内容区域
