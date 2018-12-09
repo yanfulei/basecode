@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="55dp"
+    android:background="#0e0e0e">
 
-    <!--引用步骤2中添加的SwipeLayout.java布局类，包名为你项目中SwaipeLayout.java存放的路径-->
     <top.lsmod.me.basecode.customui.SwipeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="match_parent">
+
         <LinearLayout
+            android:id="@+id/ll_usb"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#ffffff">
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="5dp"/>     <!--p10为存放在drawable目录下的头像图片名称-->
+            android:layout_height="match_parent">
+
             <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:padding="5dp"
-                android:layout_marginLeft="10dp"
-                android:text= "xingming"
-                />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="5"
+                android:text="湮灭.720p.HD中英双字"
+                android:textColor="#999999"
+                android:textSize="14sp" />
+
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp">
-            <RelativeLayout
-                android:id="@+id/delete_button"
-                android:clickable="true"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="#ff0000">
-                <View
-                    android:layout_centerInParent="true"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:background="@drawable/default_toast"/>  <!--trash为删除图标-->
-            </RelativeLayout>
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_usb_delete"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="#F00"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="14sp" />
     </top.lsmod.me.basecode.customui.SwipeLayout>
-</LinearLayout>
+
+
+</FrameLayout>

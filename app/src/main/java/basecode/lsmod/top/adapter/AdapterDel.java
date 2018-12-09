@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -13,6 +12,7 @@ import java.util.List;
 import basecode.lsmod.top.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import top.lsmod.me.basecode.utils.ToastUtils;
 
 /**
  * Created by yanfulei on 2018/12/9
@@ -54,16 +54,15 @@ public class AdapterDel extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
+        viewHolder.tvUsbDelete.setOnClickListener(v -> ToastUtils.showToast(context, "删除", ToastUtils.SUCCESS));
         return view;
     }
 
     static class ViewHolder {
-        @BindView(R.id.image)
-        ImageView image;
-        @BindView(R.id.name)
-        TextView name;
-        @BindView(R.id.delete_button)
-        RelativeLayout deleteButton;
+        @BindView(R.id.ll_usb)
+        LinearLayout llUsb;
+        @BindView(R.id.tv_usb_delete)
+        TextView tvUsbDelete;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
