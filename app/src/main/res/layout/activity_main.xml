@@ -6,58 +6,73 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_bat"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="跳转至继承自BaseActivityTitle的界面"/>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_bat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转至继承自BaseActivityTitle的界面"/>
 
-    <Button
-        android:id="@+id/btn_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dialog演示部分"/>
+            <Button
+                android:id="@+id/btn_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dialog演示部分"/>
 
-    <Button
-        android:id="@+id/btn_swich"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Switch Button"/>
+            <Button
+                android:id="@+id/btn_swich"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Switch Button"/>
 
-    <Button
-        android:id="@+id/btn_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="跳转至集成自BaseActivitySearchTitle界面"/>
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="跳转至集成自BaseActivitySearchTitle界面"/>
 
-    <Button
-        android:id="@+id/btn_jwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="GPRS方式经纬度"/>
+            <Button
+                android:id="@+id/btn_jwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GPRS方式经纬度"/>
 
-    <Button
-        android:id="@+id/btn_gjt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="骨架图"/>
+            <Button
+                android:id="@+id/btn_gjt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="骨架图"/>
 
-    <Button
-        android:id="@+id/btn_left_right_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="左右自定义View"/>
+            <Button
+                android:id="@+id/btn_left_right_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="左右自定义View"/>
 
-    <Button
-        android:id="@+id/btn_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="时间选择控件"/>
+            <Button
+                android:id="@+id/btn_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="时间选择控件"/>
 
-    <Button
-        android:id="@+id/btn_del"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="侧滑删除"/>
+            <Button
+                android:id="@+id/btn_del"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="侧滑删除"/>
+
+            <Button
+                android:id="@+id/btn_ui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="常用控件"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

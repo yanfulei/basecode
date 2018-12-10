@@ -30,6 +30,7 @@
         <activity android:name=".ActivityLeftRightView"></activity>
         <activity android:name=".ActivityTimeView"></activity>
         <activity android:name=".DelActivity"></activity>
+        <activity android:name=".ActivityUi"></activity>
     </application>
 
 </manifest>
