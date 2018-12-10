@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -39,6 +40,8 @@ public abstract class BaseActivityTitle extends Activity {
     private LinearLayout llAllView;
     // 是否已经注册EventBus
     public boolean isBaseRegistered;
+    // 列表没有数据展示
+    private TextView tvNoData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public abstract class BaseActivityTitle extends Activity {
         View view = setContentView();
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
+        tvNoData = findViewById(R.id.tv_no_data);
         llContent.addView(view, params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
@@ -63,12 +67,10 @@ public abstract class BaseActivityTitle extends Activity {
     }
 
     /**
-     * 获取无数据布局
-     *
-     * @return
+     * 展示列表暂无数据
      */
-    public View getNoDataNormal() {
-        return getLayoutInflater().inflate(R.layout.view_list_nodata_normal, null);
+    public void showNoDataList() {
+        tvNoData.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -206,6 +208,9 @@ public abstract class BaseActivityTitle extends Activity {
      */
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void onOkHttpResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
+        // 隐藏列表无数据布局
+        tvNoData.setVisibility(View.GONE);
+        // 隐藏弹出框
         hideLoading();
         // 错误自动弹出
 //        if (baseNetWorkEbRspBean.isAuto()) {
