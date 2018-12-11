@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.customui.dialog.MaterialConstomUiDialog;
 import top.lsmod.me.basecode.customui.dialog.MaterialNumDialog;
 import top.lsmod.me.basecode.ui.ShareBottomDialog;
 import top.lsmod.me.basecode.ui.SimpleCustomPop;
@@ -50,7 +51,7 @@ public class ActivityDialog extends BaseActivityTitle {
         return "弹出框";
     }
 
-    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog})
+    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog, R.id.btn_zdy})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_share_buttom_dialog:
@@ -102,6 +103,19 @@ public class ActivityDialog extends BaseActivityTitle {
                         }
                 );
                 materialNumDialog.show();
+                break;
+            case R.id.btn_zdy:
+                View view1 = getLayoutInflater().inflate(R.layout.layout_dialog_zdy, null);
+                MaterialConstomUiDialog materialConstomUiDialog = new MaterialConstomUiDialog(this, view1);
+                materialConstomUiDialog.title("自定义");
+                materialConstomUiDialog.setOnBtnClickL(
+                        materialConstomUiDialog::dismiss,
+                        () -> {
+                            ToastUtils.showToast(ActivityDialog.this, "点击确定按钮", ToastUtils.INFO);
+                            materialConstomUiDialog.dismiss();
+                        }
+                );
+                materialConstomUiDialog.show();
                 break;
         }
     }

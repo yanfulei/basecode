@@ -27,4 +27,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="数字输入框" />
+
+    <Button
+        android:id="@+id/btn_zdy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义View弹出框"/>
 </LinearLayout>
