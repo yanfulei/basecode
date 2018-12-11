@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
+            android:textSize="14sp"
             android:background="@null"
             android:hint="请输入箱码" />
 
