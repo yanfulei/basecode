@@ -42,6 +42,11 @@ public class ActivityGPRS extends BaseActivityTitle {
     }
 
     @Override
+    public boolean showRightTitleButton() {
+        return false;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         LocationUtils.getInstance(this).removeLocationUpdatesListener();

@@ -36,6 +36,11 @@ public class ActivitySwitchButton extends BaseActivityTitle {
     }
 
     @Override
+    public boolean showRightTitleButton() {
+        return false;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation

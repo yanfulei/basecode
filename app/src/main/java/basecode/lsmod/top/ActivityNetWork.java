@@ -40,6 +40,11 @@ public class ActivityNetWork extends BaseActivityTitle {
         return "网络请求";
     }
 
+    @Override
+    public boolean showRightTitleButton() {
+        return false;
+    }
+
     @OnClick({R.id.btn_bat})
     public void onViewClick(View view) {
         switch (view.getId()) {

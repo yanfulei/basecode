@@ -38,6 +38,11 @@ public class ActivityTimeView extends BaseActivityTitle {
         return "时间选择";
     }
 
+    @Override
+    public boolean showRightTitleButton() {
+        return false;
+    }
+
     @OnClick({R.id.btn_riqi, R.id.btn_shijian})
     public void onViewClick(View view) {
         switch (view.getId()) {

@@ -51,6 +51,11 @@ public class ActivityDialog extends BaseActivityTitle {
         return "弹出框";
     }
 
+    @Override
+    public boolean showRightTitleButton() {
+        return false;
+    }
+
     @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog, R.id.btn_zdy})
     public void onViewClick(View view) {
         switch (view.getId()) {

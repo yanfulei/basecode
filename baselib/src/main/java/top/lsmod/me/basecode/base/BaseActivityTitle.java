@@ -66,6 +66,8 @@ public abstract class BaseActivityTitle extends Activity {
         commonTitleBar.getLeftImageButton().setOnClickListener(view -> finish());
         commonTitleBar.setSearchRightImageResource(R.drawable.ic_more_horiz_black_24dp);
         commonTitleBar.getRightImageButton().setOnClickListener(view -> onRightImageButtonClick());
+        // 设置右侧操作按钮是否展示
+        commonTitleBar.getRightImageButton().setVisibility(showRightTitleButton() ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -105,6 +107,11 @@ public abstract class BaseActivityTitle extends Activity {
      * 设置标题
      */
     public abstract String setTitleBarText();
+
+    /**
+     * 是否展示右侧操作按钮
+     */
+    public abstract boolean showRightTitleButton();
 
     /**
      * 展示加载框

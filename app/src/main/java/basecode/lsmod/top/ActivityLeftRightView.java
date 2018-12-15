@@ -25,4 +25,9 @@ public class ActivityLeftRightView extends BaseActivityTitle {
     public String setTitleBarText() {
         return null;
     }
+
+    @Override
+    public boolean showRightTitleButton() {
+        return true;
+    }
 }
