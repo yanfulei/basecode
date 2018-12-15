@@ -19,7 +19,7 @@ import top.lsmod.me.basecode.R;
 public class ScannerItemView extends LinearLayout {
 
     public EditText et_input;
-    public ImageView iv_right_icon;
+    public LinearLayout iv_right_icon;
 
     public ScannerItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
