@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -40,6 +41,8 @@ public abstract class BaseActivitySearchTitle extends Activity {
     private LinearLayout llAllView;
     // 是否已经注册EventBus
     public boolean isBaseRegistered;
+    // 列表没有数据展示
+    private TextView tvNoData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public abstract class BaseActivitySearchTitle extends Activity {
         commonTitleBar = findViewById(R.id.titlebar);
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
+        tvNoData = findViewById(R.id.tv_no_data);
         commonTitleBar.getLeftImageButton().setOnClickListener(view -> finish());
         commonTitleBar.getCenterSearchEditText().setOnKeyListener((view, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND
@@ -69,7 +73,15 @@ public abstract class BaseActivitySearchTitle extends Activity {
     }
 
     /**
+     * 展示列表暂无数据
+     */
+    public void showNoDataList() {
+        tvNoData.setVisibility(View.VISIBLE);
+    }
+
+    /**
      * 触发头部检索
+     *
      * @param key
      */
     public abstract void onTitleSearch(String key);
@@ -197,6 +209,8 @@ public abstract class BaseActivitySearchTitle extends Activity {
      */
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void onOkHttpResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
+        // 隐藏列表无数据布局
+        tvNoData.setVisibility(View.GONE);
         hideLoading();
         // 错误自动弹出
 //        if (baseNetWorkEbRspBean.isAuto()) {
