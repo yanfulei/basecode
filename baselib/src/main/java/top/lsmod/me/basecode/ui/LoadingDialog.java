@@ -1,8 +1,10 @@
 package top.lsmod.me.basecode.ui;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 
+import com.flyco.dialog.utils.CornerUtils;
 import com.flyco.dialog.widget.base.BaseDialog;
 import com.wang.avi.AVLoadingIndicatorView;
 

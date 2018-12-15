@@ -1,6 +1,7 @@
 package top.lsmod.me.basecode.base;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -61,6 +62,7 @@ public abstract class BaseActivityTitle extends Activity {
     private void initParentView() {
         commonTitleBar = findViewById(R.id.titlebar);
         commonTitleBar.getCenterTextView().setText(setTitleBarText());
+        commonTitleBar.getCenterTextView().setTextColor(Color.parseColor("#ffffff"));
         commonTitleBar.getLeftImageButton().setOnClickListener(view -> finish());
         commonTitleBar.setSearchRightImageResource(R.drawable.ic_more_horiz_black_24dp);
         commonTitleBar.getRightImageButton().setOnClickListener(view -> onRightImageButtonClick());
@@ -115,6 +117,7 @@ public abstract class BaseActivityTitle extends Activity {
         adDialog.setCanceledOnTouchOutside(false);
         //按返回键能不能退出
         adDialog.setCancelable(true);
+        adDialog.dimEnabled(false);
         adDialog.show();
     }
 
