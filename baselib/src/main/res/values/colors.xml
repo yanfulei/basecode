@@ -20,4 +20,6 @@
 
     <color name="btn_cancel_color">#999999</color>
     <color name="btn_confirm_color">#303F9F</color>
+
+    <color name="right_lab">#262626</color>
 </resources>
