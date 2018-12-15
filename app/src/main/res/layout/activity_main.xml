@@ -72,6 +72,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="常用控件"/>
+
+            <Button
+                android:id="@+id/btn_bengkui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="崩溃弹框"/>
         </LinearLayout>
     </ScrollView>
 
