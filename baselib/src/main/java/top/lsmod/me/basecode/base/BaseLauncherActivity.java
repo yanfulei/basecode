@@ -17,6 +17,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import top.lsmod.me.basecode.R;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbReqBean;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbRspBean;
+import top.lsmod.me.basecode.ui.LoadingDialog;
 import top.lsmod.me.basecode.utils.HttpUtils;
 import top.lsmod.me.basecode.utils.StatusBarUtils;
 import top.lsmod.me.basecode.utils.ToastUtils;
@@ -30,6 +31,8 @@ import static android.view.Window.PROGRESS_START;
 public abstract class BaseLauncherActivity extends Activity {
     // 是否已经注册EventBus
     private boolean isBaseRegistered;
+    // 加载框
+    private LoadingDialog adDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +62,25 @@ public abstract class BaseLauncherActivity extends Activity {
     });
 
     /**
+     * 展示加载框
+     */
+    public void showLoading() {
+        adDialog = new LoadingDialog(this);
+        adDialog.onCreateView();
+        adDialog.setUiBeforShow();
+        //点击空白区域能不能退出
+        adDialog.setCanceledOnTouchOutside(false);
+        //按返回键能不能退出
+        adDialog.setCancelable(true);
+        adDialog.dimEnabled(false);
+        adDialog.show();
+    }
+
+    /**
      * 发送网络接口请求
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
+        showLoading();
         if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
             // EventBus注册
             EventBus.getDefault().register(this);
@@ -73,7 +92,7 @@ public abstract class BaseLauncherActivity extends Activity {
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);
         // url请求参数
-        if (interfaceInfo[2].equals("get")) {
+        if (interfaceInfo[2].equals("get") || interfaceInfo[2].equals("delete")) {
             String param = "";
             try {
                 param = HttpUtils.parseURLPair(bean);
@@ -106,22 +125,34 @@ public abstract class BaseLauncherActivity extends Activity {
      */
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void onOkHttpResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
-//        hideLoading();
+        // 隐藏列表无数据布局
+//        tvNoData.setVisibility(View.GONE);
+        // 隐藏弹出框
+        hideLoading();
         // 错误自动弹出
-        if (baseNetWorkEbRspBean.isAuto()) {
-            if (!baseNetWorkEbRspBean.isSuccess()) {
-                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
-                return;
-            }
-            // 业务层是否错误
-            Gson gson = new Gson();
-            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
-            if (!baseRspBean.Success) {
-                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
-                return;
-            }
-        }
+//        if (baseNetWorkEbRspBean.isAuto()) {
+//            if (!baseNetWorkEbRspBean.isSuccess()) {
+//                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+//                return;
+//            }
+//            // 业务层是否错误
+//            Gson gson = new Gson();
+//            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
+//            if (!baseRspBean.Success) {
+//                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
+//                return;
+//            }
+//        }
         onNetWorkResponse(baseNetWorkEbRspBean);
+    }
+
+    /**
+     * 关闭弹框
+     */
+    public void hideLoading() {
+        if (adDialog.isShowing()) {
+            adDialog.dismiss();
+        }
     }
 
     /**
