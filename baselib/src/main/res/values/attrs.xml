@@ -49,8 +49,8 @@
     <declare-styleable name="LeftRightItemView">
         <attr name="left_text" format="string"/>
         <attr name="right_text" format="string"/>
-        <attr name="lrv_padding" format="dimension" />
-        <attr name="lrv_left_width" format="dimension" />
+        <attr name="lrv_padding" format="dimension|reference" />
+        <attr name="lrv_left_width" format="dimension|reference" />
         <attr name="lrv_left_color" format="color" />
         <attr name="lrv_right_color" format="color" />
     </declare-styleable>

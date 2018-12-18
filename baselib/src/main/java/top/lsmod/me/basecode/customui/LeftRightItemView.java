@@ -50,7 +50,7 @@ public class LeftRightItemView extends LinearLayout {
         leftText = array.getString(R.styleable.LeftRightItemView_left_text);
         rightText = array.getString(R.styleable.LeftRightItemView_right_text);
         lrvPadding = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_padding, 10);
-        lrvLeftWidth = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_left_width, 100);
+        lrvLeftWidth = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_left_width, 155);
         lrvLeftColor = array.getColor(R.styleable.LeftRightItemView_lrv_left_color, Color.parseColor("#8A000000"));
         lrvRightColor = array.getColor(R.styleable.LeftRightItemView_lrv_right_color, Color.parseColor("#262626"));
         array.recycle();
