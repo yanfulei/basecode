@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:lrv_padding="30dp"
+        app:lrv_left_width="150dp"
         app:left_text="测试左侧文字"
         app:right_text="测试右侧文字" />
 </LinearLayout>

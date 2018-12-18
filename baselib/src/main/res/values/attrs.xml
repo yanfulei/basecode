@@ -50,6 +50,7 @@
         <attr name="left_text" format="string"/>
         <attr name="right_text" format="string"/>
         <attr name="lrv_padding" format="dimension" />
+        <attr name="lrv_left_width" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="LoopView">
