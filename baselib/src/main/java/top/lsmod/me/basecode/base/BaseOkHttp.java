@@ -45,10 +45,15 @@ public class BaseOkHttp {
     // token
     private static String token;
 
-    public void initNetWorkPlugin() {
+    public void initNetWorkPlugin(Activity activity) {
         if (!okHttpIsRegistered) {
             EventBus.getDefault().register(this);
             okHttpIsRegistered = true;
+            // 初始化token信息
+            Auth20RspBean auth20RspBean = (Auth20RspBean) SPUtils.getInstance().readObject(activity, "auth_info");
+            if (null != auth20RspBean) {
+                token = auth20RspBean.getAccess_token();
+            }
         }
     }
 
@@ -75,10 +80,6 @@ public class BaseOkHttp {
      */
     public void AsyncGet(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
-        if (TextUtils.isEmpty(token)) {
-            Auth20RspBean auth20RspBean = (Auth20RspBean) SPUtils.getInstance().readObject(baseNetWorkEbReqBean.getActivity(), "auth_info");
-            token = null == auth20RspBean ? "" : auth20RspBean.getAccess_token();
-        }
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -130,10 +131,6 @@ public class BaseOkHttp {
      */
     public void AsyncDelete(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
-        if (TextUtils.isEmpty(token)) {
-            Auth20RspBean auth20RspBean = (Auth20RspBean) SPUtils.getInstance().readObject(baseNetWorkEbReqBean.getActivity(), "auth_info");
-            token = null == auth20RspBean ? "" : auth20RspBean.getAccess_token();
-        }
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -187,10 +184,6 @@ public class BaseOkHttp {
      */
     public static void AsyncPostJson(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
-        if (TextUtils.isEmpty(token)) {
-            Auth20RspBean auth20RspBean = (Auth20RspBean) SPUtils.getInstance().readObject(baseNetWorkEbReqBean.getActivity(), "auth_info");
-            token = null == auth20RspBean ? "" : auth20RspBean.getAccess_token();
-        }
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)

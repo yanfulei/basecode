@@ -157,7 +157,7 @@ public abstract class BaseActivityTitle extends Activity {
             isBaseRegistered = true;
         }
         // OKHTTP注册
-        new BaseOkHttp().initNetWorkPlugin();
+        new BaseOkHttp().initNetWorkPlugin(this);
         BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
         Gson gson = new Gson();
         String json = gson.toJson(bean);
@@ -180,7 +180,7 @@ public abstract class BaseActivityTitle extends Activity {
             isBaseRegistered = true;
         }
         // OKHTTP注册
-        new BaseOkHttp().initNetWorkPlugin();
+        new BaseOkHttp().initNetWorkPlugin(this);
         BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);

@@ -87,7 +87,7 @@ public abstract class BaseLauncherActivity extends Activity {
             isBaseRegistered = true;
         }
         // OKHTTP注册
-        new BaseOkHttp().initNetWorkPlugin();
+        new BaseOkHttp().initNetWorkPlugin(this);
         BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);
