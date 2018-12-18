@@ -60,7 +60,7 @@ public class LeftRightItemView extends LinearLayout {
         llAllView2.setPadding(lrvPadding, lrvPadding, lrvPadding, lrvPadding);
         // 设置左侧宽度
         ViewGroup.LayoutParams params = tvLeftText.getLayoutParams();
-        params.width = lrvLeftWidth == 0 ? 100 : lrvLeftWidth;
+        params.width = lrvLeftWidth == 0 ? 150 : lrvLeftWidth;
         tvLeftText.setLayoutParams(params);
         // 设置颜色
         tvLeftText.setTextColor(lrvLeftColor);
