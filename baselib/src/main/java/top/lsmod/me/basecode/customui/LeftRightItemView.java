@@ -78,4 +78,12 @@ public class LeftRightItemView extends LinearLayout {
     public void setRightText(String rightText) {
         tvRightText.setText(rightText);
     }
+
+    public void setRightTextColor(int color) {
+        tvRightText.setTextColor(color);
+    }
+
+    public void setLeftTextColor(int color) {
+        tvLeftText.setTextColor(color);
+    }
 }
