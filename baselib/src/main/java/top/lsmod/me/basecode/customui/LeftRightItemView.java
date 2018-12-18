@@ -21,6 +21,8 @@ public class LeftRightItemView extends LinearLayout {
     public String leftText;
     public String rightText;
     public LinearLayout llAllView;
+    public LinearLayout llAllView2;
+    private int lrvPadding;
 
     public LeftRightItemView(Context context) {
         this(context, null);
@@ -33,13 +35,17 @@ public class LeftRightItemView extends LinearLayout {
         tvLeftText = findViewById(R.id.tv_left_title);
         tvRightText = findViewById(R.id.tv_right_text);
         llAllView = findViewById(R.id.ll_allview);
+        llAllView2 = findViewById(R.id.ll_allview2);
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.LeftRightItemView);
         leftText = array.getString(R.styleable.LeftRightItemView_left_text);
         rightText = array.getString(R.styleable.LeftRightItemView_right_text);
+        lrvPadding = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_padding, 10);
         array.recycle();
         tvLeftText.setText(leftText);
         tvRightText.setText(rightText);
+        // 设置间距
+        llAllView2.setPadding(lrvPadding, lrvPadding, lrvPadding, lrvPadding);
     }
 
     public void setOnClickListener(OnClickListener v) {
