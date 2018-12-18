@@ -10,5 +10,7 @@
         app:lrv_padding="30dp"
         app:lrv_left_width="150dp"
         app:left_text="测试左侧文字"
+        app:lrv_left_color="@color/red"
+        app:lrv_right_color="@color/deep_blue"
         app:right_text="测试右侧文字" />
 </LinearLayout>

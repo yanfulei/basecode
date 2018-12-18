@@ -2,6 +2,7 @@ package top.lsmod.me.basecode.customui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -27,6 +28,10 @@ public class LeftRightItemView extends LinearLayout {
     private int lrvPadding;
     // 左边区域宽度
     private int lrvLeftWidth;
+    // 左边颜色
+    private int lrvLeftColor;
+    // 右边颜色
+    private int lrvRightColor;
 
     public LeftRightItemView(Context context) {
         this(context, null);
@@ -46,6 +51,8 @@ public class LeftRightItemView extends LinearLayout {
         rightText = array.getString(R.styleable.LeftRightItemView_right_text);
         lrvPadding = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_padding, 10);
         lrvLeftWidth = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_left_width, 100);
+        lrvLeftColor = array.getColor(R.styleable.LeftRightItemView_lrv_left_color, Color.parseColor("#8A000000"));
+        lrvRightColor = array.getColor(R.styleable.LeftRightItemView_lrv_right_color, Color.parseColor("#262626"));
         array.recycle();
         tvLeftText.setText(leftText);
         tvRightText.setText(rightText);
@@ -55,6 +62,9 @@ public class LeftRightItemView extends LinearLayout {
         ViewGroup.LayoutParams params = tvLeftText.getLayoutParams();
         params.width = lrvLeftWidth == 0 ? 100 : lrvLeftWidth;
         tvLeftText.setLayoutParams(params);
+        // 设置颜色
+        tvLeftText.setTextColor(lrvLeftColor);
+        tvRightText.setTextColor(lrvRightColor);
     }
 
     public void setOnClickListener(OnClickListener v) {
