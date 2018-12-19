@@ -73,6 +73,7 @@ public class BaseOkHttp {
         } else if (baseNetWorkEbReqBean.getHttpType().equals("delete")) {
             AsyncDelete(baseNetWorkEbReqBean);
         }
+        Logger.d("请求taoken>>" + "Authorization:" + "bearer " + token);
     }
 
     /**
