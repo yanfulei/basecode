@@ -49,6 +49,9 @@ public class BaseOkHttp {
         if (!okHttpIsRegistered) {
             EventBus.getDefault().register(this);
             okHttpIsRegistered = true;
+        }
+        // 初始化token
+        if (TextUtils.isEmpty(token)) {
             // 初始化token信息
             Auth20RspBean auth20RspBean = (Auth20RspBean) SPUtils.getInstance().readObject(activity, "auth_info");
             if (null != auth20RspBean) {
