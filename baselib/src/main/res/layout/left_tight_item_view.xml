@@ -25,7 +25,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="我是右侧文字"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="我是右侧文字我是右侧文字我是右侧文字我是右侧文字我是右侧文字我是右侧文字"
             android:textColor="@color/right_lab" />
     </LinearLayout>
 </LinearLayout>
