@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivityNoTitle {
     }
 
     @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich, R.id.btn_search, R.id.btn_jwd, R.id.btn_gjt,
-            R.id.btn_left_right_view, R.id.btn_time, R.id.btn_del, R.id.btn_ui, R.id.btn_bengkui})
+            R.id.btn_left_right_view, R.id.btn_time, R.id.btn_del, R.id.btn_ui, R.id.btn_bengkui, R.id.btn_shoufengqin})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bat:
@@ -70,6 +70,9 @@ public class MainActivity extends BaseActivityNoTitle {
                 break;
             case R.id.btn_bengkui:
                 startActivity(new Intent(this, BengKuiActivity.class));
+                break;
+            case R.id.btn_shoufengqin:
+                startActivity(new Intent(this, ActivityShouFengQin.class));
                 break;
         }
     }

@@ -33,6 +33,7 @@
         <activity android:name=".DelActivity"></activity>
         <activity android:name=".ActivityUi"></activity>
         <activity android:name=".BengKuiActivity"></activity>
+        <activity android:name=".ActivityShouFengQin"></activity>
     </application>
 
 </manifest>
