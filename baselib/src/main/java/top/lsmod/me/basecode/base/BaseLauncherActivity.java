@@ -1,6 +1,7 @@
 package top.lsmod.me.basecode.base;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -41,7 +42,7 @@ public abstract class BaseLauncherActivity extends Activity {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addContentView(setContentView(), params);
         // 设置导航栏颜色
-        StatusBarUtils.setWindowStatusBarColor(this, R.color.white);
+        StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
         // 延迟3秒启动
         mHandler.sendEmptyMessageDelayed(PROGRESS_START, 3000);
     }
@@ -161,6 +162,13 @@ public abstract class BaseLauncherActivity extends Activity {
     public void onNetWorkResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
 
     }
+
+    /**
+     * 设置状态栏颜色
+     *
+     * @return
+     */
+    public abstract int setStatusBarColor();
 
     @Override
     protected void onDestroy() {
