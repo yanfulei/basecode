@@ -28,7 +28,9 @@
         <activity android:name=".ActicitySearchTitle"></activity>
         <activity android:name=".ActivityGPRS"></activity>
         <activity android:name=".ActivityGjt"></activity>
-        <activity android:name=".ActivityLeftRightView"></activity>
+        <activity
+            android:name=".ActivityCustomView"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".ActivityTimeView"></activity>
         <activity android:name=".DelActivity"></activity>
         <activity android:name=".ActivityUi"></activity>

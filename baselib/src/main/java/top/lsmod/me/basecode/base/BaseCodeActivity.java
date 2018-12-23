@@ -97,8 +97,9 @@ public abstract class BaseCodeActivity extends Activity implements SurfaceHolder
         scanBoxView = findViewById(R.id.capture_crop_view_v);
         llContent = findViewById(R.id.ll_content);
         // 添加自定义布局
-        if (null != getCustomUi(icicle)) {
-            llContent.addView(getCustomUi(icicle));
+        View view = getCustomUi(icicle);
+        if (null != view) {
+            llContent.addView(view);
         }
 
         inactivityTimer = new InactivityTimer(this);

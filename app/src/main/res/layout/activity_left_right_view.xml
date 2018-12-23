@@ -2,14 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <top.lsmod.me.basecode.customui.LeftRightItemView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:lrv_padding="30dp"
         app:left_text="测试左侧文字"
         app:lrv_left_color="@color/red"
+        app:lrv_padding="30dp"
         app:lrv_right_color="@color/deep_blue"
         app:right_text="测试右侧文字" />
+
+    <top.lsmod.me.basecode.customui.ScannerItemView
+        android:id="@+id/siv_scanner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:sciv_left_text="箱码/垛码"></top.lsmod.me.basecode.customui.ScannerItemView>
 </LinearLayout>
