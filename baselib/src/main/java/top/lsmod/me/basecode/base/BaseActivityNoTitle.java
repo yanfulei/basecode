@@ -163,8 +163,10 @@ public abstract class BaseActivityNoTitle extends Activity {
      * 展示加载框
      */
     public void showLoading() {
+        if (null != adDialog){
+            adDialog.dismiss();
+        }
         adDialog = new LoadingDialog(this);
-        adDialog.dismiss();
         adDialog.onCreateView();
         adDialog.setUiBeforShow();
         //点击空白区域能不能退出
