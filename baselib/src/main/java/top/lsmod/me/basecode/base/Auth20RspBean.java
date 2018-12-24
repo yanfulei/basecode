@@ -201,6 +201,16 @@ public class Auth20RspBean implements Serializable {
         private int DepId;
         private String Name;
         private int Type;
+        private int ParentId;
+
+        public int getParentId() {
+            return ParentId;
+        }
+
+        public void setParentId(int parentId) {
+            ParentId = parentId;
+        }
+
         public void setDepId(int DepId) {
             this.DepId = DepId;
         }
