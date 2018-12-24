@@ -164,6 +164,7 @@ public abstract class BaseActivityNoTitle extends Activity {
      */
     public void showLoading() {
         adDialog = new LoadingDialog(this);
+        adDialog.dismiss();
         adDialog.onCreateView();
         adDialog.setUiBeforShow();
         //点击空白区域能不能退出
