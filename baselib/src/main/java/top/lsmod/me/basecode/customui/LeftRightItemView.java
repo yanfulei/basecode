@@ -69,7 +69,7 @@ public class LeftRightItemView extends LinearLayout {
         tvLeftText.setTextColor(lrvLeftColor);
         tvRightText.setTextColor(lrvRightColor);
         // 设置右侧图标
-        tvRightText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(lrvRightIcon), null);
+        tvRightText.setCompoundDrawablesWithIntrinsicBounds(null, null, (0 == lrvRightIcon ? null : getResources().getDrawable(lrvRightIcon)), null);
     }
 
     public void setOnClickListener(OnClickListener v) {
