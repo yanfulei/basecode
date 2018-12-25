@@ -37,6 +37,9 @@ public class BDateUtils {
         return strToday;
     }
 
+    /**
+     * 获取今天的开始时间
+     */
     public static int getStartTimeStamp() {
         Calendar todayStart = Calendar.getInstance();
         todayStart.set(Calendar.HOUR_OF_DAY, 0);
@@ -47,9 +50,39 @@ public class BDateUtils {
         return (int) time;
     }
 
-
+    /**
+     * 获取今天的结束时间
+     */
     public static int getEndTimeStamp() {
         Calendar todayEnd = Calendar.getInstance();
+        todayEnd.set(Calendar.HOUR_OF_DAY, 23);
+        todayEnd.set(Calendar.MINUTE, 59);
+        todayEnd.set(Calendar.SECOND, 59);
+        todayEnd.set(Calendar.MILLISECOND, 999);
+        long time = todayEnd.getTimeInMillis() / 1000;
+        return (int) time;
+    }
+
+    /**
+     * 获取某一天的开始时间
+     */
+    public static int getSomeDayStartTimeStamp(int year, int mount, int day) {
+        Calendar todayStart = Calendar.getInstance();
+        todayStart.set(year, mount, day);
+        todayStart.set(Calendar.HOUR_OF_DAY, 0);
+        todayStart.set(Calendar.MINUTE, 0);
+        todayStart.set(Calendar.SECOND, 0);
+        todayStart.set(Calendar.MILLISECOND, 0);
+        long time = todayStart.getTimeInMillis() / 1000;
+        return (int) time;
+    }
+
+    /**
+     * 获取某一天的结束时间
+     */
+    public static int getSomeDayEndTimeStamp(int year, int mount, int day) {
+        Calendar todayEnd = Calendar.getInstance();
+        todayEnd.set(year, mount, day);
         todayEnd.set(Calendar.HOUR_OF_DAY, 23);
         todayEnd.set(Calendar.MINUTE, 59);
         todayEnd.set(Calendar.SECOND, 59);
