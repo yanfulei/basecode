@@ -25,7 +25,7 @@ import top.lsmod.me.basecode.eventbus.bean.ShareBottomItemDelClickEvBean;
  */
 public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
 
-    private List<String> datas;
+    private List<BottomAdapterBean> datas;
     private ListView listView;
     private ShareBottom shareBottom;
     private boolean showDel;
@@ -54,7 +54,7 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
         super(context);
     }
 
-    public ShareBottomDialog(Context context, View animateView, List<String> datas, boolean showDel) {
+    public ShareBottomDialog(Context context, View animateView, List<BottomAdapterBean> datas, boolean showDel) {
         super(context, animateView);
         this.datas = datas;
         this.showDel = showDel;
@@ -66,7 +66,7 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
         dismissAnim(null);
         View inflate = View.inflate(mContext, R.layout.dialog_share, null);
         listView = inflate.findViewById(R.id.lv_items);
-        shareBottomAdapter = new ShareBottomAdapter(mContext, datas, this.showDel);
+        shareBottomAdapter = new ShareBottomAdapter(mContext, datas);
         listView.setAdapter(shareBottomAdapter);
         shareBottomAdapter.notifyDataSetChanged();
         EventBus.getDefault().register(this);
@@ -93,15 +93,12 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
      */
     public static class ShareBottomAdapter extends BaseAdapter {
 
-        private List<String> datas;
+        private List<BottomAdapterBean> datas;
         private Context context;
 
-        private boolean delShow;
-
-        public ShareBottomAdapter(Context context, List<String> datas, boolean delShow) {
+        public ShareBottomAdapter(Context context, List<BottomAdapterBean> datas) {
             this.context = context;
             this.datas = datas;
-            this.delShow = delShow;
         }
 
         @Override
@@ -130,8 +127,10 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
             } else {
                 viewHolder = (ViewHolder) view.getTag();
             }
-            viewHolder.tvCode.setText(datas.get(i));
-            viewHolder.tvCodeDel.setVisibility(this.delShow ? View.VISIBLE : View.GONE);
+            BottomAdapterBean data = datas.get(i);
+            viewHolder.tvCode.setText(data.getCode());
+            viewHolder.tvCode.setTextColor(data.isError ? context.getResources().getColor(R.color.red) : context.getResources().getColor(R.color.right_lab));
+            viewHolder.tvCodeDel.setVisibility(data.isShowDel() ? View.VISIBLE : View.GONE);
             viewHolder.tvCodeDel.setOnClickListener(view1 -> {
                 ShareBottomItemDelClickEvBean shareBottomItemDelClickEvBean = new ShareBottomItemDelClickEvBean();
                 shareBottomItemDelClickEvBean.setPosion(i);
@@ -149,6 +148,36 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
                 tvCode = view.findViewById(R.id.tv_code);
                 tvCodeDel = view.findViewById(R.id.tv_code_del);
             }
+        }
+    }
+
+    public static class BottomAdapterBean {
+        private String code;
+        private boolean showDel;
+        private boolean isError;
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+
+        public boolean isShowDel() {
+            return showDel;
+        }
+
+        public void setShowDel(boolean showDel) {
+            this.showDel = showDel;
+        }
+
+        public boolean isError() {
+            return isError;
+        }
+
+        public void setError(boolean error) {
+            isError = error;
         }
     }
 }

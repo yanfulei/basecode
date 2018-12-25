@@ -60,10 +60,7 @@ public class ActivityDialog extends BaseActivityTitle {
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_share_buttom_dialog:
-                List<String> datas = new ArrayList<>();
-                datas.add("test1");
-                datas.add("test2");
-                datas.add("test3");
+                List<ShareBottomDialog.BottomAdapterBean> datas = new ArrayList<>();
                 BounceTopEnter mBasIn = new BounceTopEnter();
                 final ShareBottomDialog dialog = new ShareBottomDialog(this, getLlAllView(), datas, true);
                 dialog.showAnim(mBasIn).show();
@@ -75,10 +72,7 @@ public class ActivityDialog extends BaseActivityTitle {
                 });
                 break;
             case R.id.btn_share_buttom_dialog_nodel:
-                List<String> datas1 = new ArrayList<>();
-                datas1.add("test1");
-                datas1.add("test2");
-                datas1.add("test3");
+                List<ShareBottomDialog.BottomAdapterBean> datas1 = new ArrayList<>();
                 BounceTopEnter mBasIn1 = new BounceTopEnter();
                 final ShareBottomDialog dialog1 = new ShareBottomDialog(this, getLlAllView(), datas1, false);
                 dialog1.showAnim(mBasIn1).show();
