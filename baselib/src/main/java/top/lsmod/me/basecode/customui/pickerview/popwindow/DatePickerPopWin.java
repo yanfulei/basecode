@@ -364,7 +364,7 @@ public class DatePickerPopWin extends PopupWindow implements View.OnClickListene
     public void onClick(View v) {
 
         if (v == contentView || v == cancelBtn) {
-
+            mListener.onCancelBtnClick();
             dismissPopWin();
         } else if (v == confirmBtn) {
 
@@ -442,5 +442,7 @@ public class DatePickerPopWin extends PopupWindow implements View.OnClickListene
          */
         void onDatePickCompleted(int year, int month, int day,
                                  String dateDesc);
+
+        void onCancelBtnClick();
     }
 }

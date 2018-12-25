@@ -54,6 +54,11 @@ public class ActivityTimeView extends BaseActivityTitle {
                         long time = BDateUtils.stringToLong(dateDesc, BDateUtils.YYYY_MM_DD);
                         Toast.makeText(ActivityTimeView.this, "String 日期：" + dateDesc + "时间戳：" + time, Toast.LENGTH_SHORT).show();
                     }
+
+                    @Override
+                    public void onCancelBtnClick() {
+
+                    }
                 }).textConfirm("确定") //text of confirm button
                         .textCancel("取消") //text of cancel button
                         .btnTextSize(16) // button text size
