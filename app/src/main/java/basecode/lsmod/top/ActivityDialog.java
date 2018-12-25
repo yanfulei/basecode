@@ -75,6 +75,12 @@ public class ActivityDialog extends BaseActivityTitle {
                 List<ShareBottomDialog.BottomAdapterBean> datas1 = new ArrayList<>();
                 BounceTopEnter mBasIn1 = new BounceTopEnter();
                 final ShareBottomDialog dialog1 = new ShareBottomDialog(this, getLlAllView(), datas1);
+                dialog1.setCodeOp(new ShareBottomDialog.ShareBottomAdapter.CodeOp() {
+                    @Override
+                    public void OnCodeDel(String code, int posthion) {
+
+                    }
+                });
                 dialog1.showAnim(mBasIn1).show();
                 dialog1.setOnItemClickListener((adapterView, view1, i, l) -> ToastUtils.showToast(ActivityDialog.this, "点击位置为【" + i + "】", ToastUtils.SUCCESS));
                 break;

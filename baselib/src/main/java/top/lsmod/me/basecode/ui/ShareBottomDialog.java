@@ -45,9 +45,9 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
 
     private AdapterView.OnItemClickListener onItemClickListener;
 
-    private CodeOp codeOp;
+    private ShareBottomAdapter.CodeOp codeOp;
 
-    public void setCodeOp(CodeOp codeOp) {
+    public void setCodeOp(ShareBottomAdapter.CodeOp codeOp) {
         this.codeOp = codeOp;
     }
 
@@ -153,6 +153,10 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
                 tvCodeDel = view.findViewById(R.id.tv_code_del);
             }
         }
+
+        public interface CodeOp {
+            void OnCodeDel(String code, int posthion);
+        }
     }
 
     public static class BottomAdapterBean {
@@ -183,9 +187,5 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
         public void setError(boolean error) {
             isError = error;
         }
-    }
-
-    interface CodeOp {
-        void OnCodeDel(String code, int posthion);
     }
 }
