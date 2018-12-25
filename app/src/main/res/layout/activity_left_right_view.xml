@@ -12,6 +12,7 @@
         app:lrv_left_color="@color/red"
         app:lrv_padding="30dp"
         app:lrv_right_color="@color/deep_blue"
+        app:lrv_right_icon="@drawable/ic_keyboard_arrow_down_black_24dp"
         app:right_text="测试右侧文字" />
 
     <top.lsmod.me.basecode.customui.ScannerItemView

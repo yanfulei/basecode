@@ -109,6 +109,9 @@ public abstract class BaseActivitySearchTitle extends Activity {
      * 展示加载框
      */
     public void showLoading() {
+        if (null != adDialog){
+            adDialog.dismiss();
+        }
         adDialog = new LoadingDialog(this);
         adDialog.onCreateView();
         adDialog.setUiBeforShow();

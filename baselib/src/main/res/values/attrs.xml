@@ -47,21 +47,22 @@
     </declare-styleable>
 
     <declare-styleable name="LeftRightItemView">
-        <attr name="left_text" format="string"/>
-        <attr name="right_text" format="string"/>
+        <attr name="left_text" format="string" />
+        <attr name="right_text" format="string" />
         <attr name="lrv_padding" format="dimension|reference" />
         <attr name="lrv_left_width" format="dimension|reference" />
         <attr name="lrv_left_color" format="color" />
         <attr name="lrv_right_color" format="color" />
+        <attr name="lrv_right_icon" format="reference"></attr>
     </declare-styleable>
 
     <declare-styleable name="LoopView">
-        <attr name="lineColor" format="color"/>
-        <attr name="topBottomTextColor" format="color"/>
-        <attr name="centerTextColor" format="color"/>
-        <attr name="textSize" format="dimension"/>
-        <attr name="canLoop" format="boolean"/>
-        <attr name="initPosition" format="integer"/>
-        <attr name="drawItemCount" format="integer"/>
+        <attr name="lineColor" format="color" />
+        <attr name="topBottomTextColor" format="color" />
+        <attr name="centerTextColor" format="color" />
+        <attr name="textSize" format="dimension" />
+        <attr name="canLoop" format="boolean" />
+        <attr name="initPosition" format="integer" />
+        <attr name="drawItemCount" format="integer" />
     </declare-styleable>
 </resources>

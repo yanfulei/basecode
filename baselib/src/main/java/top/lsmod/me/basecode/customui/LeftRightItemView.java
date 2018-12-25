@@ -32,6 +32,8 @@ public class LeftRightItemView extends LinearLayout {
     private int lrvLeftColor;
     // 右边颜色
     private int lrvRightColor;
+    // 右边图标
+    private int lrvRightIcon;
 
     public LeftRightItemView(Context context) {
         this(context, null);
@@ -53,6 +55,7 @@ public class LeftRightItemView extends LinearLayout {
         lrvLeftWidth = array.getDimensionPixelSize(R.styleable.LeftRightItemView_lrv_left_width, 155);
         lrvLeftColor = array.getColor(R.styleable.LeftRightItemView_lrv_left_color, Color.parseColor("#8A000000"));
         lrvRightColor = array.getColor(R.styleable.LeftRightItemView_lrv_right_color, Color.parseColor("#262626"));
+        lrvRightIcon = array.getResourceId(R.styleable.LeftRightItemView_lrv_right_icon, 0);
         array.recycle();
         tvLeftText.setText(leftText);
         tvRightText.setText(rightText);
@@ -65,6 +68,8 @@ public class LeftRightItemView extends LinearLayout {
         // 设置颜色
         tvLeftText.setTextColor(lrvLeftColor);
         tvRightText.setTextColor(lrvRightColor);
+        // 设置右侧图标
+        tvRightText.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(lrvRightIcon), null);
     }
 
     public void setOnClickListener(OnClickListener v) {
