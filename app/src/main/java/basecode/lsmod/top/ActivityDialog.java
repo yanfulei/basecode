@@ -62,7 +62,7 @@ public class ActivityDialog extends BaseActivityTitle {
             case R.id.btn_share_buttom_dialog:
                 List<ShareBottomDialog.BottomAdapterBean> datas = new ArrayList<>();
                 BounceTopEnter mBasIn = new BounceTopEnter();
-                final ShareBottomDialog dialog = new ShareBottomDialog(this, getLlAllView(), datas, true);
+                final ShareBottomDialog dialog = new ShareBottomDialog(this, getLlAllView(), datas);
                 dialog.showAnim(mBasIn).show();
                 dialog.setOnItemClickListener((adapterView, view1, i, l) -> ToastUtils.showToast(ActivityDialog.this, "点击位置为【" + i + "】", ToastUtils.SUCCESS));
                 dialog.setOnItemDelClickListener(postion -> {
@@ -74,7 +74,7 @@ public class ActivityDialog extends BaseActivityTitle {
             case R.id.btn_share_buttom_dialog_nodel:
                 List<ShareBottomDialog.BottomAdapterBean> datas1 = new ArrayList<>();
                 BounceTopEnter mBasIn1 = new BounceTopEnter();
-                final ShareBottomDialog dialog1 = new ShareBottomDialog(this, getLlAllView(), datas1, false);
+                final ShareBottomDialog dialog1 = new ShareBottomDialog(this, getLlAllView(), datas1);
                 dialog1.showAnim(mBasIn1).show();
                 dialog1.setOnItemClickListener((adapterView, view1, i, l) -> ToastUtils.showToast(ActivityDialog.this, "点击位置为【" + i + "】", ToastUtils.SUCCESS));
                 break;
