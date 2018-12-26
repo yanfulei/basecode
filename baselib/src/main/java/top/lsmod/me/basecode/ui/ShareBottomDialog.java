@@ -27,6 +27,7 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
 
     private List<BottomAdapterBean> datas;
     private ListView listView;
+    private TextView tvTitle;
     private ShareBottom shareBottom;
 
     public ShareBottomAdapter getShareBottomAdapter() {
@@ -70,11 +71,18 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
         dismissAnim(null);
         View inflate = View.inflate(mContext, R.layout.dialog_share, null);
         listView = inflate.findViewById(R.id.lv_items);
+        tvTitle = inflate.findViewById(R.id.tv_title);
+        tvTitle.setVisibility(View.GONE);
         shareBottomAdapter = new ShareBottomAdapter(mContext, datas, codeOp);
         listView.setAdapter(shareBottomAdapter);
         shareBottomAdapter.notifyDataSetChanged();
         EventBus.getDefault().register(this);
         return inflate;
+    }
+
+    public void setTitle(String title) {
+        this.tvTitle.setVisibility(View.VISIBLE);
+        this.tvTitle.setText(title);
     }
 
     @Override
