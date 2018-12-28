@@ -79,7 +79,7 @@ public class BaseOkHttp {
      */
     public void AsyncGet(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
-        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
+        client.newBuilder().connectTimeout(180, TimeUnit.SECONDS).readTimeout(180, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -131,7 +131,7 @@ public class BaseOkHttp {
      */
     public void AsyncDelete(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
-        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
+        client.newBuilder().connectTimeout(180, TimeUnit.SECONDS).readTimeout(180, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -185,7 +185,7 @@ public class BaseOkHttp {
      */
     public static void AsyncPostJson(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
-        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
+        client.newBuilder().connectTimeout(180, TimeUnit.SECONDS).readTimeout(180, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -244,7 +244,7 @@ public class BaseOkHttp {
         String username = dataMap.get("username");
         String password = dataMap.get("password");
         OkHttpClient client = new OkHttpClient();
-        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
+        client.newBuilder().connectTimeout(180, TimeUnit.SECONDS).readTimeout(180, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("granttype", "mobile")
