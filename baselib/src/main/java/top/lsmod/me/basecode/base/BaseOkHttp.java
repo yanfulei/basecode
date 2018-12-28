@@ -3,8 +3,6 @@ package top.lsmod.me.basecode.base;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
-import android.util.Base64;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -15,8 +13,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -81,6 +79,7 @@ public class BaseOkHttp {
      */
     public void AsyncGet(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -132,6 +131,7 @@ public class BaseOkHttp {
      */
     public void AsyncDelete(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -185,6 +185,7 @@ public class BaseOkHttp {
      */
     public static void AsyncPostJson(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
         OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("Authorization", "bearer " + token)
@@ -243,6 +244,7 @@ public class BaseOkHttp {
         String username = dataMap.get("username");
         String password = dataMap.get("password");
         OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
                 .addHeader("granttype", "mobile")
@@ -296,6 +298,7 @@ public class BaseOkHttp {
      */
     public static void AsyncRefreshToken(final Activity activity, String url, final IOkHttpResponse callback) {
         OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(60, TimeUnit.SECONDS).readTimeout(60, TimeUnit.SECONDS).build();
         // 判断网络是否可用
 //        if (!AppManager.isNetworkConnected(activity)) {
 //            callback.onFailure(503, "请检查您的网络连接状态，接入有线后，请重启设备！");
