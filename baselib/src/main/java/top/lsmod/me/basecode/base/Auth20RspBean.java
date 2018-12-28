@@ -15,8 +15,26 @@ public class Auth20RspBean implements Serializable {
     private String refresh_token;
     private String LoginUser;
     private AuthUserInfo userInfo;
+    private String error;
+    private String error_description;
     // 本地属性，是否离线登陆
     private boolean isOffLineLogin;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public String getError_description() {
+        return error_description;
+    }
+
+    public void setError_description(String error_description) {
+        this.error_description = error_description;
+    }
 
     public boolean isOffLineLogin() {
         return isOffLineLogin;
