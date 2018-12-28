@@ -86,6 +86,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="手风琴" />
+
+            <Button
+                android:id="@+id/btn_CommonTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CommonTabLayout演示" />
         </LinearLayout>
     </ScrollView>
 

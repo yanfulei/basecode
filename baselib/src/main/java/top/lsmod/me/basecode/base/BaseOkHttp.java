@@ -245,7 +245,7 @@ public class BaseOkHttp {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url(baseNetWorkEbReqBean.getUrl())
-//                .addHeader("companyno", companyno)
+                .addHeader("granttype", "mobile")
                 .post(RequestBody.create(MEDTA_TYPE_FORM, "username=" + username + "&password=" + password + "&grant_type=password"))
                 .build();
         Logger.d(baseNetWorkEbReqBean.getUrl() + "入参>>" + "username=" + username + "&password=" + password + "&grant_type=password");

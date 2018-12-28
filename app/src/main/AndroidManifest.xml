@@ -36,6 +36,7 @@
         <activity android:name=".ActivityUi"></activity>
         <activity android:name=".BengKuiActivity"></activity>
         <activity android:name=".ActivityShouFengQin"></activity>
+        <activity android:name=".ActivityCommonTabLayout"></activity>
     </application>
 
 </manifest>
