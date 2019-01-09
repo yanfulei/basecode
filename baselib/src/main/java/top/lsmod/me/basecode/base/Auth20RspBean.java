@@ -260,7 +260,7 @@ public class Auth20RspBean implements Serializable {
         private int OrgType;
         private String AgentNo;
         private int Status;
-        private int ExpireTime;
+//        private int ExpireTime;
         private int GroupId;
         private boolean SupportAgent;
         private boolean Expired;
@@ -313,12 +313,12 @@ public class Auth20RspBean implements Serializable {
             return Status;
         }
 
-        public void setExpireTime(int ExpireTime) {
-            this.ExpireTime = ExpireTime;
-        }
-        public int getExpireTime() {
-            return ExpireTime;
-        }
+//        public void setExpireTime(int ExpireTime) {
+//            this.ExpireTime = ExpireTime;
+//        }
+//        public int getExpireTime() {
+//            return ExpireTime;
+//        }
 
         public void setGroupId(int GroupId) {
             this.GroupId = GroupId;
