@@ -106,6 +106,14 @@ public abstract class BaseActivitySearchTitle extends Activity {
     public abstract View setContentView();
 
     /**
+     * 传递CommonTitleBar对象
+     * @param commonTitleBar
+     */
+    public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar){
+
+    }
+
+    /**
      * 展示加载框
      */
     public void showLoading() {

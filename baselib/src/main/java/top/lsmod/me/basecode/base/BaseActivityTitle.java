@@ -114,6 +114,14 @@ public abstract class BaseActivityTitle extends Activity {
     public abstract boolean showRightTitleButton();
 
     /**
+     * 传递CommonTitleBar对象
+     * @param commonTitleBar
+     */
+    public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar){
+
+    }
+
+    /**
      * 展示加载框
      */
     public void showLoading() {
