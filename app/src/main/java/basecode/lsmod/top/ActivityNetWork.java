@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
+
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
@@ -33,6 +35,12 @@ public class ActivityNetWork extends BaseActivityTitle {
     @Override
     public View setContentView() {
         return getLayoutInflater().inflate(R.layout.activity_one, null);
+    }
+
+    @Override
+    public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar) {
+        super.giveCommonTitleBarObj(commonTitleBar);
+        commonTitleBar.getLeftImageButton().setBackgroundResource(R.mipmap.ic_launcher);
     }
 
     @Override

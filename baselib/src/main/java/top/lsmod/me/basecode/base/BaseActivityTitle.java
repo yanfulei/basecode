@@ -68,6 +68,7 @@ public abstract class BaseActivityTitle extends Activity {
         commonTitleBar.getRightImageButton().setOnClickListener(view -> onRightImageButtonClick());
         // 设置右侧操作按钮是否展示
         commonTitleBar.getRightImageButton().setVisibility(showRightTitleButton() ? View.VISIBLE : View.GONE);
+        giveCommonTitleBarObj(commonTitleBar);
     }
 
     /**
