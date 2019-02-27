@@ -61,7 +61,7 @@ public abstract class BaseActivitySearchTitle extends Activity {
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
         tvNoData = findViewById(R.id.tv_no_data);
-        commonTitleBar.getLeftImageButton().setOnClickListener(view -> finish());
+        commonTitleBar.getLeftCustomView().setOnClickListener(view -> finish());
         commonTitleBar.getCenterSearchEditText().setOnKeyListener((view, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND
                     || i == EditorInfo.IME_ACTION_DONE
@@ -70,6 +70,12 @@ public abstract class BaseActivitySearchTitle extends Activity {
             }
             return true;
         });
+        getCommonTitleBarObj(commonTitleBar);
+        // 设置左侧布局
+        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_back).setVisibility(leftIconIsMenu() ? View.GONE : View.VISIBLE);
+        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_menu).setVisibility(leftIconIsMenu() ? View.VISIBLE : View.GONE);
+        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_back).setOnClickListener(vi -> finish());
+        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_menu).setOnClickListener(vi -> onLeftMenuIcon1MenuClick());
     }
 
     /**
@@ -107,9 +113,26 @@ public abstract class BaseActivitySearchTitle extends Activity {
 
     /**
      * 传递CommonTitleBar对象
+     *
      * @param commonTitleBar
      */
-    public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar){
+    public void getCommonTitleBarObj(CommonTitleBar commonTitleBar) {
+
+    }
+
+    /**
+     * 左侧是返回还是菜单
+     *
+     * @return
+     */
+    public boolean leftIconIsMenu() {
+        return false;
+    }
+
+    /**
+     * 当左侧菜单按钮点击
+     */
+    public void onLeftMenuIcon1MenuClick() {
 
     }
 
@@ -117,7 +140,7 @@ public abstract class BaseActivitySearchTitle extends Activity {
      * 展示加载框
      */
     public void showLoading() {
-        if (null != adDialog){
+        if (null != adDialog) {
             adDialog.dismiss();
         }
         adDialog = new LoadingDialog(this);

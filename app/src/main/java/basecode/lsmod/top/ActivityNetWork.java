@@ -38,9 +38,14 @@ public class ActivityNetWork extends BaseActivityTitle {
     }
 
     @Override
-    public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar) {
-        super.giveCommonTitleBarObj(commonTitleBar);
-        commonTitleBar.getLeftImageButton().setBackgroundResource(R.mipmap.ic_launcher);
+    public boolean leftIconIsMenu() {
+        return true;
+    }
+
+    @Override
+    public void onLeftMenuIcon1MenuClick() {
+        super.onLeftMenuIcon1MenuClick();
+        ToastUtils.showToast(this, "点击菜单按钮", ToastUtils.INFO);
     }
 
     @Override

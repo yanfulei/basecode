@@ -12,8 +12,8 @@
         titlebar:centerText="我是标题"
         titlebar:centerType="searchView"
         titlebar:fillStatusBar="true"
-        titlebar:leftImageResource="@drawable/ic_chevron_left_black_24dp"
-        titlebar:leftType="imageButton"
+        titlebar:leftCustomView="@layout/title_bar_left_view_menu1"
+        titlebar:leftType="customView"
         titlebar:statusBarColor="@color/title_bar"
         titlebar:titleBarColor="@color/title_bar"
         titlebar:titleBarHeight="44dp" />
