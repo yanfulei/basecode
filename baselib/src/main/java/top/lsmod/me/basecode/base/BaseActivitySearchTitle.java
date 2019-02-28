@@ -61,7 +61,6 @@ public abstract class BaseActivitySearchTitle extends Activity {
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
         tvNoData = findViewById(R.id.tv_no_data);
-        commonTitleBar.getLeftCustomView().setOnClickListener(view -> finish());
         commonTitleBar.getCenterSearchEditText().setOnKeyListener((view, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND
                     || i == EditorInfo.IME_ACTION_DONE
@@ -70,12 +69,20 @@ public abstract class BaseActivitySearchTitle extends Activity {
             }
             return true;
         });
-        getCommonTitleBarObj(commonTitleBar);
+        // 定义titlebar右侧布局
+        LinearLayout right = (LinearLayout) commonTitleBar.getRightCustomView();
+        right.addView(null == customRightView() ? new View(this) : customRightView());
+        // 传递titlebar对象
+        giveCommonTitleBarObj(commonTitleBar);
         // 设置左侧布局
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_back).setVisibility(leftIconIsMenu() ? View.GONE : View.VISIBLE);
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_menu).setVisibility(leftIconIsMenu() ? View.VISIBLE : View.GONE);
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_back).setOnClickListener(vi -> finish());
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_menu).setOnClickListener(vi -> onLeftMenuIcon1MenuClick());
+        LinearLayout left = (LinearLayout) commonTitleBar.getLeftCustomView();
+        if (null == customLeftView()) {
+            View view = getLayoutInflater().inflate(R.layout.title_bar_left_nomarl, null);
+            view.findViewById(R.id.ll_all).setOnClickListener(v -> finish());
+            left.addView(view);
+        } else {
+            left.addView(customLeftView());
+        }
     }
 
     /**
@@ -116,24 +123,22 @@ public abstract class BaseActivitySearchTitle extends Activity {
      *
      * @param commonTitleBar
      */
-    public void getCommonTitleBarObj(CommonTitleBar commonTitleBar) {
+    public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar) {
 
     }
 
     /**
-     * 左侧是返回还是菜单
-     *
-     * @return
+     * 自定义右侧布局
      */
-    public boolean leftIconIsMenu() {
-        return false;
+    public View customRightView() {
+        return null;
     }
 
     /**
-     * 当左侧菜单按钮点击
+     * 自定义左侧布局
      */
-    public void onLeftMenuIcon1MenuClick() {
-
+    public View customLeftView() {
+        return null;
     }
 
     /**

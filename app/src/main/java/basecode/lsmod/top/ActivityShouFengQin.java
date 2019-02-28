@@ -37,11 +37,6 @@ public class ActivityShouFengQin extends BaseActivityTitle {
         return null;
     }
 
-    @Override
-    public boolean showRightTitleButton() {
-        return false;
-    }
-
     @OnClick({R.id.btn_zhankai})
     public void onClickView(View view) {
         switch (view.getId()) {

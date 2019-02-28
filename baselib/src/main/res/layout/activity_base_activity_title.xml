@@ -12,10 +12,10 @@
         titlebar:centerText="我是标题"
         titlebar:centerType="textView"
         titlebar:fillStatusBar="true"
-        titlebar:leftCustomView="@layout/title_bar_left_view_menu1"
+        titlebar:leftCustomView="@layout/title_bar_bank_view"
         titlebar:leftType="customView"
-        titlebar:rightImageResource="@drawable/ic_more_horiz_black_24dp"
-        titlebar:rightType="imageButton"
+        titlebar:rightCustomView="@layout/title_bar_bank_view"
+        titlebar:rightType="customView"
         titlebar:statusBarColor="@color/title_bar"
         titlebar:titleBarColor="@color/title_bar"
         titlebar:titleBarHeight="44dp" />

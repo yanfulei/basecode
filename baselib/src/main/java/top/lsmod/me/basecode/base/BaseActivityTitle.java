@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ import top.lsmod.me.basecode.eventbus.bean.TestInterfaceDemoBean;
 import top.lsmod.me.basecode.ui.LoadingDialog;
 import top.lsmod.me.basecode.utils.HttpUtils;
 import top.lsmod.me.basecode.utils.StatusBarUtils;
+import top.lsmod.me.basecode.utils.ToastUtils;
 
 /**
  * Created by yanfulei on 2018/10/4
@@ -63,15 +65,20 @@ public abstract class BaseActivityTitle extends Activity {
         commonTitleBar.getCenterTextView().setText(setTitleBarText());
         commonTitleBar.getCenterTextView().setTextColor(Color.parseColor("#ffffff"));
         commonTitleBar.setSearchRightImageResource(R.drawable.ic_more_horiz_black_24dp);
-        commonTitleBar.getRightImageButton().setOnClickListener(view -> onRightImageButtonClick());
-        // 设置右侧操作按钮是否展示
-        commonTitleBar.getRightImageButton().setVisibility(showRightTitleButton() ? View.VISIBLE : View.GONE);
+        // 定义titlebar右侧布局
+        LinearLayout right = (LinearLayout) commonTitleBar.getRightCustomView();
+        right.addView(null == customRightView() ? new View(this) : customRightView());
+        // 传递titlebar对象
         giveCommonTitleBarObj(commonTitleBar);
         // 设置左侧布局
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_back).setVisibility(leftIconIsMenu() ? View.GONE : View.VISIBLE);
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_menu).setVisibility(leftIconIsMenu() ? View.VISIBLE : View.GONE);
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_back).setOnClickListener(vi -> finish());
-        commonTitleBar.getLeftCustomView().findViewById(R.id.ibtn_menu).setOnClickListener(vi -> onLeftMenuIcon1MenuClick());
+        LinearLayout left = (LinearLayout) commonTitleBar.getLeftCustomView();
+        if (null == customLeftView()) {
+            View view = getLayoutInflater().inflate(R.layout.title_bar_left_nomarl, null);
+            view.findViewById(R.id.ll_all).setOnClickListener(v -> finish());
+            left.addView(view);
+        } else {
+            left.addView(customLeftView());
+        }
     }
 
     /**
@@ -89,10 +96,17 @@ public abstract class BaseActivityTitle extends Activity {
     }
 
     /**
-     * 右侧按钮点击
+     * 自定义右侧布局
      */
-    public void onRightImageButtonClick() {
+    public View customRightView() {
+        return null;
+    }
 
+    /**
+     * 自定义左侧布局
+     */
+    public View customLeftView() {
+        return null;
     }
 
     /**
@@ -113,32 +127,11 @@ public abstract class BaseActivityTitle extends Activity {
     public abstract String setTitleBarText();
 
     /**
-     * 是否展示右侧操作按钮
-     */
-    public abstract boolean showRightTitleButton();
-
-    /**
      * 传递CommonTitleBar对象
      *
      * @param commonTitleBar
      */
     public void giveCommonTitleBarObj(CommonTitleBar commonTitleBar) {
-
-    }
-
-    /**
-     * 左侧是返回还是菜单
-     *
-     * @return
-     */
-    public boolean leftIconIsMenu() {
-        return false;
-    }
-
-    /**
-     * 当左侧菜单按钮点击
-     */
-    public void onLeftMenuIcon1MenuClick() {
 
     }
 

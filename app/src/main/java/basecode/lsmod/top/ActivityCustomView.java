@@ -33,12 +33,6 @@ public class ActivityCustomView extends BaseActivityTitle {
         return null;
     }
 
-    @Override
-    public boolean showRightTitleButton() {
-        return true;
-    }
-
-
     private void initData() {
         sivScanner1.et_input.requestFocus();
     }

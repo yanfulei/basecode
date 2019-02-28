@@ -38,24 +38,15 @@ public class ActivityNetWork extends BaseActivityTitle {
     }
 
     @Override
-    public boolean leftIconIsMenu() {
-        return true;
-    }
-
-    @Override
-    public void onLeftMenuIcon1MenuClick() {
-        super.onLeftMenuIcon1MenuClick();
-        ToastUtils.showToast(this, "点击菜单按钮", ToastUtils.INFO);
-    }
-
-    @Override
     public String setTitleBarText() {
         return "网络请求";
     }
 
     @Override
-    public boolean showRightTitleButton() {
-        return false;
+    public View customRightView() {
+        View view = getLayoutInflater().inflate(R.layout.title_bar_left_view_menu1, null);
+        view.findViewById(R.id.ibtn_menu).setOnClickListener(v -> ToastUtils.showToast(this, "bbbbbbbbbbbbbbb", ToastUtils.INFO));
+        return view;
     }
 
     @OnClick({R.id.btn_bat})

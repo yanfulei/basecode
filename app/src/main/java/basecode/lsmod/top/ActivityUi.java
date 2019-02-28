@@ -24,9 +24,4 @@ public class ActivityUi extends BaseActivityTitle {
     public String setTitleBarText() {
         return "常用控件";
     }
-
-    @Override
-    public boolean showRightTitleButton() {
-        return false;
-    }
 }
