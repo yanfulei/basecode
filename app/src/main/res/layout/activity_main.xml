@@ -92,6 +92,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CommonTabLayout演示" />
+            <Button
+                android:id="@+id/btn_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="表单输入"/>
         </LinearLayout>
     </ScrollView>
 
