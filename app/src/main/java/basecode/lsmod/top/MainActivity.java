@@ -1,19 +1,26 @@
 package basecode.lsmod.top;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.EasyPermissions;
 import top.lsmod.me.basecode.base.BaseActivityNoTitle;
+import top.lsmod.me.basecode.utils.PermissionsLogUtils;
+import top.lsmod.me.basecode.utils.ToastUtils;
 
 /**
  * 测试
  */
-public class MainActivity extends BaseActivityNoTitle {
+public class MainActivity extends BaseActivityNoTitle implements EasyPermissions.PermissionCallbacks{
 
     @BindView(R.id.btn_bat)
     Button btnBat;
@@ -89,5 +96,31 @@ public class MainActivity extends BaseActivityNoTitle {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+
+        String str = PermissionsLogUtils.easyCheckPermissions(this,
+                Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        ToastUtils.showToast(this, str, ToastUtils.INFO);
+
+        EasyPermissions.requestPermissions(this, "接下来需要获取WRITE_EXTERNAL_STORAGE权限", 0,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+
+        ToastUtils.showToast(this, "获取权限成功", ToastUtils.INFO);
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+
+        ToastUtils.showToast(this, "获取权限失败", ToastUtils.INFO);
     }
 }
