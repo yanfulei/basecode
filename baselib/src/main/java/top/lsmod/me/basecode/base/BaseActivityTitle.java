@@ -89,6 +89,13 @@ public abstract class BaseActivityTitle extends Activity {
     }
 
     /**
+     * 隐藏列表暂无数据
+     */
+    public void hideNoDataList() {
+        tvNoData.setVisibility(View.GONE);
+    }
+
+    /**
      * 获取所有布局
      */
     public LinearLayout getLlAllView() {

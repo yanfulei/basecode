@@ -93,6 +93,13 @@ public abstract class BaseActivitySearchTitle extends Activity {
     }
 
     /**
+     * 隐藏列表暂无数据
+     */
+    public void hideNoDataList() {
+        tvNoData.setVisibility(View.GONE);
+    }
+
+    /**
      * 触发头部检索
      *
      * @param key
