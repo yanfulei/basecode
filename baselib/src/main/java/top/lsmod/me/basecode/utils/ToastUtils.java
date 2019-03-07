@@ -1,6 +1,7 @@
 package top.lsmod.me.basecode.utils;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
@@ -56,18 +57,44 @@ public class ToastUtils {
 
     /**
      * 展示Snackbar
+     *
      * @param ctx
      * @param view
      * @param msg
      */
-    public static void showSnackbar(Activity ctx, View view, final String msg){
+    public static void showSnackbar(Activity ctx, View view, final String msg, int stata) {
         // 判断是在子线程，还是主线程
         if ("main".equals(Thread.currentThread().getName())) {
-            Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null);
+            swichStataSnackbar(snackbar, stata);
         } else {
             // 子线程
-            ctx.runOnUiThread(() ->
-                    Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show());
+            ctx.runOnUiThread(() -> {
+                Snackbar snackbar = Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null);
+                swichStataSnackbar(snackbar, stata);
+            });
+        }
+    }
+
+    private static void swichStataSnackbar(Snackbar snackbar, int stata) {
+        if (stata == ERROR) {
+            snackbar.getView().setBackgroundColor((Color.parseColor("#993333")));
+            snackbar.show();
+            return;
+        }
+        if (stata == INFO) {
+            snackbar.show();
+            return;
+        }
+        if (stata == WARNING) {
+            snackbar.getView().setBackgroundColor((Color.parseColor("#FFA54F")));
+            snackbar.show();
+            return;
+        }
+        if (stata == SUCCESS) {
+            snackbar.getView().setBackgroundColor((Color.parseColor("#009900")));
+            snackbar.show();
+            return;
         }
     }
 }
