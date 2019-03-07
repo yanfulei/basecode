@@ -1,6 +1,8 @@
 package top.lsmod.me.basecode.utils;
 
 import android.app.Activity;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -32,7 +34,8 @@ public class ToastUtils {
         }
     }
 
-    protected static void swichState(Activity ctx, String msg, int stata) {
+
+    private static void swichState(Activity ctx, String msg, int stata) {
         if (stata == ERROR) {
             TastyToast.makeText(ctx, msg, TastyToast.LENGTH_SHORT, TastyToast.ERROR);
             return;
@@ -48,6 +51,23 @@ public class ToastUtils {
         if (stata == SUCCESS) {
             TastyToast.makeText(ctx, msg, TastyToast.LENGTH_SHORT, TastyToast.SUCCESS);
             return;
+        }
+    }
+
+    /**
+     * 展示Snackbar
+     * @param ctx
+     * @param view
+     * @param msg
+     */
+    public static void showSnackbar(Activity ctx, View view, final String msg){
+        // 判断是在子线程，还是主线程
+        if ("main".equals(Thread.currentThread().getName())) {
+            Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show();
+        } else {
+            // 子线程
+            ctx.runOnUiThread(() ->
+                    Snackbar.make(view, msg, Snackbar.LENGTH_LONG).setAction("Action", null).show());
         }
     }
 }
