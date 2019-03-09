@@ -51,6 +51,8 @@ dependencies {
     // 动态权限申请
     // For developers using the Android Support Library
     api 'pub.devrel:easypermissions:2.0.1'
+    //
+    api 'com.github.devlight:infinitecycleviewpager:1.0.2'
 }
 
 // build a jar with source files
