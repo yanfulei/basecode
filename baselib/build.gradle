@@ -55,6 +55,8 @@ dependencies {
     api 'com.github.devlight:infinitecycleviewpager:1.0.2'
     //
     api 'jp.wasabeef:glide-transformations:3.0.1'
+    //
+    api 'cjt.library.wheel:camera:1.1.9'
 }
 
 // build a jar with source files
