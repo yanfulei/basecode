@@ -53,6 +53,8 @@ dependencies {
     api 'pub.devrel:easypermissions:2.0.1'
     //
     api 'com.github.devlight:infinitecycleviewpager:1.0.2'
+    //
+    api 'jp.wasabeef:glide-transformations:3.0.1'
 }
 
 // build a jar with source files

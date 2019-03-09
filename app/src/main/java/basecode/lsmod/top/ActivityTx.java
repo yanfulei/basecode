@@ -3,8 +3,12 @@ package basecode.lsmod.top;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
 import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
+import com.gigamole.infinitecycleviewpager.OnInfiniteCyclePageTransformListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,10 @@ import java.util.List;
 import basecode.lsmod.top.adapter.AdapterTx;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+
+import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 /**
  * @author: yanfulei
@@ -27,6 +34,10 @@ public class ActivityTx extends BaseActivityTitle {
     List<View> views;
     List<String> datas;
     AdapterTx adapterTx;
+    @BindView(R.id.ll_all_view)
+    LinearLayout llAllView;
+    @BindView(R.id.iv_images)
+    ImageView ivImages;
 
     @Override
     public int setStatusBarColor() {
@@ -57,10 +68,10 @@ public class ActivityTx extends BaseActivityTitle {
             datas.add("第" + i + "项");
         }
         views = new ArrayList<>();
-        for (int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             View view = this.getLayoutInflater().inflate(R.layout.activity_main, null);
             Button button = view.findViewById(R.id.btn_bat);
-            button.setText("第"+i+"个元素");
+            button.setText("第" + i + "个元素");
             views.add(view);
         }
         adapterTx = new AdapterTx(this, views, datas);
@@ -73,5 +84,18 @@ public class ActivityTx extends BaseActivityTitle {
         icvpList.setCenterPageScaleOffset(30.0F);
         icvpList.setMinPageScaleOffset(5.0F);
 //        icvpList.setOnInfiniteCyclePageTransformListener(...);
+        icvpList.setOnInfiniteCyclePageTransformListener(new OnInfiniteCyclePageTransformListener() {
+            @Override
+            public void onPreTransform(View page, float position) {
+
+            }
+
+            @Override
+            public void onPostTransform(View page, float position) {
+                Glide.with(ActivityTx.this).load(R.drawable.ic_launcher_background)
+                        .apply(bitmapTransform(new BlurTransformation(25)))
+                        .into(ivImages);
+            }
+        });
     }
 }
