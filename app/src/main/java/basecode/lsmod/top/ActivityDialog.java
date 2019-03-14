@@ -108,6 +108,7 @@ public class ActivityDialog extends BaseActivityTitle {
                 View view1 = getLayoutInflater().inflate(R.layout.layout_dialog_zdy, null);
                 MaterialConstomUiDialog materialConstomUiDialog = new MaterialConstomUiDialog(this, view1);
                 materialConstomUiDialog.title("自定义");
+                materialConstomUiDialog.isShowRightBtn(false);
                 materialConstomUiDialog.setOnBtnClickL(
                         materialConstomUiDialog::dismiss,
                         () -> {

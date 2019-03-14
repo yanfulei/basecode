@@ -68,6 +68,18 @@ public class MaterialConstomUiDialog extends BaseAlertDialog<MaterialDialog> {
         return mLlContainer;
     }
 
+    public void isShowLeftBtn(boolean isShow) {
+        mTvBtnLeft.setVisibility(isShow ? View.VISIBLE : View.GONE);
+    }
+
+    public void isShowMiddleBtn(boolean isShow) {
+        mTvBtnMiddle.setVisibility(isShow ? View.VISIBLE : View.GONE);
+    }
+
+    public void isShowRightBtn(boolean isShow) {
+        mTvBtnRight.setVisibility(isShow ? View.VISIBLE : View.GONE);
+    }
+
     @Override
     public void setUiBeforShow() {
         super.setUiBeforShow();
