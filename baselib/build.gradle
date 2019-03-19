@@ -61,6 +61,8 @@ dependencies {
     api('com.baoyz.swipemenulistview:library:1.3.0') {
         exclude group: 'com.android.support'
     }
+    // 另一个toast
+    api 'net.steamcrafted:load-toast:1.0.12'
 }
 
 // build a jar with source files

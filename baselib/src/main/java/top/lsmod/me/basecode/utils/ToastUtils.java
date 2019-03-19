@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.sdsmdg.tastytoast.TastyToast;
 
+import net.steamcrafted.loadtoast.LoadToast;
+
 /**
  * Created by yanfulei on 2018/10/1
  * Email yanfulei1990@gmail.com
@@ -94,6 +96,51 @@ public class ToastUtils {
         if (stata == SUCCESS) {
             snackbar.getView().setBackgroundColor((Color.parseColor("#009900")));
             snackbar.show();
+            return;
+        }
+    }
+
+    /**
+     * 展示LoadToast
+     * @param ctx
+     * @param msg
+     */
+    public static void showLoadToast(Activity ctx, final String msg, int stata) {
+        // 判断是在子线程，还是主线程
+        if ("main".equals(Thread.currentThread().getName())) {
+            LoadToast lt = new LoadToast(ctx);
+            lt.setText(msg);
+            swichLoadToast(lt, stata);
+        } else {
+            // 子线程
+            ctx.runOnUiThread(() -> {
+                LoadToast lt = new LoadToast(ctx);
+                lt.setText(msg);
+                swichLoadToast(lt, stata);
+            });
+        }
+    }
+
+
+    private static void swichLoadToast(LoadToast lt, int stata) {
+        if (stata == ERROR) {
+            lt.error();
+            lt.show();
+            return;
+        }
+        if (stata == INFO) {
+            lt.hide();
+            lt.show();
+            return;
+        }
+        if (stata == WARNING) {
+            lt.hide();
+            lt.show();
+            return;
+        }
+        if (stata == SUCCESS) {
+            lt.success();
+            lt.show();
             return;
         }
     }
