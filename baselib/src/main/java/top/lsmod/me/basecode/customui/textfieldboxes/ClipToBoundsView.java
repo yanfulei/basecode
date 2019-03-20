@@ -1,4 +1,4 @@
-package studio.carbonylgroup.textfieldboxes;
+package top.lsmod.me.basecode.customui.textfieldboxes;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,6 +8,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import top.lsmod.me.basecode.R;
 
 /**
  * Text Field Boxes

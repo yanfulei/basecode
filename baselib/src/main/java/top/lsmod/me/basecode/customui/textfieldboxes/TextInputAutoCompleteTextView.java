@@ -1,4 +1,4 @@
-package studio.carbonylgroup.textfieldboxes;
+package top.lsmod.me.basecode.customui.textfieldboxes;
 
 import android.content.Context;
 import android.support.design.widget.TextInputLayout;

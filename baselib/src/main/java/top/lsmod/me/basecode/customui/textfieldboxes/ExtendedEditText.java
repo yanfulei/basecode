@@ -1,4 +1,4 @@
-package studio.carbonylgroup.textfieldboxes;
+package top.lsmod.me.basecode.customui.textfieldboxes;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -9,9 +9,9 @@ import android.graphics.Paint;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
 import android.util.AttributeSet;
-import android.view.View;
+
+import top.lsmod.me.basecode.R;
 
 
 /**

@@ -8,15 +8,16 @@ import android.widget.ImageView;
 
 import com.othershe.combinebitmap.CombineBitmap;
 import com.othershe.combinebitmap.layout.WechatLayoutManager;
-import com.othershe.combinebitmap.listener.OnSubItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
-import studio.carbonylgroup.textfieldboxes.TextFieldBoxes;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.customui.textfieldboxes.ExtendedEditText;
+import top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes;
 
 public class FormActivity extends BaseActivityTitle {
+    @BindView(R.id.iv11)
+    ImageView iv11;
     @BindView(R.id.extended_edit_text)
     ExtendedEditText extendedEditText;
     @BindView(R.id.text_field_boxes)
@@ -45,8 +46,6 @@ public class FormActivity extends BaseActivityTitle {
     ExtendedEditText extendedEditText6;
     @BindView(R.id.text_field_boxes6)
     TextFieldBoxes textFieldBoxes6;
-    @BindView(R.id.iv11)
-    ImageView iv11;
 
     private String[] IMG_URL_ARR = {
             "http://img.hb.aicdn.com/eca438704a81dd1fa83347cb8ec1a49ec16d2802c846-laesx2_fw658",

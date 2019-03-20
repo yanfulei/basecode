@@ -1,4 +1,4 @@
-package studio.carbonylgroup.textfieldboxes;
+package top.lsmod.me.basecode.customui.textfieldboxes;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -29,6 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+
+import top.lsmod.me.basecode.R;
 
 
 /**
@@ -458,7 +460,7 @@ public class TextFieldBoxes extends FrameLayout {
 
                 // Only trigger simple watcher when the String actually changed
 
-                if (!lastValue.equals(editable.toString())){
+                if (!lastValue.equals(editable.toString())) {
                     lastValue = editable.toString();
                     if (textChangeListener != null) {
                         textChangeListener.onTextChanged(editable.toString(), onError);
@@ -665,7 +667,7 @@ public class TextFieldBoxes extends FrameLayout {
     /**
      * @deprecated Pseudonym for {@link #validate()} to provide legacy support for
      * a bad PR.
-     *
+     * <p>
      * Note: This does NOT validate that there is an error, it does the opposite
      */
     @Deprecated
@@ -684,67 +686,51 @@ public class TextFieldBoxes extends FrameLayout {
         /* Floating Label */
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) this.floatingLabel.getLayoutParams();
         lp.topMargin = res.getDimensionPixelOffset(
-                useDenseSpacing ?
-                        R.dimen.dense_label_idle_margin_top :
-                        R.dimen.label_idle_margin_top
+                useDenseSpacing ? R.dimen.dense_label_idle_margin_top : R.dimen.label_idle_margin_top
         );
         this.floatingLabel.setLayoutParams(lp);
 
         /* EditText Layout */
         this.inputLayout.setPadding(
                 0, res.getDimensionPixelOffset(
-                        useDenseSpacing ?
-                                R.dimen.dense_editTextLayout_padding_top :
-                                R.dimen.editTextLayout_padding_top
+                        useDenseSpacing ? R.dimen.dense_editTextLayout_padding_top : R.dimen.editTextLayout_padding_top
                 ),
                 0, res.getDimensionPixelOffset(R.dimen.editTextLayout_padding_bottom));
 
         /* End Icon */
         this.endIconImageButton.setMinimumHeight(
                 res.getDimensionPixelOffset(
-                        useDenseSpacing ?
-                                R.dimen.end_icon_min_height :
-                                R.dimen.dense_end_icon_min_height
+                        useDenseSpacing ? R.dimen.end_icon_min_height : R.dimen.dense_end_icon_min_height
                 )
         );
         this.endIconImageButton.setMinimumWidth(
                 res.getDimensionPixelOffset(
-                        useDenseSpacing ?
-                                R.dimen.end_icon_min_width :
-                                R.dimen.dense_end_icon_min_width
+                        useDenseSpacing ? R.dimen.end_icon_min_width : R.dimen.dense_end_icon_min_width
                 )
         );
 
         /* Clear Icon */
         this.clearButton.setMinimumHeight(
                 res.getDimensionPixelOffset(
-                        useDenseSpacing ?
-                                R.dimen.clear_button_min_height :
-                                R.dimen.dense_clear_button_min_height
+                        useDenseSpacing ? R.dimen.clear_button_min_height : R.dimen.dense_clear_button_min_height
                 )
         );
         this.clearButton.setMinimumWidth(
                 res.getDimensionPixelOffset(
-                        useDenseSpacing ?
-                                R.dimen.clear_button_min_width :
-                                R.dimen.dense_clear_button_min_width
+                        useDenseSpacing ? R.dimen.clear_button_min_width : R.dimen.dense_clear_button_min_width
                 )
         );
 
         /* Bottom View */
         lp = (RelativeLayout.LayoutParams) this.bottomPart.getLayoutParams();
         lp.topMargin = res.getDimensionPixelOffset(
-                useDenseSpacing ?
-                        R.dimen.dense_bottom_marginTop :
-                        R.dimen.bottom_marginTop
+                useDenseSpacing ? R.dimen.dense_bottom_marginTop : R.dimen.bottom_marginTop
         );
         this.bottomPart.setLayoutParams(lp);
 
         /* EditText */
         this.editText.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(
-                useDenseSpacing ?
-                        R.dimen.dense_edittext_text_size :
-                        R.dimen.edittext_text_size
+                useDenseSpacing ? R.dimen.dense_edittext_text_size : R.dimen.edittext_text_size
         ));
 
         this.labelTopMargin = RelativeLayout.LayoutParams.class
@@ -775,8 +761,8 @@ public class TextFieldBoxes extends FrameLayout {
         }
 
         /* Don't Count Space & Line Feed */
-        int length = this.editText.getText().toString() .replaceAll(" ", "")
-                                                        .replaceAll("\n", "").length();
+        int length = this.editText.getText().toString().replaceAll(" ", "")
+                .replaceAll("\n", "").length();
         String lengthStr = Integer.toString(length) + " / ";
         String counterLabelResourceStr = getResources().getString(R.string.counter_label_text_constructor);
         if (this.maxCharacters > 0) {
