@@ -107,6 +107,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="下拉刷新-左滑删除组建"/>
+            <Button
+                android:id="@+id/btn_qltx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="群聊头像"/>
         </LinearLayout>
     </ScrollView>
 

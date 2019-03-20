@@ -30,6 +30,30 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
     Button btnSwich;
     @BindView(R.id.btn_search)
     Button btnSearch;
+    @BindView(R.id.btn_jwd)
+    Button btnJwd;
+    @BindView(R.id.btn_gjt)
+    Button btnGjt;
+    @BindView(R.id.btn_left_right_view)
+    Button btnLeftRightView;
+    @BindView(R.id.btn_time)
+    Button btnTime;
+    @BindView(R.id.btn_del)
+    Button btnDel;
+    @BindView(R.id.btn_ui)
+    Button btnUi;
+    @BindView(R.id.btn_bengkui)
+    Button btnBengkui;
+    @BindView(R.id.btn_shoufengqin)
+    Button btnShoufengqin;
+    @BindView(R.id.btn_CommonTabLayout)
+    Button btnCommonTabLayout;
+    @BindView(R.id.btn_form)
+    Button btnForm;
+    @BindView(R.id.btn_tx)
+    Button btnTx;
+    @BindView(R.id.btn_xlsx_zhsc)
+    Button btnXlsxZhsc;
 
     @Override
     public int setStatusBarColor() {
@@ -43,7 +67,7 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
 
     @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich, R.id.btn_search, R.id.btn_jwd, R.id.btn_gjt,
             R.id.btn_left_right_view, R.id.btn_time, R.id.btn_del, R.id.btn_ui, R.id.btn_bengkui, R.id.btn_shoufengqin,
-            R.id.btn_CommonTabLayout, R.id.btn_form, R.id.btn_tx, R.id.btn_xlsx_zhsc})
+            R.id.btn_CommonTabLayout, R.id.btn_form, R.id.btn_tx, R.id.btn_xlsx_zhsc, R.id.btn_qltx})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bat:
@@ -94,6 +118,9 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
             case R.id.btn_xlsx_zhsc:
                 startActivity(new Intent(this, ActivityXlsxZhsc.class));
                 break;
+            case R.id.btn_qltx:
+                startActivity(new Intent(this, FormActivity.class));
+                break;
         }
     }
 
@@ -110,6 +137,7 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
 
         EasyPermissions.requestPermissions(this, "接下来需要获取WRITE_EXTERNAL_STORAGE权限", 0,
                 Manifest.permission.ACCESS_FINE_LOCATION);
+
     }
 
     @Override

@@ -63,6 +63,8 @@ dependencies {
     }
     // 另一个toast
     api 'net.steamcrafted:load-toast:1.0.12'
+    // 微信群聊头像
+    api 'com.github.Othershe:CombineBitmap:1.0.5'
 }
 
 // build a jar with source files
