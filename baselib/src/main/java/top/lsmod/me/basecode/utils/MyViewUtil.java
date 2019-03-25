@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayDeque;
@@ -119,5 +120,27 @@ public class MyViewUtil {
             list.add(temp);
         }
         return list;
+    }
+
+    /**
+     * 获取图片资源ID
+     *
+     * @param imageView
+     * @return
+     */
+    public static int getImageViewResourcesId(ImageView imageView) {
+        Field[] fields = imageView.getClass().getDeclaredFields();
+        int imgid = 0;
+        for (Field f : fields) {
+            if (f.getName().equals("mResource")) {
+                f.setAccessible(true);
+                try {
+                    imgid = f.getInt(imageView);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return imgid;
     }
 }
