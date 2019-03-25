@@ -222,8 +222,8 @@ public class SwipeLayout extends ViewGroup{
         }
     }
 
-    private static class SwipeLayoutParams extends ViewGroup.LayoutParams{
-        public SwipeLayoutParams(ViewGroup.LayoutParams source) {
+    private static class SwipeLayoutParams extends LayoutParams{
+        public SwipeLayoutParams(LayoutParams source) {
             super(source);
         }
 

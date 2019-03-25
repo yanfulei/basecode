@@ -1,12 +1,18 @@
 package top.lsmod.me.basecode.base;
 
 import android.app.Activity;
+import android.content.IntentFilter;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,8 +28,10 @@ import top.lsmod.me.basecode.R;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbReqBean;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbRspBean;
 import top.lsmod.me.basecode.eventbus.bean.TestInterfaceDemoBean;
+import top.lsmod.me.basecode.receiver.NetWorkChangReceiver;
 import top.lsmod.me.basecode.ui.LoadingDialog;
 import top.lsmod.me.basecode.utils.HttpUtils;
+import top.lsmod.me.basecode.utils.MyViewUtil;
 import top.lsmod.me.basecode.utils.StatusBarUtils;
 
 /**
@@ -43,6 +51,11 @@ public abstract class BaseActivitySearchTitle extends Activity {
     public boolean isBaseRegistered;
     // 列表没有数据展示
     private TextView tvNoData;
+    // 内容布局
+    private FrameLayout fl_content;
+    // 网络状态
+    private boolean isRegistered = false;
+    private NetWorkChangReceiver netWorkChangReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +64,25 @@ public abstract class BaseActivitySearchTitle extends Activity {
         initParentView();
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         View view = setContentView();
-        llContent.addView(view, params);
-        // 设置导航栏颜色
-        StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
-    }
-
-    private void initParentView() {
         commonTitleBar = findViewById(R.id.titlebar);
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
         tvNoData = findViewById(R.id.tv_no_data);
+        fl_content = findViewById(R.id.fl_content);
+        // 设置是否全屏
+        if (isFullScreen()) {
+            MyViewUtil.setMargins(fl_content, 0, 0, 0, 0);
+        } else {
+            int hight = MyViewUtil.getStatusBarHeight(this);
+            int hight1 = MyViewUtil.dip2px(this, 44);
+            MyViewUtil.setMargins(fl_content, 0, hight + hight1 - 1, 0, 0);
+        }
+        llContent.addView(view, params);
+        // 注册网络管理器
+        initNetStataManger();
+    }
+
+    private void initParentView() {
         commonTitleBar.getCenterSearchEditText().setOnKeyListener((view, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND
                     || i == EditorInfo.IME_ACTION_DONE
@@ -69,6 +91,8 @@ public abstract class BaseActivitySearchTitle extends Activity {
             }
             return true;
         });
+        // 设置导航栏颜色
+        commonTitleBar.setBackgroundColor(TextUtils.isEmpty(setStatusBarColor()) ? Color.parseColor("#EA1C27") : Color.parseColor(setStatusBarColor()));
         // 定义titlebar右侧布局
         LinearLayout right = (LinearLayout) commonTitleBar.getRightCustomView();
         right.addView(null == customRightView() ? new View(this) : customRightView());
@@ -83,6 +107,20 @@ public abstract class BaseActivitySearchTitle extends Activity {
         } else {
             left.addView(customLeftView());
         }
+    }
+
+    /**
+     * 网络状态监听
+     */
+    protected void initNetStataManger() {
+        //注册网络状态监听广播
+        netWorkChangReceiver = new NetWorkChangReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netWorkChangReceiver, filter);
+        isRegistered = true;
     }
 
     /**
@@ -118,7 +156,7 @@ public abstract class BaseActivitySearchTitle extends Activity {
      *
      * @return
      */
-    public abstract int setStatusBarColor();
+    public abstract String setStatusBarColor();
 
     /**
      * 获取子布局
@@ -146,6 +184,16 @@ public abstract class BaseActivitySearchTitle extends Activity {
      */
     public View customLeftView() {
         return null;
+    }
+
+
+    /**
+     * 是否为全屏模式
+     *
+     * @return
+     */
+    public boolean isFullScreen() {
+        return false;
     }
 
     /**
@@ -286,5 +334,9 @@ public abstract class BaseActivitySearchTitle extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        //解绑
+        if (isRegistered) {
+            unregisterReceiver(netWorkChangReceiver);
+        }
     }
 }

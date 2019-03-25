@@ -130,7 +130,7 @@ public class LoopView extends View {
         mCenterTextPaint = new Paint();
         mCenterLinePaint = new Paint();
 
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
+        if (Build.VERSION.SDK_INT >= 11) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
         }
 
@@ -411,7 +411,7 @@ public class LoopView extends View {
         mScheduledFuture = mExecutor.scheduleWithFixedDelay(new FlingRunnable(velocityY), 0, velocityFling, TimeUnit.MILLISECONDS);
     }
 
-    class LoopViewGestureListener extends android.view.GestureDetector.SimpleOnGestureListener {
+    class LoopViewGestureListener extends GestureDetector.SimpleOnGestureListener {
 
         @Override
         public final boolean onDown(MotionEvent motionevent) {

@@ -25,7 +25,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbReqBean;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbRspBean;
+import top.lsmod.me.basecode.receiver.NetWorkChangReceiver;
 import top.lsmod.me.basecode.utils.SPUtils;
+import top.lsmod.me.basecode.utils.ToastUtils;
 
 /**
  * OKHttp网络请求基类
@@ -62,6 +64,11 @@ public class BaseOkHttp {
      */
     @Subscribe(threadMode = ThreadMode.POSTING)
     public void onNetWorkFetch(BaseNetWorkEbReqBean baseNetWorkEbReqBean) {
+        // 网络是否可用
+        if (NetWorkChangReceiver.getNetWorkState() == NetWorkChangReceiver.LOST_NET_WORK) {
+            ToastUtils.showToast(baseNetWorkEbReqBean.getActivity(), "当前网络不可用!", ToastUtils.ERROR);
+            return;
+        }
         if (baseNetWorkEbReqBean.getHttpType().equals("get")) {
             AsyncGet(baseNetWorkEbReqBean);
         } else if (baseNetWorkEbReqBean.getHttpType().equals("post")) {

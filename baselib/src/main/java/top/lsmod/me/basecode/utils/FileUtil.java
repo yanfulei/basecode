@@ -1,20 +1,24 @@
 package top.lsmod.me.basecode.utils;
 
 import android.annotation.SuppressLint;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.provider.MediaStore;
 import android.text.format.Formatter;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +52,7 @@ public class FileUtil {
     }
 
     public static FileUtil getInstance() {
-        return FileUtil.SingletonHolder.instance;
+        return SingletonHolder.instance;
     }
 
 
@@ -466,34 +470,92 @@ public class FileUtil {
 
     /**
      * 把网络图片转换为bitmap
+     *
      * @param url
      * @return
      */
-    public Bitmap returnBitMap(final String url){
+    public Bitmap getBitMapFormHttp(final String url) {
         final Bitmap[] bitmap = new Bitmap[1];
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                URL imageurl = null;
+        new Thread(() -> {
+            URL imageurl = null;
 
-                try {
-                    imageurl = new URL(url);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    HttpURLConnection conn = (HttpURLConnection)imageurl.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
-                    InputStream is = conn.getInputStream();
-                    bitmap[0] = BitmapFactory.decodeStream(is);
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                imageurl = new URL(url);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            try {
+                HttpURLConnection conn = (HttpURLConnection) imageurl.openConnection();
+                conn.setDoInput(true);
+                conn.connect();
+                InputStream is = conn.getInputStream();
+                bitmap[0] = BitmapFactory.decodeStream(is);
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }).start();
 
         return bitmap[0];
+    }
+
+    /**
+     * 从本地图片读取bitmap
+     *
+     * @param localUrl
+     * @return
+     */
+    public Bitmap getBitMapFormLocal(String localUrl) {
+        FileInputStream fis = null;
+        try {
+            fis = new FileInputStream(localUrl);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmap = BitmapFactory.decodeStream(fis);
+        return bitmap;
+    }
+
+    /**
+     * 保存方法
+     */
+    public void saveBitmap(Bitmap bitmap, String filePath) {
+        File f = new File(filePath);
+        if (f.exists()) {
+            f.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /***
+     * 将指定路径的图片转uri
+     * @param context
+     * @param path ，指定图片(或文件)的路径
+     * @return
+     */
+    public Uri getMediaUriFromPath(Context context, String path) {
+        Uri mediaUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+        Cursor cursor = context.getContentResolver().query(mediaUri,
+                null,
+                MediaStore.Images.Media.DISPLAY_NAME + "= ?",
+                new String[]{path.substring(path.lastIndexOf("/") + 1)},
+                null);
+
+        Uri uri = null;
+        if (cursor.moveToFirst()) {
+            uri = ContentUris.withAppendedId(mediaUri,
+                    cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media._ID)));
+        }
+        cursor.close();
+        return uri;
     }
 }

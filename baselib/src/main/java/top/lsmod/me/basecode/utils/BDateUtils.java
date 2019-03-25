@@ -16,6 +16,7 @@ public class BDateUtils {
     public static final String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
     public static final String HH_MM = "HH:mm";
     public static final String HH_MM_SS = "HH:mm:ss";
+    public static final String YYYY_MM_DD_HH_MM_SS_FILE_NAME = "yyyy_MM_dd_HH_mm_ss";
 
     /**
      * 获取当天的开始和结束时间

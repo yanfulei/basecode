@@ -1,6 +1,7 @@
 package top.lsmod.me.basecode.ui;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -46,12 +47,6 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
 
     private AdapterView.OnItemClickListener onItemClickListener;
 
-    private ShareBottomAdapter.CodeOp codeOp;
-
-    public void setCodeOp(ShareBottomAdapter.CodeOp codeOp) {
-        this.codeOp = codeOp;
-    }
-
     public ShareBottomDialog(Context context, View animateView) {
         super(context, animateView);
     }
@@ -73,7 +68,7 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
         listView = inflate.findViewById(R.id.lv_items);
         tvTitle = inflate.findViewById(R.id.tv_title);
         tvTitle.setVisibility(View.GONE);
-        shareBottomAdapter = new ShareBottomAdapter(mContext, datas, codeOp);
+        shareBottomAdapter = new ShareBottomAdapter(mContext, datas);
         listView.setAdapter(shareBottomAdapter);
         shareBottomAdapter.notifyDataSetChanged();
         EventBus.getDefault().register(this);
@@ -107,12 +102,10 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
 
         private List<BottomAdapterBean> datas;
         private Context context;
-        private CodeOp codeOp;
 
-        public ShareBottomAdapter(Context context, List<BottomAdapterBean> datas, CodeOp codeOp) {
+        public ShareBottomAdapter(Context context, List<BottomAdapterBean> datas) {
             this.context = context;
             this.datas = datas;
-            this.codeOp = codeOp;
         }
 
         @Override
@@ -142,58 +135,37 @@ public class ShareBottomDialog extends BottomBaseDialog<ShareBottomDialog> {
                 viewHolder = (ViewHolder) view.getTag();
             }
             BottomAdapterBean data = datas.get(i);
-            viewHolder.tvCode.setText(data.getCode());
-            viewHolder.tvCode.setTextColor(data.isError ? context.getResources().getColor(R.color.red) : context.getResources().getColor(R.color.right_lab));
-            viewHolder.tvCodeDel.setVisibility(data.isShowDel() ? View.VISIBLE : View.GONE);
-            viewHolder.tvCodeDel.setOnClickListener(view1 -> {
-                codeOp.OnCodeDel(data.getCode(), i);
-            });
+            viewHolder.tvMsg.setText(data.getMsg());
             return view;
         }
 
         class ViewHolder {
-
-            TextView tvCode;
-            TextView tvCodeDel;
+            TextView tvMsg;
 
             ViewHolder(View view) {
-                tvCode = view.findViewById(R.id.tv_code);
-                tvCodeDel = view.findViewById(R.id.tv_code_del);
+                tvMsg = view.findViewById(R.id.tv_msg);
             }
-        }
-
-        public interface CodeOp {
-            void OnCodeDel(String code, int posthion);
         }
     }
 
     public static class BottomAdapterBean {
-        private String code;
-        private boolean showDel;
-        private boolean isError;
+        private String msg;
+        private Bitmap icon;
 
-        public String getCode() {
-            return code;
+        public String getMsg() {
+            return msg;
         }
 
-        public void setCode(String code) {
-            this.code = code;
+        public void setMsg(String msg) {
+            this.msg = msg;
         }
 
-        public boolean isShowDel() {
-            return showDel;
+        public Bitmap getIcon() {
+            return icon;
         }
 
-        public void setShowDel(boolean showDel) {
-            this.showDel = showDel;
-        }
-
-        public boolean isError() {
-            return isError;
-        }
-
-        public void setError(boolean error) {
-            isError = error;
+        public void setIcon(Bitmap icon) {
+            this.icon = icon;
         }
     }
 }

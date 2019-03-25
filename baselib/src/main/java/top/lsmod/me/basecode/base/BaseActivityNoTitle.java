@@ -1,6 +1,9 @@
 package top.lsmod.me.basecode.base;
 
 import android.app.Activity;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import top.lsmod.me.basecode.R;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbReqBean;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbRspBean;
+import top.lsmod.me.basecode.receiver.NetWorkChangReceiver;
 import top.lsmod.me.basecode.ui.LoadingDialog;
 import top.lsmod.me.basecode.utils.HttpUtils;
 import top.lsmod.me.basecode.utils.StatusBarUtils;
@@ -30,6 +34,9 @@ public abstract class BaseActivityNoTitle extends Activity {
     private LoadingDialog adDialog;
     // 是否已经注册EventBus
     private boolean isBaseRegistered;
+    // 网络状态
+    private boolean isRegistered = false;
+    private NetWorkChangReceiver netWorkChangReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,22 @@ public abstract class BaseActivityNoTitle extends Activity {
         addContentView(setContentView(), params);
         // 设置导航栏颜色
         StatusBarUtils.setWindowStatusBarColor(this, setStatusBarColor() == 0 ? R.color.white : setStatusBarColor());
+        // 注册网络管理器
+        initNetStataManger();
+    }
+
+    /**
+     * 网络状态监听
+     */
+    protected void initNetStataManger() {
+        //注册网络状态监听广播
+        netWorkChangReceiver = new NetWorkChangReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(netWorkChangReceiver, filter);
+        isRegistered = true;
     }
 
     /**
@@ -163,7 +186,7 @@ public abstract class BaseActivityNoTitle extends Activity {
      * 展示加载框
      */
     public void showLoading() {
-        if (null != adDialog){
+        if (null != adDialog) {
             adDialog.dismiss();
         }
         adDialog = new LoadingDialog(this);
@@ -186,5 +209,9 @@ public abstract class BaseActivityNoTitle extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        //解绑
+        if (isRegistered) {
+            unregisterReceiver(netWorkChangReceiver);
+        }
     }
 }
