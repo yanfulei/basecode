@@ -78,8 +78,8 @@ public class FormActivity extends BaseActivityTitle {
     }
 
     @Override
-    public int setStatusBarColor() {
-        return 0;
+    public String setStatusBarColor() {
+        return "#3F51B5";
     }
 
     @Override
@@ -95,7 +95,6 @@ public class FormActivity extends BaseActivityTitle {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         extendedEditText3.setError("我是代码设置的错误信息");
         loadWechatBitmap(iv11, 9);

@@ -109,8 +109,8 @@ public class ActivityXlsxZhsc extends BaseActivityTitle {
     }
 
     @Override
-    public int setStatusBarColor() {
-        return R.color.A400red;
+    public String setStatusBarColor() {
+        return "#3F51B5";
     }
 
     @Override
@@ -126,7 +126,6 @@ public class ActivityXlsxZhsc extends BaseActivityTitle {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         initData();
     }

@@ -171,8 +171,6 @@ public class LoopView extends View {
         mCircularDiameter = (int) ((mHalfCircumference * 2) / Math.PI);
         //the radius of circular
         mCircularRadius = (int) (mHalfCircumference / Math.PI);
-        // FIXME: 7/8/16  通过控件的高度来计算圆弧的周长
-
         if (mInitPosition == -1) {
             if (mCanLoop) {
                 mInitPosition = (mDataList.size() + 1) / 2;

@@ -27,8 +27,8 @@ public class ActivityGPRS extends BaseActivityTitle {
     }
 
     @Override
-    public int setStatusBarColor() {
-        return 0;
+    public String setStatusBarColor() {
+        return "#3F51B5";
     }
 
     @Override

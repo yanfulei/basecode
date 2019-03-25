@@ -21,8 +21,8 @@ public class ActivitySwitchButton extends BaseActivityTitle {
     SwitchButton sbTest;
 
     @Override
-    public int setStatusBarColor() {
-        return 0;
+    public String setStatusBarColor() {
+        return "#3F51B5";
     }
 
     @Override
@@ -38,7 +38,6 @@ public class ActivitySwitchButton extends BaseActivityTitle {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         sbTest.setOnCheckedChangeListener((compoundButton, b) -> ToastUtils.showToast(ActivitySwitchButton.this, "" + b, ToastUtils.INFO));
     }

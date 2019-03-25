@@ -23,8 +23,8 @@ public class DelActivity extends BaseActivityTitle {
     private AdapterDel adapterDel;
 
     @Override
-    public int setStatusBarColor() {
-        return 0;
+    public String setStatusBarColor() {
+        return "#3F51B5";
     }
 
     @Override
@@ -40,7 +40,6 @@ public class DelActivity extends BaseActivityTitle {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         initData();
     }

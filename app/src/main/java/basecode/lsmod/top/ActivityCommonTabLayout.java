@@ -36,8 +36,8 @@ public class ActivityCommonTabLayout extends BaseActivityTitle {
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
     @Override
-    public int setStatusBarColor() {
-        return 0;
+    public String setStatusBarColor() {
+        return "#3F51B5";
     }
 
     @Override
@@ -53,7 +53,6 @@ public class ActivityCommonTabLayout extends BaseActivityTitle {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
         initData();
     }
