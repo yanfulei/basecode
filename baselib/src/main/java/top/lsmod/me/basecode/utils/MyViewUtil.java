@@ -8,6 +8,9 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 
 import java.lang.reflect.Field;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: yanfulei
@@ -83,6 +86,7 @@ public class MyViewUtil {
 
     /**
      * 根据手机分辨率从DP转成PX
+     *
      * @param context
      * @param dpValue
      * @return
@@ -90,5 +94,30 @@ public class MyViewUtil {
     public static int dip2px(Context context, float dpValue) {
         float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 广度遍历
+     * 获取所有自view
+     *
+     * @param rootView
+     */
+    public static List<View> depthTravelView(View rootView) {
+        List<View> list = new ArrayList<>();
+        ArrayDeque queue = new ArrayDeque<>();
+        queue.addLast(rootView);
+        while (!queue.isEmpty()) {
+            View temp = (View) queue.getLast();
+            //队尾出队
+            queue.pollLast();
+            if (temp instanceof ViewGroup) {
+                int childCount = ((ViewGroup) temp).getChildCount();
+                for (int i = childCount - 1; i >= 0; i--) {
+                    queue.addLast(((ViewGroup) temp).getChildAt(i));
+                }
+            }
+            list.add(temp);
+        }
+        return list;
     }
 }
