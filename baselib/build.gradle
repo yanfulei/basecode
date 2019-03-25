@@ -65,4 +65,6 @@ dependencies {
     api 'net.steamcrafted:load-toast:1.0.12'
     // 微信群聊头像
     api 'com.github.Othershe:CombineBitmap:1.0.5'
+    // 水印
+    api 'com.huangyz0918:androidwm:0.2.3'
 }
