@@ -4,9 +4,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/loading_bg"
-    android:padding="20dp"
+    android:gravity="center"
     android:orientation="vertical"
-    android:gravity="center">
+    android:paddingLeft="20dp"
+    android:paddingTop="10dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="10dp">
 
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/av_loading"
@@ -15,8 +18,10 @@
         app:indicatorName="BallScaleMultipleIndicator" />
 
     <TextView
+        android:id="@+id/tv_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="正在加载"
         android:textColor="@color/white"
-        android:text="正在加载"/>
+        android:textSize="12sp" />
 </LinearLayout>

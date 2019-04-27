@@ -56,6 +56,11 @@ public class TextFieldBoxes extends FrameLayout {
     protected boolean enabled;
 
     /**
+     * 是否为select
+     */
+    protected boolean selected;
+
+    /**
      * labelText text at the top.
      */
     protected String labelText;
@@ -171,6 +176,9 @@ public class TextFieldBoxes extends FrameLayout {
     protected AppCompatImageButton clearButton;
     protected AppCompatImageButton iconImageButton;
     protected AppCompatImageButton endIconImageButton;
+    protected AppCompatImageButton endIconAdd;
+    protected AppCompatImageButton endIconJian;
+    protected boolean showJiaJian;
     protected InputMethodManager inputMethodManager;
 
     protected SimpleTextChangedWatcher textChangeListener;
@@ -376,6 +384,8 @@ public class TextFieldBoxes extends FrameLayout {
         this.bottomPart = findViewById(R.id.text_field_boxes_bottom);
         this.clearButton = findViewById(R.id.text_field_boxes_clear_button);
         this.endIconImageButton = findViewById(R.id.text_field_boxes_end_icon_button);
+        this.endIconAdd = findViewById(R.id.text_field_boxes_end_icon_add);
+        this.endIconJian = findViewById(R.id.text_field_boxes_end_icon_jian);
         this.helperLabel = findViewById(R.id.text_field_boxes_helper);
         this.counterLabel = findViewById(R.id.text_field_boxes_counter);
         this.iconImageButton = findViewById(R.id.text_field_boxes_imageView);
@@ -390,6 +400,10 @@ public class TextFieldBoxes extends FrameLayout {
         this.clearButton.setAlpha(0.35f);
         this.endIconImageButton.setColorFilter(DEFAULT_TEXT_COLOR);
         this.endIconImageButton.setAlpha(0.54f);
+        this.endIconAdd.setColorFilter(DEFAULT_TEXT_COLOR);
+        this.endIconAdd.setAlpha(0.54f);
+        this.endIconJian.setColorFilter(DEFAULT_TEXT_COLOR);
+        this.endIconJian.setAlpha(0.54f);
         this.labelTopMargin = RelativeLayout.LayoutParams.class
                 .cast(this.floatingLabel.getLayoutParams()).topMargin;
 
@@ -466,15 +480,36 @@ public class TextFieldBoxes extends FrameLayout {
                         textChangeListener.onTextChanged(editable.toString(), onError);
                     }
                 }
-
+                // 调用毁掉事件
+                if (null != inputTypeWatcher) inputTypeWatcher.onInput(editable.toString());
             }
         });
 
-        this.clearButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editText.setText("");
+        this.clearButton.setOnClickListener(view -> editText.setText(""));
+    }
+
+    /**
+     * selected事件
+     *
+     * @param tfbChangeWatcher
+     */
+    public void setOnSelectClick(TfbChangeWatcher.OnSelectType tfbChangeWatcher) {
+        final boolean[] click = {false};
+        this.editText.setOnFocusChangeListener((v, hasFocus) -> {
+            if (!click[0]) {
+                tfbChangeWatcher.onClick();
+                click[0] = true;
+            } else {
+                click[0] = false;
             }
+        });
+        this.setOnClickListener(v -> {
+            if (!click[0]) {
+                tfbChangeWatcher.onClick();
+                editText.clearFocus();
+                click[0] = true;
+            }
+            click[0] = false;
         });
     }
 
@@ -519,9 +554,13 @@ public class TextFieldBoxes extends FrameLayout {
                     .getBoolean(R.styleable.TextFieldBoxes_isResponsiveIconColor, true);
             this.hasClearButton = styledAttrs
                     .getBoolean(R.styleable.TextFieldBoxes_hasClearButton, false);
+            this.showJiaJian = styledAttrs
+                    .getBoolean(R.styleable.TextFieldBoxes_hasJiaJian, false);
             this.hasFocus = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_hasFocus, false);
             this.alwaysShowHint = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_alwaysShowHint, false);
             this.useDenseSpacing = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_useDenseSpacing, false);
+            // 是否为select
+            this.selected = styledAttrs.getBoolean(R.styleable.TextFieldBoxes_selected, false);
 
             styledAttrs.recycle();
 
@@ -709,6 +748,27 @@ public class TextFieldBoxes extends FrameLayout {
                 )
         );
 
+        /* 加好和减号 */
+        this.endIconAdd.setMinimumHeight(res.getDimensionPixelOffset(
+                useDenseSpacing ? R.dimen.end_icon_min_height : R.dimen.dense_end_icon_min_height
+        ));
+
+        this.endIconAdd.setMinimumWidth(
+                res.getDimensionPixelOffset(
+                        useDenseSpacing ? R.dimen.end_icon_min_width : R.dimen.dense_end_icon_min_width
+                )
+        );
+
+        this.endIconJian.setMinimumHeight(res.getDimensionPixelOffset(
+                useDenseSpacing ? R.dimen.end_icon_min_height : R.dimen.dense_end_icon_min_height
+        ));
+
+        this.endIconJian.setMinimumWidth(
+                res.getDimensionPixelOffset(
+                        useDenseSpacing ? R.dimen.end_icon_min_width : R.dimen.dense_end_icon_min_width
+                )
+        );
+
         /* Clear Icon */
         this.clearButton.setMinimumHeight(
                 res.getDimensionPixelOffset(
@@ -886,6 +946,17 @@ public class TextFieldBoxes extends FrameLayout {
         else this.clearButton.setVisibility(View.GONE);
     }
 
+    protected void showJianJian(boolean show) {
+        // 设置背景
+        endIconAdd.setImageResource(R.drawable.ic_jia);
+        endIconJian.setImageResource(R.drawable.ic_jian);
+        if (show) this.endIconAdd.setVisibility(View.VISIBLE);
+        else this.endIconAdd.setVisibility(View.GONE);
+
+        if (show) this.endIconJian.setVisibility(View.VISIBLE);
+        else this.endIconJian.setVisibility(View.GONE);
+    }
+
     private void triggerSetters() {
 
         /* Texts */
@@ -910,6 +981,7 @@ public class TextFieldBoxes extends FrameLayout {
         setEndIcon(this.endIconResourceId);
         setIsResponsiveIconColor(this.isResponsiveIconColor);
         setHasClearButton(this.hasClearButton);
+        setHasJiaJian(this.showJiaJian);
         setHasFocus(this.hasFocus);
         setAlwaysShowHint(this.alwaysShowHint);
         updateCounterText(!isManualValidateError);
@@ -1032,7 +1104,8 @@ public class TextFieldBoxes extends FrameLayout {
             this.iconImageButton.setEnabled(false);
             this.helperLabel.setVisibility(View.INVISIBLE);
             this.counterLabel.setVisibility(View.INVISIBLE);
-            this.bottomLine.setVisibility(View.INVISIBLE);
+//            this.bottomLine.setVisibility(View.INVISIBLE);
+            this.bottomLine.setVisibility(View.VISIBLE);
             this.panel.setEnabled(false);
             setHighlightColor(DEFAULT_DISABLED_TEXT_COLOR);
         }
@@ -1124,6 +1197,13 @@ public class TextFieldBoxes extends FrameLayout {
         updateClearAndEndIconLayout();
     }
 
+    public void setHasJiaJian(boolean hasJiaJian) {
+        this.showJiaJian = hasJiaJian;
+        showJianJian(hasJiaJian);
+        updateClearAndEndIconLayout();
+    }
+
+
     /**
      * set if the EditText is having focus
      *
@@ -1134,7 +1214,10 @@ public class TextFieldBoxes extends FrameLayout {
         this.hasFocus = hasFocus;
         if (this.hasFocus) {
             activate(true);
-            this.editText.requestFocus();
+            if (!this.selected) {
+                this.editText.requestFocus();
+                this.editText.setSelection(this.editText.getText().toString().length());//将光标移至文字末尾
+            }
             makeCursorBlink();
 
             /* if there's an error, keep the error color */
@@ -1230,6 +1313,14 @@ public class TextFieldBoxes extends FrameLayout {
 
     public AppCompatImageButton getEndIconImageButton() {
         return this.endIconImageButton;
+    }
+
+    public AppCompatImageButton getEndIconJia() {
+        return this.endIconAdd;
+    }
+
+    public AppCompatImageButton getEndIconJian() {
+        return this.endIconJian;
     }
 
     /* Other Getters */
@@ -1330,5 +1421,14 @@ public class TextFieldBoxes extends FrameLayout {
         int green = Color.green(color);
         int blue = Color.blue(color);
         return Color.argb(alpha, red, green, blue);
+    }
+
+    /**
+     * 输入框输入事件
+     */
+    private TfbChangeWatcher.OnInputType inputTypeWatcher;
+
+    public void setEditTextInputWatcher(TfbChangeWatcher.OnInputType inputTypeWatcher) {
+        this.inputTypeWatcher = inputTypeWatcher;
     }
 }

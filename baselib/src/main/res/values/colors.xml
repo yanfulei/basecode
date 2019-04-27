@@ -18,6 +18,9 @@
     <color name="colorBlack50">#88000000</color>
 
     <color name="light_grey">#FFF2F2F2</color>
+    <color name="green_lv2">#669933</color>
+    <color name="yellow_lv2">#FFCC66</color>
+    <color name="blue_lv2">#330099</color>
 
     <color name="btn_cancel_color">#999999</color>
     <color name="btn_confirm_color">#303F9F</color>
@@ -48,4 +51,7 @@
     <color name="per70white">#46ffffff</color>
     <color name="per50white">#32ffffff</color>
     <color name="per10white">#0affffff</color>
+
+    <color name="sd_label_text_color">#757575</color>
+    <color name="sd_overlay_color">#aaffffff</color>
 </resources>

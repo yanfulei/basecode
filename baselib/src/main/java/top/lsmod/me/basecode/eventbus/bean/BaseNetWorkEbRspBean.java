@@ -8,7 +8,6 @@ public class BaseNetWorkEbRspBean {
     private int httpCode;
     private String httpMsg;
     private boolean isSuccess;
-    private boolean isAuto;
     private int interfaceId;
 
     public int getInterfaceId() {
@@ -21,14 +20,6 @@ public class BaseNetWorkEbRspBean {
 
     public int getHttpCode() {
         return httpCode;
-    }
-
-    public boolean isAuto() {
-        return isAuto;
-    }
-
-    public void setAuto(boolean auto) {
-        isAuto = auto;
     }
 
     public boolean isSuccess() {

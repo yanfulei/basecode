@@ -1,17 +1,10 @@
 package top.lsmod.me.basecode.utils;
 
-import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-
-import java.util.List;
+import android.net.Uri;
 
 /**
  * Author:yanfulei
@@ -19,122 +12,38 @@ import java.util.List;
  * Email:yanfulei1990@gmail.com
  **/
 public class GPSUtils {
-
-    private static GPSUtils instance;
-    private Context mContext;
-    private LocationManager locationManager;
-
-    private GPSUtils(Context context) {
-        this.mContext = context;
-    }
-
-    public static GPSUtils getInstance(Context context) {
-        if (instance == null) {
-            instance = new GPSUtils(context);
+    /**
+     * 判断GPS是否开启，GPS或者AGPS开启一个就认为是开启的
+     * @param context
+     * @return true 表示开启
+     */
+    public static final boolean isOPen(final Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        // 通过GPS卫星定位，定位级别可以精确到街（通过24颗卫星定位，在室外和空旷的地方定位准确、速度快）
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        // 通过WLAN或移动网络(3G/2G)确定的位置（也称作AGPS，辅助GPS定位。主要用于在室内或遮盖物（建筑群或茂密的深林等）密集的地方定位）
+//        boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (gps) {
+            return true;
         }
-        return instance;
+
+        return false;
     }
 
     /**
-     * 获取经纬度
-     *
-     * @return
+     * 强制帮用户打开GPS
+     * @param context
      */
-    public String getLngAndLat(OnLocationResultListener onLocationResultListener) {
-        double latitude = 0.0;
-        double longitude = 0.0;
-
-        mOnLocationListener = onLocationResultListener;
-
-        String locationProvider = null;
-        locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        //获取所有可用的位置提供器
-        List<String> providers = locationManager.getProviders(true);
-
-        if (providers.contains(LocationManager.GPS_PROVIDER)) {
-            //如果是GPS
-            locationProvider = LocationManager.GPS_PROVIDER;
-        } else if (providers.contains(LocationManager.NETWORK_PROVIDER)) {
-            //如果是Network
-            locationProvider = LocationManager.NETWORK_PROVIDER;
-        } else {
-            Intent i = new Intent();
-            i.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            mContext.startActivity(i);
-            return null;
+    public static final void openGPS(Context context) {
+        Intent GPSIntent = new Intent();
+        GPSIntent.setClassName("com.android.settings",
+                "com.android.settings.widget.SettingsAppWidgetProvider");
+        GPSIntent.addCategory("android.intent.category.ALTERNATIVE");
+        GPSIntent.setData(Uri.parse("custom:3"));
+        try {
+            PendingIntent.getBroadcast(context, 0, GPSIntent, 0).send();
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
         }
-
-        //获取Location
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return "没有权限";
-        }
-        Location location = locationManager.getLastKnownLocation(locationProvider);
-        if (location != null) {
-            //不为空,显示地理位置经纬度
-            if (mOnLocationListener != null) {
-                mOnLocationListener.onLocationResult(location);
-            }
-
-        }
-        //监视地理位置变化
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return "没有权限";
-        }
-        locationManager.requestLocationUpdates(locationProvider, 3000, 1, locationListener);
-        return null;
-    }
-
-
-    public LocationListener locationListener = new LocationListener() {
-
-        // Provider的状态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        // Provider被enable时触发此函数，比如GPS被打开
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        // Provider被disable时触发此函数，比如GPS被关闭
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-
-        //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
-        @Override
-        public void onLocationChanged(Location location) {
-            if (mOnLocationListener != null) {
-                mOnLocationListener.OnLocationChange(location);
-            }
-        }
-    };
-
-    public void removeListener() {
-        locationManager.removeUpdates(locationListener);
-    }
-
-    private OnLocationResultListener mOnLocationListener;
-
-    public interface OnLocationResultListener {
-        void onLocationResult(Location location);
-
-        void OnLocationChange(Location location);
     }
 }

@@ -96,9 +96,11 @@
         <attr name="endIcon" format="reference" />
         <attr name="isResponsiveIconColor" format="boolean" />
         <attr name="hasClearButton" format="boolean" />
+        <attr name="hasJiaJian" format="boolean"></attr>
         <attr name="hasFocus" format="boolean" />
         <attr name="alwaysShowHint" format="boolean" />
         <attr name="useDenseSpacing" format="boolean" />
+        <attr name="selected" format="boolean" />
 
         <!-- Set whether to automaticavalidateErrordate, or only on demand
                @see {@link TextFieldBoxes#setManualValidateError(boolean) } -->
@@ -116,5 +118,103 @@
         <attr name="prefixTextColor" format="color" />
         <attr name="suffixTextColor" format="color" />
 
+    </declare-styleable>
+
+    <!-- ActionMenu Property -->
+    <declare-styleable name="ActionMenu">
+        <attr name="circleRadius" format="dimension" />
+        <attr name="dimens" format="dimension" />
+        <attr name="animationDuration" format="integer" />
+        <attr name="buttonNormalColor" format="color" />
+        <attr name="buttonPressColor" format="color" />
+        <attr name="actionMenuIcon" format="reference" />
+        <attr name="actionMenuOnIcon" format="reference" />
+        <attr name="expandDirect" />
+    </declare-styleable>
+
+    <!-- direct enum -->
+    <attr name="expandDirect">
+        <enum name="expandDirectTop" value="0" />
+        <enum name="expandDirectDown" value="1" />
+        <enum name="expandDirectLeft" value="2" />
+        <enum name="expandDirectRight" value="3" />
+    </attr>
+
+    <!-- 卫星菜单 -->
+    <declare-styleable name="SatelliteMenu">
+        <attr name="radius" format="dimension"></attr>
+        <attr name="menu_image_width" format="dimension"></attr>
+        <attr name="menu_item_image_width" format="dimension"></attr>
+        <attr name="menu_item_text_size" format="dimension"></attr>
+        <attr name="menu_item_text_color" format="color"></attr>
+
+        <attr name="menu_postion" format="integer">
+            <enum name="left_top" value="0"></enum>
+            <enum name="right_top" value="1"></enum>
+            <enum name="left_bottom" value="2"></enum>
+            <enum name="right_bottom" value="3"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FabWithLabelView">
+        <attr name="android:src" />
+        <attr name="srcCompat" />
+        <attr name="fabLabel" format="string" />
+        <attr name="fabBackgroundColor" format="color" />
+        <attr name="fabLabelColor" format="color" />
+        <attr name="fabLabelBackgroundColor" format="color" />
+        <attr name="fabLabelClickable" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SpeedDialView">
+        <attr name="sdExpansionMode" format="enum">
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="left" value="2" />
+            <enum name="right" value="3" />
+        </attr>
+        <attr name="sdMainFabAnimationRotateAngle" format="float" />
+        <attr name="sdMainFabClosedSrc" format="reference" />
+        <attr name="sdMainFabClosedBackgroundColor" format="color" />
+        <attr name="sdMainFabOpenedSrc" format="reference" />
+        <attr name="sdMainFabOpenedBackgroundColor" format="color" />
+        <attr name="sdOverlayLayout" format="reference" />
+        <attr name="sdUseReverseAnimationOnClose" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="SpeedDialOverlayLayout">
+        <attr name="clickable_overlay" format="boolean" />
+        <attr name="android:background" />
+    </declare-styleable>
+
+    <attr name="icvp_min_page_scale_offset" format="dimension"/>
+    <attr name="icvp_center_page_scale_offset" format="dimension"/>
+    <attr name="icvp_min_page_scale" format="float"/>
+    <attr name="icvp_max_page_scale" format="float"/>
+    <attr name="icvp_medium_scaled" format="boolean"/>
+    <attr name="icvp_scroll_duration" format="integer"/>
+    <attr name="icvp_page_duration" format="integer"/>
+    <attr name="icvp_interpolator" format="reference"/>
+
+    <declare-styleable name="HorizontalInfiniteCycleViewPager">
+        <attr name="icvp_min_page_scale_offset"/>
+        <attr name="icvp_center_page_scale_offset"/>
+        <attr name="icvp_min_page_scale"/>
+        <attr name="icvp_max_page_scale"/>
+        <attr name="icvp_medium_scaled"/>
+        <attr name="icvp_scroll_duration"/>
+        <attr name="icvp_page_duration"/>
+        <attr name="icvp_interpolator"/>
+    </declare-styleable>
+
+    <declare-styleable name="VerticalInfiniteCycleViewPager">
+        <attr name="icvp_min_page_scale_offset"/>
+        <attr name="icvp_center_page_scale_offset"/>
+        <attr name="icvp_min_page_scale"/>
+        <attr name="icvp_max_page_scale"/>
+        <attr name="icvp_medium_scaled"/>
+        <attr name="icvp_scroll_duration"/>
+        <attr name="icvp_page_duration"/>
+        <attr name="icvp_interpolator"/>
     </declare-styleable>
 </resources>

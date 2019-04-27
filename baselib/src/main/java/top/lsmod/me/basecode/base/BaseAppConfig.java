@@ -26,7 +26,7 @@ public class BaseAppConfig {
     //设置服务器地址
     public static String SERVICE_PATH = " ";
     //SharedPreferences  name
-    public static String SP_NAME = "pda";
+    public static String SP_NAME = "fieldsys";
 
     public static void init(Context context, String fileName) {
         APP_PATH_ROOT = FileUtil.getInstance().getRootPath().getAbsolutePath() + File.separator + fileName;

@@ -7,9 +7,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.gigamole.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
-import com.gigamole.infinitecycleviewpager.OnInfiniteCyclePageTransformListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +15,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.customui.infinitecycleviewpager.HorizontalInfiniteCycleViewPager;
+import top.lsmod.me.basecode.customui.infinitecycleviewpager.OnInfiniteCyclePageTransformListener;
 
 import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 

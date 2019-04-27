@@ -1,6 +1,7 @@
 package top.lsmod.me.basecode.eventbus.bean;
 
 import android.app.Activity;
+import android.content.Context;
 
 /**
  * Created by yanfulei on 2018/10/4
@@ -11,9 +12,17 @@ public class BaseNetWorkEbReqBean {
     private String url;
     private String json;
     private String httpType;
-    private boolean isAuto;
     private int interfaceId;
     private Activity activity;
+    private Context context;
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 
     public Activity getActivity() {
         return activity;
@@ -33,14 +42,6 @@ public class BaseNetWorkEbReqBean {
 
     public String getUrl() {
         return url;
-    }
-
-    public boolean isAuto() {
-        return isAuto;
-    }
-
-    public void setAuto(boolean auto) {
-        isAuto = auto;
     }
 
     public void setUrl(String url) {

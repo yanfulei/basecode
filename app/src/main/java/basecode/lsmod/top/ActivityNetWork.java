@@ -56,7 +56,7 @@ public class ActivityNetWork extends BaseActivityTitle {
                 TestInterfaceDemoBean testInterfaceDemoBean = new TestInterfaceDemoBean();
                 testInterfaceDemoBean.setCode("utf-8");
                 testInterfaceDemoBean.setQ("女性");
-                sendNetWorkRequest(testInterfaceDemoBean, BuildConfig.DEMO_INTERFACE, BaseInterface.TaoBaoDemo);
+                sendNetWorkRequest(testInterfaceDemoBean, BuildConfig.DEMO_INTERFACE, BaseInterface.TaoBaoDemo, true);
                 break;
         }
     }
@@ -73,6 +73,5 @@ public class ActivityNetWork extends BaseActivityTitle {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ButterKnife.bind(this);
-        EventBus.getDefault().register(this);
     }
 }

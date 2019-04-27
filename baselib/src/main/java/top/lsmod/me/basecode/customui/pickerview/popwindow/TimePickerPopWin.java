@@ -74,42 +74,42 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
         private int btnTextSize = 16;//text btnTextsize of cancel and confirm button
         private int viewTextSize = 25;
 
-        public Builder textCancel(String textCancel){
+        public Builder textCancel(String textCancel) {
             this.textCancel = textCancel;
             return this;
         }
 
-        public Builder textConfirm(String textConfirm){
+        public Builder textConfirm(String textConfirm) {
             this.textConfirm = textConfirm;
             return this;
         }
 
-        public Builder colorCancel(int colorCancel){
+        public Builder colorCancel(int colorCancel) {
             this.colorCancel = colorCancel;
             return this;
         }
 
-        public Builder colorConfirm(int colorConfirm){
+        public Builder colorConfirm(int colorConfirm) {
             this.colorConfirm = colorConfirm;
             return this;
         }
 
-        public Builder btnTextSize(int textSize){
+        public Builder btnTextSize(int textSize) {
             this.btnTextSize = textSize;
             return this;
         }
 
-        public Builder viewTextSize(int textSize){
+        public Builder viewTextSize(int textSize) {
             this.viewTextSize = textSize;
             return this;
         }
 
-        public TimePickerPopWin build(){
+        public TimePickerPopWin build() {
             return new TimePickerPopWin(this);
         }
     }
 
-    public TimePickerPopWin(Builder builder){
+    public TimePickerPopWin(Builder builder) {
         this.textCancel = builder.textCancel;
         this.textConfirm = builder.textConfirm;
         this.mContext = builder.context;
@@ -123,12 +123,12 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
 
     private OnTimePickListener mListener;
 
-    private void initView(){
-        contentView= LayoutInflater.from(mContext).inflate(R.layout.layout_time_picker,null);
-        cancelBtn=(Button)contentView.findViewById(R.id.btn_cancel);
+    private void initView() {
+        contentView = LayoutInflater.from(mContext).inflate(R.layout.layout_time_picker, null);
+        cancelBtn = (Button) contentView.findViewById(R.id.btn_cancel);
         cancelBtn.setTextColor(colorCancel);
         cancelBtn.setTextSize(btnTextsize);
-        confirmBtn=(Button)contentView.findViewById(R.id.btn_confirm);
+        confirmBtn = (Button) contentView.findViewById(R.id.btn_confirm);
         confirmBtn.setTextColor(colorConfirm);
         confirmBtn.setTextSize(btnTextsize);
         hourLoopView = (LoopView) contentView.findViewById(R.id.picker_hour);
@@ -140,21 +140,21 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
         hourLoopView.setLoopListener(new LoopScrollListener() {
             @Override
             public void onItemSelect(int item) {
-                hourPos=item;
+                hourPos = item;
             }
         });
 
         minuteLoopView.setLoopListener(new LoopScrollListener() {
             @Override
             public void onItemSelect(int item) {
-                minutePos=item;
+                minutePos = item;
             }
         });
 
         meridianLoopView.setLoopListener(new LoopScrollListener() {
             @Override
             public void onItemSelect(int item) {
-                meridianPos=item;
+                meridianPos = item;
             }
         });
 
@@ -165,11 +165,11 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
         confirmBtn.setOnClickListener(this);
         contentView.setOnClickListener(this);
 
-        if(!TextUtils.isEmpty(textConfirm)){
+        if (!TextUtils.isEmpty(textConfirm)) {
             confirmBtn.setText(textConfirm);
         }
 
-        if(!TextUtils.isEmpty(textCancel)){
+        if (!TextUtils.isEmpty(textCancel)) {
             cancelBtn.setText(textCancel);
         }
 
@@ -183,27 +183,27 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
         setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
     }
 
-    private void initPickerViews(){
+    private void initPickerViews() {
 
-        hourPos = Calendar.getInstance().get(Calendar.HOUR)-1;
-        minutePos= Calendar.getInstance().get(Calendar.MINUTE);
-        meridianPos=Calendar.getInstance().get(Calendar.AM_PM);
+        hourPos = Calendar.getInstance().get(Calendar.HOUR) - 1;
+        minutePos = Calendar.getInstance().get(Calendar.MINUTE);
+        meridianPos = Calendar.getInstance().get(Calendar.AM_PM);
 
-        for (int i = 1; i <=12; i++) {
+        for (int i = 1; i <= 12; i++) {
             hourList.add(format2LenStr(i));
         }
 
-        for (int j = 0; j <60; j++) {
+        for (int j = 0; j < 60; j++) {
             minList.add(format2LenStr(j));
         }
 
-        meridianList.add("AM");
-        meridianList.add("PM");
+        meridianList.add("上午");
+        meridianList.add("下午");
 
         hourLoopView.setDataList(hourList);
         hourLoopView.setInitPosition(hourPos);
 
-        minuteLoopView.setDataList( minList);
+        minuteLoopView.setDataList(minList);
         minuteLoopView.setInitPosition(minutePos);
 
         meridianLoopView.setDataList(meridianList);
@@ -219,14 +219,14 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
         } else if (v == confirmBtn) {
 
             if (null != mListener) {
-                String amPm=meridianList.get(meridianPos);
+                String amPm = meridianList.get(meridianPos);
 
                 StringBuffer sb = new StringBuffer();
                 sb.append(String.valueOf(hourList.get(hourPos)));
                 sb.append(":");
                 sb.append(String.valueOf(minList.get(minutePos)));
                 sb.append(amPm);
-                mListener.onTimePickCompleted(hourPos+1,minutePos,amPm,sb.toString());
+                mListener.onTimePickCompleted(hourPos + 1, minutePos, amPm, sb.toString());
             }
             dismissPopWin();
         }
@@ -289,6 +289,7 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
 
     /**
      * Transform int to String with prefix "0" if less than 10
+     *
      * @param num
      * @return
      */

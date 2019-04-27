@@ -12,10 +12,6 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import top.lsmod.me.basecode.R;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbReqBean;
 import top.lsmod.me.basecode.eventbus.bean.BaseNetWorkEbRspBean;
@@ -30,18 +26,20 @@ import top.lsmod.me.basecode.utils.ToastUtils;
  * Email yanfulei1990@gmail.com
  */
 public abstract class BaseActivityNoTitle extends Activity {
+    public String TAG = "YanFulei";
     // 加载框
     private LoadingDialog adDialog;
-    // 是否已经注册EventBus
-    private boolean isBaseRegistered;
     // 网络状态
     private boolean isRegistered = false;
     private NetWorkChangReceiver netWorkChangReceiver;
+    // 所有布局
+    private View llAllView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_activity_no_title);
+        llAllView = findViewById(R.id.ll_allview);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         addContentView(setContentView(), params);
         // 设置导航栏颜色
@@ -72,6 +70,13 @@ public abstract class BaseActivityNoTitle extends Activity {
     public abstract int setStatusBarColor();
 
     /**
+     * 获取所有布局
+     */
+    public View getLlAllView() {
+        return llAllView;
+    }
+
+    /**
      * 获取子布局
      */
     public abstract View setContentView();
@@ -89,37 +94,8 @@ public abstract class BaseActivityNoTitle extends Activity {
     /**
      * 发送网络接口请求
      */
-    public void sendNetWorkRequestAuto(BaseReqBean bean) {
-        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
-            // EventBus注册
-            EventBus.getDefault().register(this);
-            isBaseRegistered = true;
-        }
-        // OKHTTP注册
-        new BaseOkHttp().initNetWorkPlugin(this);
-        BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
-        Gson gson = new Gson();
-        String json = gson.toJson(bean);
-        Log.d("sendNetWorkRequest", json);
-        baseNetWorkEbReqBean.setJson(json);
-        // 是否为错误自动弹出
-        baseNetWorkEbReqBean.setAuto(true);
-        // 发送网络请求
-        EventBus.getDefault().post(baseNetWorkEbReqBean);
-    }
-
-    /**
-     * 发送网络接口请求
-     */
-    public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo) {
-        showLoading();
-        if (!isBaseRegistered && !EventBus.getDefault().isRegistered(this)) {
-            // EventBus注册
-            EventBus.getDefault().register(this);
-            isBaseRegistered = true;
-        }
-        // OKHTTP注册
-        new BaseOkHttp().initNetWorkPlugin(this);
+    public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo, boolean isShowLoading) {
+        if (isShowLoading) showLoading("正在加载");
         BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);
@@ -142,37 +118,76 @@ public abstract class BaseActivityNoTitle extends Activity {
             // 请求路径
             baseNetWorkEbReqBean.setUrl(serverLocal + interfaceInfo[0]);
         }
-        // 是否为错误自动弹出
-        baseNetWorkEbReqBean.setAuto(false);
         // 请求类型
         baseNetWorkEbReqBean.setHttpType((String) interfaceInfo[2]);
         // 请求ID
         baseNetWorkEbReqBean.setInterfaceId((Integer) interfaceInfo[1]);
+        baseNetWorkEbReqBean.setContext(getApplicationContext());
         // 发送网络请求
-        EventBus.getDefault().post(baseNetWorkEbReqBean);
+        BaseOkHttp.onNetWorkFetch(baseNetWorkEbReqBean, new BaseOkHttp.NetWorkMonitor() {
+            @Override
+            public void onSuccess(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
+                hideLoading(); // 隐藏弹出框
+                onNetWorkResponse(baseNetWorkEbRspBean); // 传递对象
+            }
+
+            @Override
+            public void onError(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
+                hideLoading(); // 隐藏弹出框
+                ToastUtils.showSnackbar(BaseActivityNoTitle.this, getLlAllView(), baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+            }
+        });
     }
 
+
     /**
-     * 接口请求数据返回
+     * 发送网络接口请求
      */
-    @Subscribe(threadMode = ThreadMode.POSTING)
-    public void onOkHttpResponse(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
-        hideLoading();
-        // 错误自动弹出
-//        if (baseNetWorkEbRspBean.isAuto()) {
-//            if (!baseNetWorkEbRspBean.isSuccess()) {
-//                ToastUtils.showToast(this, baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
-//                return;
-//            }
-//            // 业务层是否错误
-//            Gson gson = new Gson();
-//            BaseRspBean baseRspBean = gson.fromJson(baseNetWorkEbRspBean.getHttpMsg(), BaseRspBean.class);
-//            if (!baseRspBean.Success) {
-//                ToastUtils.showToast(this, baseRspBean.getMessage(), ToastUtils.ERROR);
-//                return;
-//            }
-//        }
-        onNetWorkResponse(baseNetWorkEbRspBean);
+    public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo, boolean isShowLoading,
+                                   BaseOkHttp.RealTimeNetWorkMonitor callback) {
+        if (isShowLoading) showLoading("正在加载");
+        BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
+        // 设置上下文
+        baseNetWorkEbReqBean.setActivity(this);
+        // url请求参数
+        if (interfaceInfo[2].equals("get")) {
+            String param = "";
+            try {
+                param = HttpUtils.parseURLPair(bean);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 请求路径
+            baseNetWorkEbReqBean.setUrl(serverLocal + interfaceInfo[0] + "?" + param);
+        } else {
+            Gson gson = new Gson();
+            String json = gson.toJson(bean);
+            Log.d("sendNetWorkRequest", json);
+            // json请求参数
+            baseNetWorkEbReqBean.setJson(json);
+            // 请求路径
+            baseNetWorkEbReqBean.setUrl(serverLocal + interfaceInfo[0]);
+        }
+        // 请求类型
+        baseNetWorkEbReqBean.setHttpType((String) interfaceInfo[2]);
+        // 请求ID
+        baseNetWorkEbReqBean.setInterfaceId((Integer) interfaceInfo[1]);
+        baseNetWorkEbReqBean.setContext(getApplicationContext());
+        // 发送网络请求
+        BaseOkHttp.onNetWorkFetch(baseNetWorkEbReqBean, new BaseOkHttp.NetWorkMonitor() {
+            @Override
+            public void onSuccess(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
+                hideLoading(); // 隐藏弹出框
+                callback.onSuccess(baseNetWorkEbRspBean); // 传递对象
+            }
+
+            @Override
+            public void onError(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
+                hideLoading(); // 隐藏弹出框
+                ToastUtils.showSnackbar(BaseActivityNoTitle.this, getLlAllView(), baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+                callback.onError(baseNetWorkEbRspBean);
+            }
+        });
     }
 
     /**
@@ -185,11 +200,11 @@ public abstract class BaseActivityNoTitle extends Activity {
     /**
      * 展示加载框
      */
-    public void showLoading() {
+    public void showLoading(String msg) {
         if (null != adDialog) {
             adDialog.dismiss();
         }
-        adDialog = new LoadingDialog(this);
+        adDialog = new LoadingDialog(this, msg);
         adDialog.onCreateView();
         adDialog.setUiBeforShow();
         //点击空白区域能不能退出
@@ -208,8 +223,6 @@ public abstract class BaseActivityNoTitle extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
-        //解绑
         if (isRegistered) {
             unregisterReceiver(netWorkChangReceiver);
         }

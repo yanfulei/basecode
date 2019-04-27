@@ -69,7 +69,7 @@ public class BDateUtils {
      */
     public static long getSomeDayStartTimeStamp(int year, int mount, int day) {
         Calendar todayStart = Calendar.getInstance();
-        todayStart.set(year, mount, day);
+        todayStart.set(year, mount - 1, day);
         todayStart.set(Calendar.HOUR_OF_DAY, 0);
         todayStart.set(Calendar.MINUTE, 0);
         todayStart.set(Calendar.SECOND, 0);
@@ -82,7 +82,7 @@ public class BDateUtils {
      */
     public static long getSomeDayEndTimeStamp(int year, int mount, int day) {
         Calendar todayEnd = Calendar.getInstance();
-        todayEnd.set(year, mount, day);
+        todayEnd.set(year, mount - 1, day);
         todayEnd.set(Calendar.HOUR_OF_DAY, 23);
         todayEnd.set(Calendar.MINUTE, 59);
         todayEnd.set(Calendar.SECOND, 59);
@@ -93,9 +93,21 @@ public class BDateUtils {
     /**
      * 日期字符串转换为日期
      */
-    public synchronized static Date getDate(String dateStr) {
+    public synchronized static Date getDateYYYY_MM_DD(String dateStr) {
         try {
             SimpleDateFormat df = new SimpleDateFormat(YYYY_MM_DD);
+            return df.parse(dateStr);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    /**
+     * 日期字符串转换为日期
+     */
+    public synchronized static Date getDateYYYY_MM_DD_HH_MM(String dateStr) {
+        try {
+            SimpleDateFormat df = new SimpleDateFormat(YYYY_MM_DD_HH_MM);
             return df.parse(dateStr);
         } catch (Exception ex) {
             return null;
