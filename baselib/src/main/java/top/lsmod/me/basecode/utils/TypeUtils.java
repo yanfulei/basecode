@@ -54,6 +54,9 @@ public class TypeUtils {
      * @return
      */
     public static String ListToJoinString(List<String> list, String split) {
+        if (list.isEmpty()) {
+            return "";
+        }
         StringBuilder csvBuilder = new StringBuilder();
         for (String city : list) {
             csvBuilder.append(city);
