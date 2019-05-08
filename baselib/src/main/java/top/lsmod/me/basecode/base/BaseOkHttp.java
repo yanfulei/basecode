@@ -1,9 +1,7 @@
 package top.lsmod.me.basecode.base;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
