@@ -42,7 +42,11 @@ public class BaseOkHttp {
      * @param baseNetWorkEbReqBean
      */
     public static void onNetWorkFetch(BaseNetWorkEbReqBean baseNetWorkEbReqBean, NetWorkMonitor netWorkMonitor) {
-        token = CacheUtils.get(baseNetWorkEbReqBean.getContext()).getAsString("token");
+        try {
+            token = CacheUtils.get(baseNetWorkEbReqBean.getContext()).getAsString("token");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // 网络是否可用
 //        if (NetWorkChangReceiver.getNetWorkState() == NetWorkChangReceiver.LOST_NET_WORK) {
 //            ToastUtils.showToast(baseNetWorkEbReqBean.getActivity(), "当前网络不可用!", ToastUtils.ERROR);
