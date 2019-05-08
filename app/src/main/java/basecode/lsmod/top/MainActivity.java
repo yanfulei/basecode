@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import pub.devrel.easypermissions.EasyPermissions;
 import top.lsmod.me.basecode.base.BaseActivityNoTitle;
 import top.lsmod.me.basecode.utils.PermissionsLogUtils;
+import top.lsmod.me.basecode.utils.SystemUtils;
 import top.lsmod.me.basecode.utils.ToastUtils;
 
 /**
@@ -139,6 +140,7 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
 
         EasyPermissions.requestPermissions(this, "接下来需要获取WRITE_EXTERNAL_STORAGE权限", 0,
                 Manifest.permission.ACCESS_FINE_LOCATION);
+        ToastUtils.showToast(this, "版本信息-->versionCode:" + SystemUtils.getVersionCode(this) + "  versionName:" + SystemUtils.getVerName(this), ToastUtils.SUCCESS);
 
     }
 
