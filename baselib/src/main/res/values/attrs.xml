@@ -187,34 +187,51 @@
         <attr name="android:background" />
     </declare-styleable>
 
-    <attr name="icvp_min_page_scale_offset" format="dimension"/>
-    <attr name="icvp_center_page_scale_offset" format="dimension"/>
-    <attr name="icvp_min_page_scale" format="float"/>
-    <attr name="icvp_max_page_scale" format="float"/>
-    <attr name="icvp_medium_scaled" format="boolean"/>
-    <attr name="icvp_scroll_duration" format="integer"/>
-    <attr name="icvp_page_duration" format="integer"/>
-    <attr name="icvp_interpolator" format="reference"/>
+    <attr name="icvp_min_page_scale_offset" format="dimension" />
+    <attr name="icvp_center_page_scale_offset" format="dimension" />
+    <attr name="icvp_min_page_scale" format="float" />
+    <attr name="icvp_max_page_scale" format="float" />
+    <attr name="icvp_medium_scaled" format="boolean" />
+    <attr name="icvp_scroll_duration" format="integer" />
+    <attr name="icvp_page_duration" format="integer" />
+    <attr name="icvp_interpolator" format="reference" />
 
     <declare-styleable name="HorizontalInfiniteCycleViewPager">
-        <attr name="icvp_min_page_scale_offset"/>
-        <attr name="icvp_center_page_scale_offset"/>
-        <attr name="icvp_min_page_scale"/>
-        <attr name="icvp_max_page_scale"/>
-        <attr name="icvp_medium_scaled"/>
-        <attr name="icvp_scroll_duration"/>
-        <attr name="icvp_page_duration"/>
-        <attr name="icvp_interpolator"/>
+        <attr name="icvp_min_page_scale_offset" />
+        <attr name="icvp_center_page_scale_offset" />
+        <attr name="icvp_min_page_scale" />
+        <attr name="icvp_max_page_scale" />
+        <attr name="icvp_medium_scaled" />
+        <attr name="icvp_scroll_duration" />
+        <attr name="icvp_page_duration" />
+        <attr name="icvp_interpolator" />
     </declare-styleable>
 
     <declare-styleable name="VerticalInfiniteCycleViewPager">
-        <attr name="icvp_min_page_scale_offset"/>
-        <attr name="icvp_center_page_scale_offset"/>
-        <attr name="icvp_min_page_scale"/>
-        <attr name="icvp_max_page_scale"/>
-        <attr name="icvp_medium_scaled"/>
-        <attr name="icvp_scroll_duration"/>
-        <attr name="icvp_page_duration"/>
-        <attr name="icvp_interpolator"/>
+        <attr name="icvp_min_page_scale_offset" />
+        <attr name="icvp_center_page_scale_offset" />
+        <attr name="icvp_min_page_scale" />
+        <attr name="icvp_max_page_scale" />
+        <attr name="icvp_medium_scaled" />
+        <attr name="icvp_scroll_duration" />
+        <attr name="icvp_page_duration" />
+        <attr name="icvp_interpolator" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomCircleProgressBar">
+        <attr name="outside_color" format="color" />
+        <attr name="outside_radius" format="dimension" />
+        <attr name="inside_color" format="color" />
+        <attr name="progress_text_color" format="color" />
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_width" format="dimension" />
+        <attr name="max_progress" format="integer" />
+        <attr name="progress" format="float" />
+        <attr name="direction">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
     </declare-styleable>
 </resources>

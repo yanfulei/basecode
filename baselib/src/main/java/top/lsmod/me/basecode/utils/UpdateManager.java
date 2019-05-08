@@ -8,7 +8,9 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,18 +18,19 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import top.lsmod.me.basecode.R;
+import top.lsmod.me.basecode.customui.dialog.MaterialConstomUiDialog;
+import top.lsmod.me.basecode.customui.progressview.CustomCircleProgressBar;
+
 /**
  * 更新工具类
  */
 public class UpdateManager {
-
     private final Activity mContext;// 上下文
-
     private String apkUrl; // apk下载地址
     private static final String savePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).toString(); // apk保存到SD卡的路径
     private static final String saveFileName = savePath + "/pda.apk"; // 完整路径名
-
-    private ProgressBar mProgress; // 下载进度条控件
+    private static CustomCircleProgressBar am_progressbar_three; // 下载进度条控件
     private static final int DOWNLOADING = 1; // 表示正在下载
     private static final int DOWNLOADED = 2; // 下载完毕
     private static final int DOWNLOAD_FAILED = 3; // 下载失败
@@ -133,7 +136,6 @@ public class UpdateManager {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case DOWNLOADING:
-                    mProgress.setProgress(progress);
                     break;
                 case DOWNLOADED:
                     if (alertDialog2 != null && alertDialog2.isShowing()) {
@@ -173,5 +175,45 @@ public class UpdateManager {
         void OpSuccess();
 
         void OpFail();
+    }
+
+    /**
+     * 展示更新窗口
+     *
+     * @param activity
+     * @param updateMsg
+     */
+    public static void showUpdateDialog(Activity activity, String updateMsg, UpdateDialogCancelOkClickListener listener) {
+        View view = activity.getLayoutInflater().inflate(R.layout.custom_update_dialog, null);
+        TextView textView = view.findViewById(R.id.tv_tips);
+        textView.setText(updateMsg);
+        TextView tv_cancel = view.findViewById(R.id.tv_cancel);
+        tv_cancel.setOnClickListener(v -> listener.onCancelClick());
+        TextView tv_update = view.findViewById(R.id.tv_update);
+        tv_update.setOnClickListener(v -> listener.onOkClick());
+        // 进度条
+        am_progressbar_three = view.findViewById(R.id.am_progressbar_three);
+        am_progressbar_three.setProgress(50);
+        MaterialConstomUiDialog dialog = new MaterialConstomUiDialog(activity, view);
+        dialog.isTitleShow(false);
+        dialog.isShowLeftBtn(false);
+        dialog.isShowMiddleBtn(false);
+        dialog.isShowRightBtn(false);
+        dialog.show();
+    }
+
+    public interface UpdateDialogCancelOkClickListener {
+        void onCancelClick();
+
+        void onOkClick();
+    }
+
+    /**
+     * 设置进度
+     *
+     * @param progress
+     */
+    public static void setDownloadProgress(int progress) {
+        am_progressbar_three.setProgress(progress);
     }
 }

@@ -67,7 +67,7 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
 
     @OnClick({R.id.btn_bat, R.id.btn_dialog, R.id.btn_swich, R.id.btn_search, R.id.btn_jwd, R.id.btn_gjt,
             R.id.btn_left_right_view, R.id.btn_time, R.id.btn_del, R.id.btn_ui, R.id.btn_bengkui, R.id.btn_shoufengqin,
-            R.id.btn_CommonTabLayout, R.id.btn_form, R.id.btn_tx, R.id.btn_xlsx_zhsc, R.id.btn_qltx})
+            R.id.btn_CommonTabLayout, R.id.btn_form, R.id.btn_tx, R.id.btn_xlsx_zhsc, R.id.btn_qltx, R.id.btn_gx})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_bat:
@@ -120,6 +120,9 @@ public class MainActivity extends BaseActivityNoTitle implements EasyPermissions
                 break;
             case R.id.btn_qltx:
                 startActivity(new Intent(this, FormActivity.class));
+                break;
+            case R.id.btn_gx:
+                startActivity(new Intent(this, GxActivity.class));
                 break;
         }
     }

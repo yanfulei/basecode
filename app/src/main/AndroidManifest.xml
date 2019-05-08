@@ -45,6 +45,7 @@
             android:name=".ActivityTx"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ActivityXlsxZhsc"></activity>
+        <activity android:name=".GxActivity"></activity>
     </application>
 
 </manifest>
