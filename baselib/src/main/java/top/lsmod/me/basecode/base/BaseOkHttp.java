@@ -6,7 +6,10 @@ import android.os.Looper;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -270,6 +273,61 @@ public class BaseOkHttp {
         });
     }
 
+    /**
+     * 异步下载请求
+     */
+    private static void AsyncDownload(String serverUrl, String savePath, String fileName, DownloadMonitor downloadMonitor) {
+        OkHttpClient client = new OkHttpClient();
+        client.newBuilder().connectTimeout(180, TimeUnit.SECONDS).readTimeout(180, TimeUnit.SECONDS).build();
+        Request request = new Request.Builder().url(serverUrl).build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                mMainHandler.post(() -> downloadMonitor.onError(e.getMessage()));
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) {
+                mMainHandler.post(() -> {
+                    InputStream is = null;
+                    byte[] buf = new byte[2048];
+                    int len;
+                    FileOutputStream fos = null;
+                    try {
+                        is = response.body().byteStream();
+                        long total = response.body().contentLength();
+                        File file = new File(savePath, fileName);
+                        fos = new FileOutputStream(file);
+                        long sum = 0;
+                        while ((len = is.read(buf)) != -1) {
+                            fos.write(buf, 0, len);
+                            sum += len;
+                            int progress = (int) (sum * 1.0f / total * 100);
+                            // 下载中
+                            downloadMonitor.onProgress(progress);
+                        }
+                        fos.flush();
+                        // 下载完成
+                        downloadMonitor.onDownloadSuccess();
+                    } catch (Exception e) {
+                        downloadMonitor.onDownloadFailed();
+                    } finally {
+                        try {
+                            if (is != null) is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        try {
+                            if (fos != null) fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
     public interface NetWorkMonitor {
         void onSuccess(BaseNetWorkEbRspBean baseNetWorkEbRspBean);
 
@@ -280,5 +338,16 @@ public class BaseOkHttp {
         void onSuccess(BaseNetWorkEbRspBean baseNetWorkEbRspBean);
 
         void onError(BaseNetWorkEbRspBean baseNetWorkEbRspBean);
+    }
+
+    public interface DownloadMonitor {
+
+        void onError(String error);
+
+        void onProgress(int progress);
+
+        void onDownloadSuccess();
+
+        void onDownloadFailed();
     }
 }
