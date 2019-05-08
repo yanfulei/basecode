@@ -276,7 +276,7 @@ public class BaseOkHttp {
     /**
      * 异步下载请求
      */
-    private static void AsyncDownload(String serverUrl, String savePath, String fileName, DownloadMonitor downloadMonitor) {
+    public static void AsyncDownload(String serverUrl, String savePath, String fileName, DownloadMonitor downloadMonitor) {
         OkHttpClient client = new OkHttpClient();
         client.newBuilder().connectTimeout(180, TimeUnit.SECONDS).readTimeout(180, TimeUnit.SECONDS).build();
         Request request = new Request.Builder().url(serverUrl).build();
