@@ -283,47 +283,45 @@ public class BaseOkHttp {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                mMainHandler.post(() -> downloadMonitor.onError(e.getMessage()));
+                downloadMonitor.onError(e.getMessage());
             }
 
             @Override
             public void onResponse(Call call, Response response) {
-                mMainHandler.post(() -> {
-                    InputStream is = null;
-                    byte[] buf = new byte[2048];
-                    int len;
-                    FileOutputStream fos = null;
-                    try {
-                        is = response.body().byteStream();
-                        long total = response.body().contentLength();
-                        File file = new File(savePath, fileName);
-                        fos = new FileOutputStream(file);
-                        long sum = 0;
-                        while ((len = is.read(buf)) != -1) {
-                            fos.write(buf, 0, len);
-                            sum += len;
-                            int progress = (int) (sum * 1.0f / total * 100);
-                            // 下载中
-                            downloadMonitor.onProgress(progress);
-                        }
-                        fos.flush();
-                        // 下载完成
-                        downloadMonitor.onDownloadSuccess();
-                    } catch (Exception e) {
-                        downloadMonitor.onDownloadFailed();
-                    } finally {
-                        try {
-                            if (is != null) is.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            if (fos != null) fos.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                InputStream is = null;
+                byte[] buf = new byte[2048];
+                int len;
+                FileOutputStream fos = null;
+                try {
+                    is = response.body().byteStream();
+                    long total = response.body().contentLength();
+                    File file = new File(savePath, fileName);
+                    fos = new FileOutputStream(file);
+                    long sum = 0;
+                    while ((len = is.read(buf)) != -1) {
+                        fos.write(buf, 0, len);
+                        sum += len;
+                        int progress = (int) (sum * 1.0f / total * 100);
+                        // 下载中
+                        downloadMonitor.onProgress(progress);
                     }
-                });
+                    fos.flush();
+                    // 下载完成
+                    downloadMonitor.onDownloadSuccess();
+                } catch (Exception e) {
+                    downloadMonitor.onDownloadFailed();
+                } finally {
+                    try {
+                        if (is != null) is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        if (fos != null) fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
