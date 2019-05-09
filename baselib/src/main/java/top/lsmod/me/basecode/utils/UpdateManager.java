@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -141,7 +143,7 @@ public class UpdateManager {
                     if (alertDialog2 != null && alertDialog2.isShowing()) {
                         alertDialog2.dismiss();
                     }
-                    installAPK();
+                    installAPK(mContext, savePath);
                     break;
                 case DOWNLOAD_FAILED:
                     if (alertDialog2 != null && alertDialog2.isShowing()) {
@@ -159,16 +161,23 @@ public class UpdateManager {
     /**
      * 下载完成后自动安装apk
      */
-    public void installAPK() {
-        File apkFile = new File(saveFileName);
-        if (!apkFile.exists()) {
-            return;
-        }
+    public static void installAPK(Activity activity, String filePath) {
+        File apkFile = new File(filePath);
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setDataAndType(Uri.parse("file://" + apkFile.toString()),
-                "application/vnd.android.package-archive");
-        mContext.startActivity(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            Log.w(TAG, "版本大于 N ，开始使用 fileProvider 进行安装");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.getUriForFile(
+                    activity
+                    , activity.getPackageName() + ".provider"
+                    , apkFile);
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+//            Log.w(TAG, "正常进行安装");
+            intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+        }
+        activity.startActivity(intent);
     }
 
     public interface IUpdateOp {
@@ -193,7 +202,7 @@ public class UpdateManager {
         tv_update.setOnClickListener(v -> listener.onOkClick());
         // 进度条
         am_progressbar_three = view.findViewById(R.id.am_progressbar_three);
-        am_progressbar_three.setProgress(50);
+        am_progressbar_three.setProgressTextSize(100);
         MaterialConstomUiDialog dialog = new MaterialConstomUiDialog(activity, view);
         dialog.isTitleShow(false);
         dialog.isShowLeftBtn(false);
@@ -213,7 +222,7 @@ public class UpdateManager {
      *
      * @param progress
      */
-    public static void setDownloadProgress(int progress) {
-        am_progressbar_three.setProgress(progress);
+    public static void setDownloadProgress(int begingProgress, int progress) {
+        am_progressbar_three.setProgress(begingProgress, progress);
     }
 }

@@ -295,10 +295,15 @@ public class BaseOkHttp {
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
+                    File _temp = new File(savePath);
+                    if (!_temp.exists()) {
+                        _temp.mkdir();
+                    }
                     File file = new File(savePath, fileName);
                     fos = new FileOutputStream(file);
                     long sum = 0;
                     while ((len = is.read(buf)) != -1) {
+                        Thread.sleep(5);
                         fos.write(buf, 0, len);
                         sum += len;
                         int progress = (int) (sum * 1.0f / total * 100);
@@ -307,7 +312,7 @@ public class BaseOkHttp {
                     }
                     fos.flush();
                     // 下载完成
-                    downloadMonitor.onDownloadSuccess();
+                    downloadMonitor.onDownloadSuccess(savePath + fileName);
                 } catch (Exception e) {
                     downloadMonitor.onDownloadFailed();
                 } finally {
@@ -344,7 +349,7 @@ public class BaseOkHttp {
 
         void onProgress(int progress);
 
-        void onDownloadSuccess();
+        void onDownloadSuccess(String filePath);
 
         void onDownloadFailed();
     }

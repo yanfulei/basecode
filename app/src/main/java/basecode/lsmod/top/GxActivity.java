@@ -1,13 +1,18 @@
 package basecode.lsmod.top;
 
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.base.BaseOkHttp;
 import top.lsmod.me.basecode.utils.UpdateManager;
 
 /**
@@ -20,6 +25,7 @@ public class GxActivity extends BaseActivityTitle {
 
     @BindView(R.id.btn_gx)
     Button btnGx;
+    private int test;
 
     @OnClick({R.id.btn_gx})
     void Onclick(View view) {
@@ -28,15 +34,40 @@ public class GxActivity extends BaseActivityTitle {
                 UpdateManager.showUpdateDialog(this, "发现新版本", new UpdateManager.UpdateDialogCancelOkClickListener() {
                     @Override
                     public void onCancelClick() {
-
+                        String test = "/storage/emulated/0/basecode.lsmod.top/_temp.apk";
+                        runOnUiThread(() -> UpdateManager.installAPK(GxActivity.this, test));
                     }
 
                     @Override
                     public void onOkClick() {
+                        String fileFolderPath = Environment.getExternalStorageDirectory() + File.separator + GxActivity.this.getPackageName() + File.separator;
+                        BaseOkHttp.AsyncDownload("https://zhkc.oss-cn-hangzhou.aliyuncs.com/ican.1.0.0.apk", fileFolderPath, "_temp.apk", new BaseOkHttp.DownloadMonitor() {
+                            @Override
+                            public void onError(String error) {
+                            }
 
+                            @Override
+                            public void onProgress(int progress) {
+                                if (progress > test) {
+                                    runOnUiThread(() -> UpdateManager.setDownloadProgress(test, progress));
+                                    Log.d(TAG, "onProgress: ----------------" + progress);
+                                    test = progress;
+                                }
+                            }
+
+                            @Override
+                            public void onDownloadSuccess(String filePath) {
+                                runOnUiThread(() -> UpdateManager.installAPK(GxActivity.this, filePath));
+                                test = 0;
+                            }
+
+                            @Override
+                            public void onDownloadFailed() {
+
+                            }
+                        });
                     }
                 });
-                UpdateManager.setDownloadProgress(90);
                 break;
         }
     }

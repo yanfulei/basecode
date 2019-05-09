@@ -231,18 +231,18 @@ public class CustomCircleProgressBar extends View {
     }
 
     //加锁保证线程安全,能在线程中使用
-    public synchronized void setProgress(int progress) {
+    public synchronized void setProgress(int begingProgress, int progress) {
         if (progress < 0) {
             throw new IllegalArgumentException("progress should not be less than 0");
         }
         if (progress > maxProgress) {
             progress = maxProgress;
         }
-        startAnim(progress);
+        startAnim(begingProgress, progress);
     }
 
-    private void startAnim(float startProgress) {
-        animator = ObjectAnimator.ofFloat(0, startProgress);
+    private void startAnim(float begingProgress, float startProgress) {
+        animator = ObjectAnimator.ofFloat(begingProgress, startProgress);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
