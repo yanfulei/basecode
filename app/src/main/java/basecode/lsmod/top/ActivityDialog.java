@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.popup.BubblePopup;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnSelectListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +53,8 @@ public class ActivityDialog extends BaseActivityTitle {
         return "弹出框";
     }
 
-    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog, R.id.btn_zdy})
+    @OnClick({R.id.btn_share_buttom_dialog, R.id.btn_share_buttom_dialog_nodel, R.id.btn_popup_dialog, R.id.btn_ed_dialog,
+            R.id.btn_zdy, R.id.btn_dxdb})
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.btn_share_buttom_dialog:
@@ -117,6 +120,19 @@ public class ActivityDialog extends BaseActivityTitle {
                         }
                 );
                 materialConstomUiDialog.show();
+                break;
+            case R.id.btn_dxdb:
+                new XPopup.Builder(this)
+                        .autoDismiss(false)
+                        .asBottomList("请选择一项", new String[]{"条目1", "条目2", "条目3", "条目4", "条目5"},
+                                null, 0,
+                                new OnSelectListener() {
+                                    @Override
+                                    public void onSelect(int position, String text) {
+
+                                    }
+                                })
+                        .show();
                 break;
         }
     }

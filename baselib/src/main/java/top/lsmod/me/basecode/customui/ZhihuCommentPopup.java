@@ -3,6 +3,7 @@ package top.lsmod.me.basecode.customui;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.lxj.xpopup.core.BottomPopupView;
 import com.lxj.xpopup.util.XPopupUtils;
@@ -35,6 +36,14 @@ public class ZhihuCommentPopup extends BottomPopupView {
     protected void onCreate() {
         super.onCreate();
         webView = findViewById(R.id.wv_baike);
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("https://baike.baidu.com/item/" + this.url);
     }
 
