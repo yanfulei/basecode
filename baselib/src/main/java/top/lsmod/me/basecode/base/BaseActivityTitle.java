@@ -180,7 +180,7 @@ public abstract class BaseActivityTitle extends Activity {
     /**
      * 展示加载框
      */
-    public void showLoading(String msg) {
+    public void showLoading(String msg, boolean canceled) {
         if (null != adDialog) {
             adDialog.dismiss();
         }
@@ -188,9 +188,9 @@ public abstract class BaseActivityTitle extends Activity {
         adDialog.onCreateView();
         adDialog.setUiBeforShow();
         //点击空白区域能不能退出
-        adDialog.setCanceledOnTouchOutside(false);
+        adDialog.setCanceledOnTouchOutside(canceled);
         //按返回键能不能退出
-        adDialog.setCancelable(true);
+        adDialog.setCancelable(canceled);
         adDialog.dimEnabled(false);
         adDialog.show();
     }
@@ -218,7 +218,7 @@ public abstract class BaseActivityTitle extends Activity {
      * 发送网络接口请求
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo, boolean isShowLoading) {
-        if (isShowLoading) showLoading("正在加载");
+        if (isShowLoading) showLoading("正在加载", true);
         BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);
@@ -270,7 +270,7 @@ public abstract class BaseActivityTitle extends Activity {
      */
     public void sendNetWorkRequest(Object bean, String serverLocal, Object[] interfaceInfo, boolean isShowLoading,
                                    BaseOkHttp.RealTimeNetWorkMonitor callback) {
-        if (isShowLoading) showLoading("正在加载");
+        if (isShowLoading) showLoading("正在加载", true);
         BaseNetWorkEbReqBean baseNetWorkEbReqBean = new BaseNetWorkEbReqBean();
         // 设置上下文
         baseNetWorkEbReqBean.setActivity(this);
