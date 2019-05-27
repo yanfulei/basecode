@@ -165,7 +165,7 @@ public class PageUiUtils {
         CheckBoxBottomPopup popup = new CheckBoxBottomPopup(context, datas, viewInteface);
         new XPopup.Builder(context)
                 .autoDismiss(false)
-                .maxHeight(400)
+                .maxHeight(200)
                 .moveUpToKeyboard(false) //如果不加这个，评论弹窗会移动到软键盘上面
                 .asCustom(popup)/*.enableDrag(false)*/
                 .show();
