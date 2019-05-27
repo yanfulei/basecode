@@ -1,16 +1,21 @@
 package top.lsmod.me.basecode.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.view.menu.ActionMenuItemView;
 import android.view.View;
 
 import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BottomPopupView;
 import com.lxj.xpopup.enums.PopupPosition;
+import com.lxj.xpopup.enums.PopupType;
+import com.lxj.xpopup.impl.BottomListPopupView;
 import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.lxj.xpopup.interfaces.XPopupCallback;
 
 import java.util.List;
 
+import top.lsmod.me.basecode.customui.CheckBoxBottomPopup;
 import top.lsmod.me.basecode.customui.CustomAttachPopup;
 import top.lsmod.me.basecode.customui.CustomAttachQSPopup;
 import top.lsmod.me.basecode.customui.CustomAttachYtmsPopup;
@@ -146,6 +151,23 @@ public class PageUiUtils {
                 .atView(view)
                 .hasShadowBg(false) // 去掉半透明背景
                 .asCustom(new CustomAttachkfzPopup(context, kfz))
+                .show();
+    }
+
+    /**
+     * 底部弹出popup窗口
+     *
+     * @param context
+     * @param datas
+     * @param viewInteface
+     */
+    public static void showCheckBoxOnViewBottom(Activity context, List<String> datas, CheckBoxBottomPopup.ICheckBoxBottomPopup viewInteface) {
+        CheckBoxBottomPopup popup = new CheckBoxBottomPopup(context, datas, viewInteface);
+        new XPopup.Builder(context)
+                .autoDismiss(false)
+                .maxHeight(400)
+                .moveUpToKeyboard(false) //如果不加这个，评论弹窗会移动到软键盘上面
+                .asCustom(popup)/*.enableDrag(false)*/
                 .show();
     }
 }

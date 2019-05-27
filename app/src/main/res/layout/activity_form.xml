@@ -32,6 +32,24 @@
             </top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes>
 
             <top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes
+                android:id="@+id/tfb_CheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:iconSignifier="@drawable/ic_camera"
+                app:labelText="多选"
+                app:panelBackgroundColor="#ffff"
+                app:secondaryColor="#ccc"
+                app:selected="true"
+                app:useDenseSpacing="true">
+
+                <top.lsmod.me.basecode.customui.textfieldboxes.ExtendedEditText
+                    android:id="@+id/ee_CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes>
+
+            <top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes
                 android:id="@+id/text_field_boxes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

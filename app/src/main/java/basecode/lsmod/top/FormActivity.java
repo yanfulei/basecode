@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.lxj.xpopup.XPopup;
 import com.othershe.combinebitmap.CombineBitmap;
 import com.othershe.combinebitmap.layout.WechatLayoutManager;
 
@@ -15,12 +16,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
+import top.lsmod.me.basecode.customui.CheckBoxBottomPopup;
+import top.lsmod.me.basecode.customui.ZhihuCommentPopup;
 import top.lsmod.me.basecode.customui.textfieldboxes.ExtendedEditText;
 import top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes;
-import top.lsmod.me.basecode.customui.textfieldboxes.TfbChangeWatcher;
 import top.lsmod.me.basecode.utils.PageUiUtils;
 import top.lsmod.me.basecode.utils.ToastUtils;
-import top.lsmod.me.basecode.utils.ViewInteface;
+import top.lsmod.me.basecode.utils.TypeUtils;
 
 public class FormActivity extends BaseActivityTitle {
     @BindView(R.id.iv11)
@@ -57,6 +59,10 @@ public class FormActivity extends BaseActivityTitle {
     ExtendedEditText eeTimesType;
     @BindView(R.id.tfb_TimesType)
     TextFieldBoxes tfbTimesType;
+    @BindView(R.id.ee_CheckBox)
+    ExtendedEditText eeCheckBox;
+    @BindView(R.id.tfb_CheckBox)
+    TextFieldBoxes tfbCheckBox;
 
     private String[] IMG_URL_ARR = {
             "http://img.hb.aicdn.com/eca438704a81dd1fa83347cb8ec1a49ec16d2802c846-laesx2_fw658",
@@ -117,5 +123,9 @@ public class FormActivity extends BaseActivityTitle {
             ToastUtils.showSnackbar(FormActivity.this, getLlAllView(), "111", ToastUtils.SUCCESS);
         }));
         eeTimesType.setText("111");
+
+        tfbCheckBox.setOnSelectClick(() -> PageUiUtils.showCheckBoxOnViewBottom(FormActivity.this, test,
+                checked -> ToastUtils.showSnackbar(FormActivity.this, getLlAllView(),
+                        TypeUtils.ListToJoinString(checked, ","), ToastUtils.SUCCESS)));
     }
 }
