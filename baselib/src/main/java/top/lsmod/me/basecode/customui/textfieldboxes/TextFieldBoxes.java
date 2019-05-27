@@ -503,14 +503,14 @@ public class TextFieldBoxes extends FrameLayout {
                 click[0] = false;
             }
         });
-        this.setOnClickListener(v -> {
-            if (!click[0]) {
-                tfbChangeWatcher.onClick();
-                editText.clearFocus();
-                click[0] = true;
-            }
-            click[0] = false;
-        });
+//        this.setOnClickListener(v -> {
+//            if (!click[0]) {
+//                tfbChangeWatcher.onClick();
+//                editText.clearFocus();
+//                click[0] = true;
+//            }
+//            click[0] = false;
+//        });
     }
 
     protected void handleAttributes(Context context, AttributeSet attrs) {

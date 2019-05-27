@@ -125,38 +125,23 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
 
     private void initView() {
         contentView = LayoutInflater.from(mContext).inflate(R.layout.layout_time_picker, null);
-        cancelBtn = (Button) contentView.findViewById(R.id.btn_cancel);
+        cancelBtn = contentView.findViewById(R.id.btn_cancel);
         cancelBtn.setTextColor(colorCancel);
         cancelBtn.setTextSize(btnTextsize);
-        confirmBtn = (Button) contentView.findViewById(R.id.btn_confirm);
+        confirmBtn = contentView.findViewById(R.id.btn_confirm);
         confirmBtn.setTextColor(colorConfirm);
         confirmBtn.setTextSize(btnTextsize);
-        hourLoopView = (LoopView) contentView.findViewById(R.id.picker_hour);
-        minuteLoopView = (LoopView) contentView.findViewById(R.id.picker_minute);
-        meridianLoopView = (LoopView) contentView.findViewById(R.id.picker_meridian);
+        hourLoopView = contentView.findViewById(R.id.picker_hour);
+        minuteLoopView = contentView.findViewById(R.id.picker_minute);
+        meridianLoopView = contentView.findViewById(R.id.picker_meridian);
         pickerContainerV = contentView.findViewById(R.id.container_picker);
 
 
-        hourLoopView.setLoopListener(new LoopScrollListener() {
-            @Override
-            public void onItemSelect(int item) {
-                hourPos = item;
-            }
-        });
+        hourLoopView.setLoopListener(item -> hourPos = item);
 
-        minuteLoopView.setLoopListener(new LoopScrollListener() {
-            @Override
-            public void onItemSelect(int item) {
-                minutePos = item;
-            }
-        });
+        minuteLoopView.setLoopListener(item -> minutePos = item);
 
-        meridianLoopView.setLoopListener(new LoopScrollListener() {
-            @Override
-            public void onItemSelect(int item) {
-                meridianPos = item;
-            }
-        });
+        meridianLoopView.setLoopListener(item -> meridianPos = item);
 
         initPickerViews();  // init hour and minute loop view
 
@@ -222,9 +207,9 @@ public class TimePickerPopWin extends PopupWindow implements View.OnClickListene
                 String amPm = meridianList.get(meridianPos);
 
                 StringBuffer sb = new StringBuffer();
-                sb.append(String.valueOf(hourList.get(hourPos)));
+                sb.append(hourList.get(hourPos));
                 sb.append(":");
-                sb.append(String.valueOf(minList.get(minutePos)));
+                sb.append(minList.get(minutePos));
                 sb.append(amPm);
                 mListener.onTimePickCompleted(hourPos + 1, minutePos, amPm, sb.toString());
             }
