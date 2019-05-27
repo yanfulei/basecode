@@ -9,11 +9,18 @@ import android.widget.ImageView;
 import com.othershe.combinebitmap.CombineBitmap;
 import com.othershe.combinebitmap.layout.WechatLayoutManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import top.lsmod.me.basecode.base.BaseActivityTitle;
 import top.lsmod.me.basecode.customui.textfieldboxes.ExtendedEditText;
 import top.lsmod.me.basecode.customui.textfieldboxes.TextFieldBoxes;
+import top.lsmod.me.basecode.customui.textfieldboxes.TfbChangeWatcher;
+import top.lsmod.me.basecode.utils.PageUiUtils;
+import top.lsmod.me.basecode.utils.ToastUtils;
+import top.lsmod.me.basecode.utils.ViewInteface;
 
 public class FormActivity extends BaseActivityTitle {
     @BindView(R.id.iv11)
@@ -46,6 +53,10 @@ public class FormActivity extends BaseActivityTitle {
     ExtendedEditText extendedEditText6;
     @BindView(R.id.text_field_boxes6)
     TextFieldBoxes textFieldBoxes6;
+    @BindView(R.id.ee_TimesType)
+    ExtendedEditText eeTimesType;
+    @BindView(R.id.tfb_TimesType)
+    TextFieldBoxes tfbTimesType;
 
     private String[] IMG_URL_ARR = {
             "http://img.hb.aicdn.com/eca438704a81dd1fa83347cb8ec1a49ec16d2802c846-laesx2_fw658",
@@ -98,5 +109,13 @@ public class FormActivity extends BaseActivityTitle {
         ButterKnife.bind(this);
         extendedEditText3.setError("我是代码设置的错误信息");
         loadWechatBitmap(iv11, 9);
+        List<String> test = new ArrayList<>();
+        test.add("1");
+        test.add("2");
+        tfbTimesType.setOnSelectClick(() -> PageUiUtils.showXpopupOnViewBottom(FormActivity.this, test, (postion, text) -> {
+            eeTimesType.setText("22222222222");
+            ToastUtils.showSnackbar(FormActivity.this, getLlAllView(), "111", ToastUtils.SUCCESS);
+        }));
+        eeTimesType.setText("111");
     }
 }

@@ -495,22 +495,25 @@ public class TextFieldBoxes extends FrameLayout {
      */
     public void setOnSelectClick(TfbChangeWatcher.OnSelectType tfbChangeWatcher) {
         final boolean[] click = {false};
-        this.editText.setOnFocusChangeListener((v, hasFocus) -> {
-            if (!click[0]) {
-                tfbChangeWatcher.onClick();
-                click[0] = true;
-            } else {
+//        this.editText.setOnFocusChangeListener((v, hasFocus) -> {
+//            if (!click[0]) {
+//                tfbChangeWatcher.onClick();
+//                click[0] = true;
+//            } else {
+//                click[0] = false;
+//            }
+//        });
+        this.editTextLayout.setOnClickListener(v -> {
+            // 输入框组件不禁用情况下
+            if (this.editText.isEnabled()) {
+                if (!click[0]) {
+                    tfbChangeWatcher.onClick();
+                    editText.clearFocus();
+                    click[0] = true;
+                }
                 click[0] = false;
             }
         });
-//        this.setOnClickListener(v -> {
-//            if (!click[0]) {
-//                tfbChangeWatcher.onClick();
-//                editText.clearFocus();
-//                click[0] = true;
-//            }
-//            click[0] = false;
-//        });
     }
 
     protected void handleAttributes(Context context, AttributeSet attrs) {
