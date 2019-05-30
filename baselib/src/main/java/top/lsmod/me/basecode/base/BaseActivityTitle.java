@@ -59,7 +59,9 @@ public abstract class BaseActivityTitle extends Activity {
         llContent = findViewById(R.id.ll_content);
         llAllView = findViewById(R.id.ll_allview);
         tvNoData = findViewById(R.id.tv_no_data);
-        llContent.addView(view, params);
+        if (null != view) {
+            llContent.addView(view, params);
+        }
         initParentView();
         // 注册网络管理器
         initNetStataManger();
