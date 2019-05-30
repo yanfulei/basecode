@@ -37,7 +37,7 @@ public abstract class BaseTitleFragmentActivity extends FragmentActivity {
     public String TAG = "YanFulei";
     public CommonTitleBar commonTitleBar;
     // 加载框
-    private LoadingDialog adDialog;
+    public LoadingDialog adDialog;
     // 内容区域
     private LinearLayout llContent;
     // 所有布局
