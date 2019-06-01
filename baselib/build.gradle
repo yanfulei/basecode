@@ -71,4 +71,6 @@ dependencies {
     api 'net.grandcentrix.tray:tray:0.12.0'
     //
     api 'com.bm.photoview:library:1.4.1'
+    // tab
+    api 'com.github.hackware1993:MagicIndicator:1.5.0'
 }

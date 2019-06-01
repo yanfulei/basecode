@@ -47,6 +47,7 @@
             android:screenOrientation="portrait"></activity>
         <activity android:name=".ActivityXlsxZhsc"></activity>
         <activity android:name=".GxActivity"></activity>
+        <activity android:name=".activity.JdtActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -55,4 +55,6 @@
     <color name="sd_label_text_color">#757575</color>
     <color name="sd_overlay_color">#aaffffff</color>
     <color name="inside_color">#d1cdcd</color>
+    <color name="uncompleted_color">#A3E0D9</color>
+    <color name="uncompleted_text_color">#F8F8F8</color>
 </resources>

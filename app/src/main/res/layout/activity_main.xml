@@ -92,31 +92,42 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CommonTabLayout演示" />
+
             <Button
                 android:id="@+id/btn_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="表单输入"/>
+                android:text="表单输入" />
+
             <Button
                 android:id="@+id/btn_tx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="首页特效"/>
+                android:text="首页特效" />
+
             <Button
                 android:id="@+id/btn_xlsx_zhsc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="下拉刷新-左滑删除组建"/>
+                android:text="下拉刷新-左滑删除组建" />
+
             <Button
                 android:id="@+id/btn_qltx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="群聊头像"/>
+                android:text="群聊头像" />
+
             <Button
                 android:id="@+id/btn_gx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="更新弹框"/>
+                android:text="更新弹框" />
+
+            <Button
+                android:id="@+id/btn_jdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="进度条stepView" />
         </LinearLayout>
     </ScrollView>
 
