@@ -74,5 +74,5 @@ dependencies {
     // tab
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
     // 图表组件
-    api 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    api 'com.github.lecho:hellocharts-android:v1.5.8'
 }
