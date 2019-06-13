@@ -11,7 +11,7 @@
     <application>
         <activity android:name=".base.CrashDialogActivity"></activity>
         <activity
-            android:name=".base.BmPhotoViewActivity"
+            android:name=".base.PhotoViewActivity"
             android:screenOrientation="portrait"></activity>
     </application>
 </manifest>
