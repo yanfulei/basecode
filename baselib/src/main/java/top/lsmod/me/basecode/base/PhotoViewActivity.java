@@ -48,7 +48,7 @@ public class PhotoViewActivity extends Activity {
             public Object instantiateItem(ViewGroup container, int position) {
                 PhotoView view = new PhotoView(PhotoViewActivity.this);
                 view.enable();
-                view.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//                view.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 Glide.with(PhotoViewActivity.this).load(urls[position]).into(view);
                 container.addView(view);
                 return view;
