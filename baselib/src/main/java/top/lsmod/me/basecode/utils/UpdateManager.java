@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.FileProvider;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -199,7 +200,11 @@ public class UpdateManager {
         TextView tv_cancel = view.findViewById(R.id.tv_cancel);
         tv_cancel.setOnClickListener(v -> listener.onCancelClick());
         TextView tv_update = view.findViewById(R.id.tv_update);
-        tv_update.setOnClickListener(v -> listener.onOkClick());
+        LinearLayout ll_op_view = view.findViewById(R.id.ll_op_view);
+        tv_update.setOnClickListener(v -> {
+            ll_op_view.setVisibility(View.GONE);
+            listener.onOkClick();
+        });
         // 进度条
         am_progressbar_three = view.findViewById(R.id.am_progressbar_three);
         am_progressbar_three.setProgressTextSize(100);

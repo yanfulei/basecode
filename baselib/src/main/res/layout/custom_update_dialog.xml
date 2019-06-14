@@ -51,6 +51,7 @@
         android:background="#ccc" />
 
     <LinearLayout
+        android:id="@+id/ll_op_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
