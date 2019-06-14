@@ -266,6 +266,7 @@ public abstract class BaseTitleFragmentActivity extends FragmentActivity {
                 tvNoData.setVisibility(View.GONE); // 隐藏列表无数据布局
                 hideLoading(); // 隐藏弹出框
                 ToastUtils.showSnackbar(BaseTitleFragmentActivity.this, getLlAllView(), baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+                onNetWorkResponse(baseNetWorkEbRspBean);
             }
         });
     }

@@ -263,6 +263,7 @@ public abstract class BaseActivityTitle extends Activity {
                 tvNoData.setVisibility(View.GONE); // 隐藏列表无数据布局
                 hideLoading(); // 隐藏弹出框
                 ToastUtils.showSnackbar(BaseActivityTitle.this, getLlAllView(), baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+                onNetWorkResponse(baseNetWorkEbRspBean);
             }
         });
     }

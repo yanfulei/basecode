@@ -121,6 +121,7 @@ public abstract class BaseLauncherActivity extends Activity {
             public void onError(BaseNetWorkEbRspBean baseNetWorkEbRspBean) {
                 hideLoading(); // 隐藏弹出框
                 ToastUtils.showSnackbar(BaseLauncherActivity.this, getLlAllView(), baseNetWorkEbRspBean.getHttpMsg(), ToastUtils.ERROR);
+                onNetWorkResponse(baseNetWorkEbRspBean);
             }
         });
     }
