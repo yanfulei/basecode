@@ -194,17 +194,21 @@ public abstract class BaseActivitySearchTitle extends Activity {
      * 展示加载框
      */
     public void showLoading(String msg) {
-        if (null != adDialog) {
-            adDialog.dismiss();
+        try {
+            if (null != adDialog) {
+                adDialog.dismiss();
+            }
+            adDialog = new LoadingDialog(this, msg);
+            adDialog.onCreateView();
+            adDialog.setUiBeforShow();
+            //点击空白区域能不能退出
+            adDialog.setCanceledOnTouchOutside(false);
+            //按返回键能不能退出
+            adDialog.setCancelable(true);
+            adDialog.show();
+        } catch (Exception e) {
+            Log.e(TAG, "showLoading: 出现弹出框无附着点错误", e);
         }
-        adDialog = new LoadingDialog(this, msg);
-        adDialog.onCreateView();
-        adDialog.setUiBeforShow();
-        //点击空白区域能不能退出
-        adDialog.setCanceledOnTouchOutside(false);
-        //按返回键能不能退出
-        adDialog.setCancelable(true);
-        adDialog.show();
     }
 
     /**
