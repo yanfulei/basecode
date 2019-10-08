@@ -34,7 +34,7 @@ dependencies {
     api 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     api 'org.greenrobot:eventbus:3.1.1'
     api 'com.squareup.okhttp3:okhttp:3.12.0'
-    api 'com.google.code.gson:gson:2.8.4'
+    api 'com.google.code.gson:gson:2.8.5'
     api 'com.wuhenzhizao:titlebar:1.1.4'
     api 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
     api 'com.wang.avi:library:2.1.3'
