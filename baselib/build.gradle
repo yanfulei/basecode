@@ -10,11 +10,6 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath true
-            }
-        }
     }
     compileOptions {
         targetCompatibility 1.8
@@ -78,6 +73,4 @@ dependencies {
     api 'com.github.hackware1993:MagicIndicator:1.5.0'
     // 图表组件
     api 'com.github.lecho:hellocharts-android:v1.5.8'
-    // lombok
-    api 'org.projectlombok:lombok:1.18.10'
 }

@@ -103,8 +103,16 @@ public class Auth20RspBean implements Serializable {
         private List<Roles> Roles;
         private DepInfo DepInfo;
         private CompanyInfo CompanyInfo;
-//        private List<Menus> Menus;
+        private List<String> Functions;
         private int Status;
+
+        public List<String> getFunctions() {
+            return Functions;
+        }
+
+        public void setFunctions(List<String> functions) {
+            Functions = functions;
+        }
 
         public int getUserId() {
             return UserId;
